@@ -43,16 +43,17 @@ textarea { resize: none; height: 100px; }
 </header>
 
 <script>
+<script>
 // Mostrar la sección activa
 function showSection(id) {
   document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
   document.getElementById(id).style.display = 'block';
 }
 
-// Array global para guardar los datos de los usuarios cargados
+// Array global
 let usuariosData = [];
 
-// Función para cargar usuarios desde la Web App
+// Cargar usuarios desde Web App
 function cargarUsuarios(data) {
   const select = document.getElementById("contactos");
   select.innerHTML = '<option value="">Selecciona un usuario</option>';
@@ -62,7 +63,7 @@ function cargarUsuarios(data) {
     if (u["Fecha de Pago"]) {
       const fechaPago = new Date(u["Fecha de Pago"]);
       fechaVenc = new Date(fechaPago);
-      fechaVenc.setMonth(fechaVenc.getMonth() + 1); // sumar un mes
+      fechaVenc.setMonth(fechaVenc.getMonth() + 1);
     }
     return {
       "NombreCompleto": u["Nombre Completo"],
@@ -72,7 +73,6 @@ function cargarUsuarios(data) {
     };
   });
 
-  // Llenar el dropdown
   usuariosData.forEach(u => {
     const option = document.createElement("option");
     option.value = u["NumeroContacto"];
@@ -81,18 +81,15 @@ function cargarUsuarios(data) {
   });
 }
 
-// JSONP para cargar usuarios desde Web App
+// Cargar usuarios con JSONP
 var script = document.createElement('script');
 script.src = "https://script.google.com/macros/s/AKfycbxny5x1P_HUdiB1kLrJ_rxhSxyPlQKxadfhzCBjAPCqVS-67pPFx29gMPBeHhrT1QE/exec?callback=cargarUsuarios";
 document.body.appendChild(script);
 
-// Función para actualizar el link de WhatsApp al seleccionar usuario
-document.getElementById("contactos").addEventListener("change", function() {
-  // Limpiar el número (solo dígitos)
-  const numero = this.value.replace(/\D/g,''); 
-  const btn = document.getElementById("btnAlerta");
+// BOTÓN: Enviar WhatsApp (aquí colocamos el listener)
+document.getElementById("btnAlerta").addEventListener("click", function(e) {
+  e.preventDefault(); // evita recarga de página
 
-btn.addEventListener("click", function() {
   const select = document.getElementById("contactos");
   let numero = select.value;
 
@@ -101,8 +98,7 @@ btn.addEventListener("click", function() {
     return;
   }
 
-  // Limpiar número (solo dígitos)
-  numero = numero.replace(/\D/g,'');
+  numero = numero.replace(/\D/g,''); // limpiar solo dígitos
 
   const usuario = usuariosData.find(u => u["NumeroContacto"].replace(/\D/g,'') === numero);
   if (!usuario) return;
@@ -121,7 +117,6 @@ btn.addEventListener("click", function() {
     mensaje = `Hola ${usuario["NombreCompleto"]}, tu membresía sigue activa hasta el ${fechaStr}.`;
   }
 
-  // Abrir WhatsApp en nueva pestaña
   window.open(`https://api.whatsapp.com/send?phone=57${numero}&text=${encodeURIComponent(mensaje)}`, "_blank");
 });
 
