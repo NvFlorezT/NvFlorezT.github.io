@@ -124,9 +124,6 @@ function actualizarWhatsApp() {
 
   btn.href = `https://api.whatsapp.com/send?phone=57${numero}&text=${encodeURIComponent(mensaje)}`;
 }
-
-document.getElementById("contactos").addEventListener("change", actualizarWhatsApp);
-document.getElementById("mensajeAlerta").addEventListener("input", actualizarWhatsApp);
 </script>
 
 </body>
