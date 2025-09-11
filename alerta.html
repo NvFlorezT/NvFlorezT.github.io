@@ -40,10 +40,24 @@
     </section>
 
     <section id="registro">
-      <h2>💳 Registrar pago</h2>
-      <select id="usuariosPago"><option value="">Selecciona un usuario</option></select>
-      <input type="date" id="fechaPago">
-      <button onclick="registrarPago()">Registrar Pago</button>
+      <h2>Registrar nuevo pago</h2>
+       <form id="formPago">
+        <input type="date" id="fechaPago" required />
+        
+        <!-- Selección de usuario en lugar de escribir el nombre -->
+        <select id="usuariosPago" required>
+          <option value="">Selecciona Usuario</option>
+        </select>
+        
+        <input type="number" id="montoPago" placeholder="Monto" required />
+        <select id="medioPago" required>
+          <option value="">Selecciona Medio de Pago</option>
+          <option value="Efectivo">Efectivo</option>
+          <option value="Transferencia">Transferencia</option>
+          <option value="Tarjeta">Tarjeta</option>
+        </select>
+        <button type="submit">Registrar Pago</button>
+      </form>
     </section>
 
   </div>
