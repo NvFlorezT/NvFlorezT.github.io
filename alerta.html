@@ -5,97 +5,122 @@
 <title>Panel Administrador Gym</title>
 <style>
 body { font-family:'Segoe UI', sans-serif; margin:0; background:#111; color:#fff; }
-header { background: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438') no-repeat center center/cover; height: 100vh; position:relative; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; }
-header::before { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:0; }
-.container { position:relative; z-index:1; background:rgba(0,0,0,0.7); padding:40px; border-radius:15px; max-width:500px; width:90%; text-align:center; }
+header { background: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438') no-repeat center center/cover; height: 100vh; display:flex; justify-content:center; align-items:center; text-align:center; }
+.container { background:rgba(0,0,0,0.7); padding:40px; border-radius:15px; max-width:500px; width:90%; text-align:center; }
 nav { display:flex; justify-content:space-around; margin-bottom:20px; }
-nav button { padding:10px 20px; border:none; border-radius:5px; background:#2ecc71; color:#fff; cursor:pointer; transition:0.3s; }
-nav button:hover { background:#27ae60; }
+nav button { padding:10px 20px; border:none; border-radius:5px; background:#2ecc71; color:#fff; cursor:pointer; }
 section { display:none; margin-top:20px; }
-select,input,textarea,button { width:100%; padding:10px; margin:10px 0; border-radius:5px; border:none; }
+select,input,button { width:100%; padding:10px; margin:10px 0; border-radius:5px; border:none; }
 a.button { display:inline-block; padding:10px 20px; background:#25D366; color:#fff; text-decoration:none; border-radius:5px; }
-textarea { resize: none; height: 100px; }
 </style>
 </head>
 <body>
 
-<header>
 <div class="container">
 <h1>Panel Administrador Gym</h1>
 
-<!-- Navegación -->
 <nav>
 <button onclick="showSection('alerta')">Alerta Membresía</button>
+<button onclick="showSection('registro')">Registrar Pago</button>
 </nav>
 
-<!-- Sección alerta -->
+<!-- Alerta -->
 <section id="alerta">
-  <h2>🔔 Enviar alerta de membresía</h2>
-  
-  <!-- Dropdown de usuarios -->
-  <select id="contactos"><option value="">Selecciona un usuario</option></select>
-  
-  <!-- Botón enviar WhatsApp -->
-  <a id="btnAlerta" class="button" href="#" target="_blank">🚀 Enviar Alerta por WhatsApp</a>
+<h2>🔔 Enviar alerta de membresía</h2>
+<select id="contactos"><option value="">Selecciona un usuario</option></select>
+<a id="btnAlerta" class="button" href="#" target="_blank">🚀 Enviar Alerta por WhatsApp</a>
+</section>
+
+<!-- Registrar Pago -->
+<section id="registro">
+<h2>💳 Registrar nuevo pago</h2>
+<form id="formPago">
+<input type="date" id="fechaPago" required />
+<select id="usuariosPago" required>
+<option value="">Selecciona Usuario</option>
+</select>
+<input type="number" id="montoPago" placeholder="Monto" required />
+<select id="medioPago" required>
+<option value="">Selecciona Medio de Pago</option>
+<option value="Efectivo">Efectivo</option>
+<option value="Transferencia">Transferencia</option>
+<option value="Tarjeta">Tarjeta</option>
+</select>
+<button type="submit">Registrar Pago</button>
+</form>
 </section>
 
 </div>
-</header>
 
 <script>
-// Mostrar la sección activa
-function showSection(id) {
-  document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
-  document.getElementById(id).style.display = 'block';
+function showSection(id){
+  document.querySelectorAll('section').forEach(sec=>sec.style.display='none');
+  document.getElementById(id).style.display='block';
 }
 
-// Array global de usuarios
-let usuariosData = [];
-
-// Cargar usuarios desde Web App
-function cargarUsuarios(data) {
+// Cargar usuarios desde Apps Script
+function cargarUsuarios(data){
   const select = document.getElementById("contactos");
+  const selectPago = document.getElementById("usuariosPago");
   select.innerHTML = '<option value="">Selecciona un usuario</option>';
+  selectPago.innerHTML = '<option value="">Selecciona Usuario</option>';
 
-  usuariosData = data.map(u => {
-    let fechaVenc = null;
-    if(u["Fecha de Pago"]) {
-      const fechaPago = new Date(u["Fecha de Pago"]);
-      fechaVenc = new Date(fechaPago);
-      fechaVenc.setMonth(fechaVenc.getMonth() + 1); // sumar 1 mes
-    }
-    return {
-      "NombreCompleto": u["Nombre Completo"],
-      "NumeroContacto": u["Numero de Contacto"],
-      "FechaVencimiento": fechaVenc
-    };
-  });
-
-  // Llenar el dropdown
-  usuariosData.forEach(u => {
+  data.forEach(u=>{
+    // Dropdown alerta
     const option = document.createElement("option");
-    option.value = u["NumeroContacto"];
-    option.textContent = u["NombreCompleto"];
+    option.value = u.NumeroContacto + "|" + encodeURIComponent(u.MensajeAlerta);
+    option.textContent = u.NombreCompleto;
     select.appendChild(option);
+
+    // Dropdown pago
+    const optionPago = document.createElement("option");
+    optionPago.value = u.NombreCompleto;
+    optionPago.textContent = u.NombreCompleto;
+    selectPago.appendChild(optionPago);
   });
 }
 
-// Cargar usuarios con JSONP
-var script = document.createElement('script');
+// JSONP
+const script = document.createElement('script');
 script.src = "https://script.google.com/macros/s/AKfycbxny5x1P_HUdiB1kLrJ_rxhSxyPlQKxadfhzCBjAPCqVS-67pPFx29gMPBeHhrT1QE/exec?callback=cargarUsuarios";
 document.body.appendChild(script);
-// Enviar WhatsApp
-document.getElementById("contactos").addEventListener("change", function() {
-const val = this.value;
-if(!val) return;
-const [numero,mensaje] = val.split("|");
-const btn = document.getElementById("btnAlerta");
-btn.href = `https://api.whatsapp.com/send?phone=57${numero}&text=${decodeURIComponent(mensaje)}`;
+
+// Cambiar enlace WhatsApp
+document.getElementById("contactos").addEventListener("change",function(){
+  const val=this.value;
+  if(!val) return;
+  const [numero,mensaje]=val.split("|");
+  const btn=document.getElementById("btnAlerta");
+  btn.href=`https://api.whatsapp.com/send?phone=57${numero}&text=${decodeURIComponent(mensaje)}`;
 });
 
+// Registrar pago
+document.getElementById("formPago").addEventListener("submit",function(e){
+  e.preventDefault();
+  const fecha=document.getElementById("fechaPago").value;
+  const nombre=document.getElementById("usuariosPago").value;
+  const monto=document.getElementById("montoPago").value;
+  const medio=document.getElementById("medioPago").value;
 
+  const url="https://script.google.com/macros/s/AKfycbxny5x1P_HUdiB1kLrJ_rxhSxyPlQKxadfhzCBjAPCqVS-67pPFx29gMPBeHhrT1QE/exec";
+
+  fetch(url,{
+    method:"POST",
+    headers:{ "Content-Type": "application/json" },
+    body: JSON.stringify({ FechaPago:fecha, NombreCompleto:nombre, Monto:monto, MedioPago:medio })
+  })
+  .then(res=>res.json())
+  .then(res=>{
+    if(res.status==="ok") alert("Pago registrado correctamente");
+    else alert("Error: "+(res.message||""));
+    document.getElementById("formPago").reset();
+  })
+  .catch(err=>{
+    console.error(err);
+    alert("Error: "+err);
+  });
+});
 </script>
-
 
 </body>
 </html>
