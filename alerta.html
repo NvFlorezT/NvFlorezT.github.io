@@ -113,14 +113,31 @@ document.getElementById("contactos").addEventListener("change", function() {
   btn.href = `https://api.whatsapp.com/send?phone=57${numero}&text=${decodeURIComponent(mensaje)}`;
 });
 
-// Registrar Pago
-function registrarPago() {
-  const usuario = document.getElementById("usuariosPago").value;
+// Registrar Pago con Web App
+document.getElementById("formPago").addEventListener("submit", function(e) {
+  e.preventDefault(); // Evita recargar la página
+
   const fecha = document.getElementById("fechaPago").value;
-  if(!usuario || !fecha) { alert("Selecciona usuario y fecha"); return; }
-  alert(`Pago registrado para ${usuario} el ${fecha}`);
-  // Aquí luego puedes llamar tu Apps Script para guardar en la hoja
-}
+  const nombre = document.getElementById("usuariosPago").value;
+  const monto = document.getElementById("montoPago").value;
+  const medio = document.getElementById("medioPago").value;
+
+  // Tu Web App de Apps Script
+  const url = "https://script.google.com/macros/s/AKfycbwNbYVD5FGUYMS7lDB-9Ij3jkShlExnvcq28K4ZGxlD9hnp7zhrfz7q64waZGHOwbg/exec";
+
+  // Llamada GET con query parameters
+  fetch(`${url}?fechaPago=${encodeURIComponent(fecha)}&nombre=${encodeURIComponent(nombre)}&monto=${encodeURIComponent(monto)}&medioPago=${encodeURIComponent(medio)}`)
+    .then(res => res.json())
+    .then(res => {
+      if(res.status === "ok") alert("Pago registrado correctamente");
+      else alert("Error al registrar pago");
+      document.getElementById("formPago").reset(); // limpiar formulario
+    })
+    .catch(err => {
+      console.error(err);
+      alert("Error al registrar pago");
+    });
+});
 </script>
 
 </body>
