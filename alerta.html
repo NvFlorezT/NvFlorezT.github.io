@@ -102,29 +102,27 @@
   </header>
 
   <script>
-    const apiURL = "https://script.google.com/macros/s/AKfycbztRoPPZ6wSE7UUV87Tb8eObUr8gWbVk4CCatr13zuVnqV6x_Ab4OcEeuwg3XndufQ/exec";
-
-    // Cargar contactos desde Google Sheets
-    fetch(apiURL)
-      .then(res => res.json())
-      .then(data => {
-        const select = document.getElementById("contactos");
-        data.forEach(u => {
-          const option = document.createElement("option");
-          option.value = u["Numero de Contacto"] + "|" + encodeURIComponent(u["Mensaje"]);
-          option.textContent = u["Nombre Completo"];
-          select.appendChild(option);
-        });
-      });
-
-    // Actualizar enlace del botón según el contacto seleccionado
-    document.getElementById("contactos").addEventListener("change", function() {
-      const val = this.value;
-      if(!val) return;
-      const [numero, mensaje] = val.split("|");
-      const btn = document.getElementById("btnAlerta");
-      btn.href = `https://api.whatsapp.com/send?phone=57${numero}&text=${decodeURIComponent(mensaje)}`;
+  function cargarUsuarios(data) {
+    const select = document.getElementById("contactos");
+    data.forEach(u => {
+      const option = document.createElement("option");
+      option.value = u["Numero de Contacto"] + "|" + encodeURIComponent(u["Mensaje"]);
+      option.textContent = u["Nombre Completo"];
+      select.appendChild(option);
     });
-  </script>
+  }
+
+  var script = document.createElement('script');
+  script.src = "https://script.google.com/macros/s/AKfycbztRoPPZ6wSE7UUV87Tb8eObUr8gWbVk4CCatr13zuVnqV6x_Ab4OcEeuwg3XndufQ/exec?callback=cargarUsuarios";
+  document.body.appendChild(script);
+
+  document.getElementById("contactos").addEventListener("change", function() {
+    const val = this.value;
+    if(!val) return;
+    const [numero, mensaje] = val.split("|");
+    const btn = document.getElementById("btnAlerta");
+    btn.href = `https://api.whatsapp.com/send?phone=57${numero}&text=${decodeURIComponent(mensaje)}`;
+  });
+</script>
 </body>
 </html>
