@@ -159,34 +159,29 @@ document.getElementById("formPago").addEventListener("submit", function(e) {
   });
 });
 
-const URL_WEB_APP = "https://script.google.com/macros/s/AKfycbwNbYVD5FGUYMS7lDB-9Ij3jkShlExnvcq28K4ZGxlD9hnp7zhrfz7q64waZGHOwbg/exec";
-
 // Registrar Nuevo Usuario
 document.getElementById("formNuevoUsuario").addEventListener("submit", function(e) {
-  e.preventDefault(); // Evita que se recargue la página
+  e.preventDefault();
 
-  // Obtener valores del formulario
   const correo = document.getElementById("correoUsuario").value;
   const nombre = document.getElementById("nombreUsuario").value;
   const telefono = document.getElementById("telefonoUsuario").value;
 
-  // Enviar datos a tu Web App usando POST
-  fetch(URL_WEB_APP, {
+  const url = "https://script.google.com/macros/s/AKfycbztRoPPZ6wSE7UUV87Tb8eObUr8gWbVk4CCatr13zuVnqV6x_Ab4OcEeuwg3XndufQ/exec"; // tu Web App
+
+  fetch(url, {
     method: "POST",
-    body: JSON.stringify({
-      tipo: "nuevoUsuario",  // Le decimos a Apps Script que es un usuario nuevo
-      correo,
-      nombre,
-      telefono
-    })
+    headers: { "Content-Type": "application/json" }, // <- Muy importante
+    body: JSON.stringify({ tipo: "nuevoUsuario", correo, nombre, telefono })
   })
   .then(res => res.json())
   .then(res => {
-    if(res.status === "ok") alert("Usuario registrado correctamente");
-    else alert("Error al registrar usuario: " + (res.message || ""));
-    
-    // Limpiar formulario
-    document.getElementById("formNuevoUsuario").reset();
+    if(res.status === "ok") {
+      alert("Usuario registrado correctamente");
+      document.getElementById("formNuevoUsuario").reset();
+    } else {
+      alert("Error al registrar usuario: " + (res.message || ""));
+    }
   })
   .catch(err => {
     console.error(err);
