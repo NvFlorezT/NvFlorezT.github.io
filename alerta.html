@@ -101,7 +101,7 @@
     </div>
   </header>
 
-  <script>
+<script>
   function cargarUsuarios(data) {
     const select = document.getElementById("contactos");
     data.forEach(u => {
@@ -124,5 +124,6 @@
     btn.href = `https://api.whatsapp.com/send?phone=57${numero}&text=${decodeURIComponent(mensaje)}`;
   });
 </script>
+  
 </body>
 </html>
