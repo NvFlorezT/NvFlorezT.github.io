@@ -35,6 +35,9 @@ textarea { resize: none; height: 100px; }
   <!-- Dropdown de usuarios -->
   <select id="contactos"><option value="">Selecciona un usuario</option></select>
   
+  <!-- Área para escribir mensaje -->
+  <textarea id="mensajeAlerta" placeholder="Escribe tu mensaje aquí"></textarea>
+  
   <!-- Botón enviar WhatsApp -->
   <a id="btnAlerta" class="button" href="#" target="_blank">🚀 Enviar Alerta por WhatsApp</a>
 </section>
@@ -43,83 +46,44 @@ textarea { resize: none; height: 100px; }
 </header>
 
 <script>
-<script>
 // Mostrar la sección activa
 function showSection(id) {
   document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
   document.getElementById(id).style.display = 'block';
 }
 
-// Array global
-let usuariosData = [];
-
 // Cargar usuarios desde Web App
 function cargarUsuarios(data) {
   const select = document.getElementById("contactos");
   select.innerHTML = '<option value="">Selecciona un usuario</option>';
 
-  usuariosData = data.map(u => {
-    let fechaVenc = null;
-    if (u["Fecha de Pago"]) {
-      const fechaPago = new Date(u["Fecha de Pago"]);
-      fechaVenc = new Date(fechaPago);
-      fechaVenc.setMonth(fechaVenc.getMonth() + 1);
-    }
-    return {
-      "NombreCompleto": u["Nombre Completo"],
-      "NumeroContacto": u["Numero de Contacto"],
-      "FechaPago": u["Fecha de Pago"] || "",
-      "FechaVencimiento": fechaVenc
-    };
-  });
-
-  usuariosData.forEach(u => {
+  data.forEach(u => {
     const option = document.createElement("option");
-    option.value = u["NumeroContacto"];
-    option.textContent = u["NombreCompleto"];
+    option.value = u["Numero de Contacto"];
+    option.textContent = u["Nombre Completo"];
     select.appendChild(option);
   });
 }
 
-// Cargar usuarios con JSONP
+// JSONP para cargar usuarios
 var script = document.createElement('script');
 script.src = "https://script.google.com/macros/s/AKfycbxny5x1P_HUdiB1kLrJ_rxhSxyPlQKxadfhzCBjAPCqVS-67pPFx29gMPBeHhrT1QE/exec?callback=cargarUsuarios";
 document.body.appendChild(script);
 
-// BOTÓN: Enviar WhatsApp (aquí colocamos el listener)
-document.getElementById("btnAlerta").addEventListener("click", function(e) {
-  e.preventDefault(); // evita recarga de página
-
-  const select = document.getElementById("contactos");
-  let numero = select.value;
-
-  if (!numero) {
-    alert("Selecciona un usuario");
+// Actualizar link de WhatsApp cuando cambie usuario o mensaje
+function actualizarWhatsApp() {
+  const numero = document.getElementById("contactos").value;
+  const mensaje = document.getElementById("mensajeAlerta").value.trim();
+  const btn = document.getElementById("btnAlerta");
+  if(!numero || !mensaje) {
+    btn.href = "#";
     return;
   }
+  btn.href = `https://api.whatsapp.com/send?phone=57${numero}&text=${encodeURIComponent(mensaje)}`;
+}
 
-  numero = numero.replace(/\D/g,''); // limpiar solo dígitos
-
-  const usuario = usuariosData.find(u => u["NumeroContacto"].replace(/\D/g,'') === numero);
-  if (!usuario) return;
-
-  let mensaje = "";
-  const hoy = new Date();
-  const diffDias = Math.ceil((usuario["FechaVencimiento"] - hoy) / (1000*60*60*24));
-
-  if(diffDias < 0) {
-    mensaje = `Hola ${usuario["NombreCompleto"]}, tu membresía ya venció. Por favor renueva cuanto antes.`;
-  } else if(diffDias <= 3) {
-    mensaje = `Hola ${usuario["NombreCompleto"]}, tu membresía vence en ${diffDias} día(s). ¡No te quedes sin acceso!`;
-  } else {
-    const opciones = { year: 'numeric', month: '2-digit', day: '2-digit' };
-    const fechaStr = usuario["FechaVencimiento"].toLocaleDateString('es-CO', opciones);
-    mensaje = `Hola ${usuario["NombreCompleto"]}, tu membresía sigue activa hasta el ${fechaStr}.`;
-  }
-
-  window.open(`https://api.whatsapp.com/send?phone=57${numero}&text=${encodeURIComponent(mensaje)}`, "_blank");
-});
-
+document.getElementById("contactos").addEventListener("change", actualizarWhatsApp);
+document.getElementById("mensajeAlerta").addEventListener("input", actualizarWhatsApp);
 </script>
 
 </body>
