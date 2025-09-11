@@ -11,12 +11,15 @@
       justify-content: center;
       align-items: center;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      /* Fondo con imagen del gym y overlay oscuro */
+      background: 
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url('https://images.unsplash.com/photo-1599058917211-7e7e8ff6405b?auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
       color: #f4f4f4;
     }
 
     .container {
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(0, 0, 0, 0.7); /* Fondo semitransparente */
       padding: 50px;
       border-radius: 15px;
       text-align: center;
@@ -84,31 +87,30 @@
   </div>
 
   <script>
-  const apiURL = "https://script.google.com/macros/s/AKfycby_2mg1jEwuamvxAFkGrbXUex2fpxy1QkGUbHI3XC2rBcczXyTSoLYiWJsZAzO9bLk/exec";
+ const apiURL = "https://script.google.com/macros/s/AKfycby_2mg1jEwuamvxAFkGrbXUex2fpxy1QkGUbHI3XC2rBcczXyTSoLYiWJsZAzO9bLk/exec";
 
-  // Cargar contactos desde Google Sheets
-  fetch(apiURL)
-    .then(res => res.json())
-    .then(data => {
-      const select = document.getElementById("contactos");
-      data.forEach(u => {
-        const option = document.createElement("option");
-        // Usamos Numero de Contacto (columna 3) + mensaje
-        option.value = u.numero + "|" + encodeURIComponent(u.mensaje);
-        option.textContent = u.nombre;
-        select.appendChild(option);
-      });
+// Cargar contactos desde Google Sheets
+fetch(apiURL)
+  .then(res => res.json())
+  .then(data => {
+    const select = document.getElementById("contactos");
+    data.forEach(u => {
+      const option = document.createElement("option");
+      option.value = u["Numero de Contacto"] + "|" + encodeURIComponent(u["Mensaje"]);
+      option.textContent = u["Nombre Completo"];
+      select.appendChild(option);
     });
-
-  // Actualizar enlace del botón según el contacto seleccionado
-  document.getElementById("contactos").addEventListener("change", function() {
-    const val = this.value;
-    if(!val) return;
-    const [numero, mensaje] = val.split("|");
-    const btn = document.getElementById("btnAlerta");
-    btn.href = `https://api.whatsapp.com/send?phone=57${numero}&text=${decodeURIComponent(mensaje)}`;
   });
-</script>
 
+// Actualizar enlace del botón según el contacto seleccionado
+document.getElementById("contactos").addEventListener("change", function() {
+  const val = this.value;
+  if(!val) return;
+  const [numero, mensaje] = val.split("|");
+  const btn = document.getElementById("btnAlerta");
+  btn.href = `https://api.whatsapp.com/send?phone=57${numero}&text=${decodeURIComponent(mensaje)}`;
+});
+
+  </script>
 </body>
 </html>
