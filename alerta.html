@@ -34,23 +34,17 @@
       <select id="contactos"><option value="">Selecciona un usuario</option></select>
       <a id="btnAlerta" class="button" href="#" target="_blank">🚀 Enviar Alerta por WhatsApp</a>
     </section>
-    <!-- Botón para registrar nuevo usuario -->
-    <div style="text-align:center; margin-top:20px;">
-      <a href="https://docs.google.com/forms/d/14j3geGs0-9HYeDyF24Y3v5wufc5ZryCHa8rJvKDQ_E4/edit" target="_blank"
-         style="display:inline-block; padding:15px 35px; background:#e74c3c; color:#fff; font-weight:bold;
-                border-radius:50px; text-decoration:none; font-size:18px;
-                box-shadow:0px 4px 10px rgba(0,0,0,0.4); transition:0.3s;">
-        🆕 Registrar nuevo usuario
-      </a>
-    </div>
+  
 
- <section id="Nuevo" style="text-align:center; padding:40px; background:#222; color:white;">
+ <section id="nuevoUsuario" style="text-align:center; padding:40px; background:#222; color:white;">
   <h2>🆕 Registrar Nuevo Usuario</h2>
   <form id="formNuevoUsuario">
-    <input type="email" id="correoUsuario" placeholder="Correo electrónico" required />
-    <input type="text" id="nombreUsuario" placeholder="Nombre completo" required />
-    <input type="text" id="telefonoUsuario" placeholder="Número de contacto" required />
-    <button type="submit">Registrar Usuario</button>
+    <input type="email" id="correoUsuario" placeholder="Correo Electrónico" required />
+    <input type="text" id="nombreUsuario" placeholder="Nombre Completo" required />
+    <input type="tel" id="telefonoUsuario" placeholder="Número de Contacto" required />
+    <button type="submit" style="padding:10px 20px; background:#e74c3c; color:#fff; border:none; border-radius:5px; cursor:pointer;">
+      Registrar Usuario
+    </button>
   </form>
 </section>
 
