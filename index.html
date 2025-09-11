@@ -2,143 +2,101 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Entrenador Personal - Juan Pérez</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brahyan Cortes Castañeda - Entrenador Personal</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Arial', sans-serif; background: #111; color: #f4f4f4; }
-
-    /* ENCABEZADO */
-    header {
-      background: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438') no-repeat center center/cover;
-      height: 90vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: white;
-      padding: 20px;
-    }
-    header h1 { font-size: 3em; text-shadow: 2px 2px 6px #000; }
-    header p { font-size: 1.3em; margin-top: 10px; text-shadow: 1px 1px 4px #000; }
-    .btn {
-      margin-top: 20px;
-      padding: 12px 25px;
-      background: #2ecc71;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #111, #222);
       color: #fff;
+    }
+    header {
+      text-align: center;
+      padding: 60px 20px;
+      background: url('https://images.unsplash.com/photo-1594737625785-cd7c7e4e1f34') center/cover no-repeat;
+      background-blend-mode: multiply;
+      background-color: rgba(0,0,0,0.6);
+    }
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+      color: #ffcc00;
+    }
+    header p {
+      font-size: 1.3rem;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    h2 {
+      color: #ffcc00;
+      border-bottom: 2px solid #ffcc00;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+    .about, .services, .contact {
+      margin-bottom: 60px;
+    }
+    .services ul {
+      list-style: none;
+      padding: 0;
+    }
+    .services li {
+      background: #333;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 10px;
+    }
+    .contact a {
+      color: #ffcc00;
       text-decoration: none;
       font-weight: bold;
-      border-radius: 5px;
-      transition: 0.3s;
     }
-    .btn:hover { background: #27ae60; }
-
-    /* MENÚ */
-    nav { background: #000; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 10; }
-    nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
-    nav a:hover { color: #2ecc71; }
-
-    /* SECCIONES */
-    section { padding: 60px 20px; max-width: 1100px; margin: auto; }
-    h2 { text-align: center; color: #2ecc71; margin-bottom: 30px; }
-
-    /* SERVICIOS */
-    .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-    .card {
-      background: #1c1c1c;
-      padding: 20px;
-      border-radius: 10px;
+    footer {
       text-align: center;
-      box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
-      transition: 0.3s;
-    }
-    .card:hover { transform: translateY(-5px); }
-    .card h3 { margin-bottom: 10px; color: #2ecc71; }
-
-    /* TESTIMONIOS */
-    .testimonial {
-      background: #222;
-      margin: 15px;
       padding: 20px;
-      border-left: 5px solid #2ecc71;
-      font-style: italic;
+      background: #000;
+      color: #aaa;
     }
-
-    /* CONTACTO */
-    .contacto { text-align: center; }
-    .contacto p { margin: 10px 0; }
-    .contacto a { color: #2ecc71; text-decoration: none; }
-
-    /* PIE */
-    footer { background: #000; color: #777; text-align: center; padding: 20px; margin-top: 40px; }
-    footer a { color: #2ecc71; text-decoration: none; }
   </style>
 </head>
 <body>
 
-  <!-- HERO -->
   <header>
-    <h1>Juan Pérez 💪</h1>
-    <p>Transforma tu cuerpo, transforma tu vida</p>
-    <a href="#contacto" class="btn">Agenda tu primera sesión</a>
+    <h1>Brahyan Cortes Castañeda</h1>
+    <p>🏋️ Entrenador Personal - Transformando tu cuerpo y mente</p>
   </header>
 
-  <!-- MENÚ -->
-  <nav>
-    <a href="#sobre-mi">Sobre mí</a>
-    <a href="#servicios">Servicios</a>
-    <a href="#testimonios">Testimonios</a>
-    <a href="#contacto">Contacto</a>
-  </nav>
-
-  <!-- SOBRE MI -->
-  <section id="sobre-mi">
+  <section class="about">
     <h2>Sobre mí</h2>
-    <p style="text-align:center; max-width:800px; margin:auto;">
-      Soy Juan Pérez, entrenador personal certificado con más de 5 años de experiencia. 
-      Mi misión es ayudarte a alcanzar tu mejor versión con programas personalizados de entrenamiento y motivación constante. 🔥
+    <p>
+      Soy entrenador personal apasionado por ayudar a las personas a alcanzar sus objetivos físicos y de salud. 
+      Con planes personalizados y seguimiento cercano, te acompaño en tu camino hacia una mejor versión de ti mismo.
     </p>
   </section>
 
-  <!-- SERVICIOS -->
-  <section id="servicios">
+  <section class="services">
     <h2>Servicios</h2>
-    <div class="services">
-      <div class="card">
-        <h3>🏋️‍♂️ Plan de Fuerza</h3>
-        <p>Rutinas personalizadas para ganar músculo y mejorar el rendimiento.</p>
-      </div>
-      <div class="card">
-        <h3>🔥 Pérdida de Peso</h3>
-        <p>Entrenamientos dinámicos y asesoría básica en nutrición para lograr tus metas.</p>
-      </div>
-      <div class="card">
-        <h3>🤸‍♀️ Funcional</h3>
-        <p>Ejercicios que mejoran movilidad, resistencia y energía en tu día a día.</p>
-      </div>
-    </div>
+    <ul>
+      <li>✔️ Rutinas personalizadas de entrenamiento</li>
+      <li>✔️ Planes de nutrición adaptados a tus metas</li>
+      <li>✔️ Asesoría online y presencial</li>
+      <li>✔️ Programas de pérdida de peso y ganancia muscular</li>
+    </ul>
   </section>
 
-  <!-- TESTIMONIOS -->
-  <section id="testimonios">
-    <h2>Testimonios</h2>
-    <div class="testimonial">"Gracias a Juan bajé 10 kilos en 3 meses, me siento con más energía que nunca" – Andrea G.</div>
-    <div class="testimonial">"Excelente entrenador, siempre motivándome a dar lo mejor de mí" – Carlos M.</div>
-  </section>
-
-  <!-- CONTACTO -->
-  <section id="contacto">
+  <section class="contact">
     <h2>Contacto</h2>
-    <div class="contacto">
-      <p>📩 Email: <a href="mailto:ViviTique@gmail.com">ViviTique@gmail.com</a></p>
-      <p>📱 WhatsApp: <a href="https://wa.me/573216156819" target="_blank">321 615 6819</a></p>
-      <p>📷 Instagram: <a href="https://instagram.com/usuario" target="_blank">@usuario</a></p>
-    </div>
+    <p>📲 WhatsApp: <a href="https://wa.me/573216156819" target="_blank">+57 321 615 6819</a></p>
+    <p>📧 Correo: <a href="mailto:ViviTique@gmail.com">ViviTique@gmail.com</a></p>
+    <p>📍 Manizales, Colombia</p>
   </section>
 
-  <!-- PIE -->
   <footer>
-    <p>&copy; 2025 Juan Pérez | Entrenador Personal</p>
+    <p>© 2025 Brahyan Cortes Castañeda - Entrenador Personal</p>
   </footer>
 
 </body>
