@@ -170,9 +170,9 @@ document.getElementById("formNuevoUsuario").addEventListener("submit", function(
   const url = "https://script.google.com/macros/s/AKfycbztRoPPZ6wSE7UUV87Tb8eObUr8gWbVk4CCatr13zuVnqV6x_Ab4OcEeuwg3XndufQ/exec"; // tu Web App
 
   fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" }, // <- Muy importante
-    body: JSON.stringify({ tipo: "nuevoUsuario", correo, nombre, telefono })
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ tipo: "nuevoUsuario", correo, nombre, telefono })
   })
   .then(res => res.json())
   .then(res => {
