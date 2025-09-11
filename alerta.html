@@ -118,10 +118,9 @@ document.getElementById("btnAlerta").addEventListener("click", function(e){
   }
 
   // Abrir WhatsApp en nueva pestaña
-btn.href = `https://api.whatsapp.com/send?phone=57${numero}&text=${decodeURIComponent(mensaje)}`;
+btn.href = (`https://api.whatsapp.com/send?phone=57${numero}&text=${encodeURIComponent(mensaje)}`, "_blank");
 
-});
-</script>
+});</script>
 
 
 </body>
