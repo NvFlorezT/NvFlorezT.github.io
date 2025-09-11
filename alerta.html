@@ -75,15 +75,11 @@ function cargarUsuarios(data) {
   const selectPago = document.getElementById("usuariosPago");
   const proximos = document.getElementById("usuariosProximos");
 
-  const hoy = new Date();
-  const dosDias = new Date();
-  dosDias.setDate(hoy.getDate() + 2);
-
   data.forEach(u => {
     const nombre = u["Nombre Completo"];
     const numero = u["Numero de Contacto"];
     const mensaje = u["Mensaje"];
-    const fechaVenc = u["FechaVencimiento"]; // opcional, si existe
+    // const fechaVenc = u["FechaVencimiento"]; // ya no se usa si no hay columna real
 
     // Dropdown alerta
     const option = document.createElement("option");
@@ -97,12 +93,10 @@ function cargarUsuarios(data) {
     optionPago.textContent = nombre;
     selectPago.appendChild(optionPago);
 
-    // Próximos a vencer
-    if(fechaVenc && new Date(fechaVenc) <= dosDias) {
-      const li = document.createElement("li");
-      li.textContent = `${nombre} - Vence: ${fechaVenc}`;
-      proximos.appendChild(li);
-    }
+    // Lista próximos (solo nombre)
+    const li = document.createElement("li");
+    li.textContent = nombre; // mostramos solo el nombre, no la fecha
+    proximos.appendChild(li);
   });
 }
 
