@@ -1,129 +1,113 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Panel de Alertas</title>
-  <style>
-    /* ENCABEZADO */
-    header {
-      background: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438') no-repeat center center/cover;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: white;
-      padding: 20px;
-      position: relative;
-    }
-
-    /* Overlay oscuro */
-    header::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      z-index: 0;
-    }
-
-    .container {
-      position: relative;
-      z-index: 1;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 50px;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0px 8px 20px rgba(0,0,0,0.6);
-      max-width: 450px;
-      width: 90%;
-    }
-
-    h1 {
-      color: #2ecc71;
-      margin-bottom: 30px;
-      font-size: 24px;
-    }
-
-    select {
-      width: 100%;
-      padding: 12px 15px;
-      border-radius: 8px;
-      border: none;
-      margin-bottom: 20px;
-      font-size: 16px;
-    }
-
-    a {
-      display: inline-block;
-      background: #25D366;
-      color: #fff;
-      padding: 15px 30px;
-      border-radius: 50px;
-      font-weight: bold;
-      text-decoration: none;
-      font-size: 18px;
-      transition: all 0.3s ease;
-      box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-    }
-
-    a:hover {
-      background: #1ebc57;
-      transform: scale(1.05);
-    }
-
-    p {
-      margin-top: 25px;
-      color: #bbb;
-      font-size: 14px;
-      font-style: italic;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Panel Administrador Gym</title>
+<style>
+  body { font-family:'Segoe UI', sans-serif; margin:0; background:#111; color:#fff; }
+  header { background: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438') no-repeat center center/cover; height: 100vh; position:relative; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; }
+  header::before { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:0; }
+  .container { position:relative; z-index:1; background:rgba(0,0,0,0.7); padding:40px; border-radius:15px; max-width:500px; width:90%; text-align:center; }
+  nav { display:flex; justify-content:space-around; margin-bottom:20px; }
+  nav button { padding:10px 20px; border:none; border-radius:5px; background:#2ecc71; color:#fff; cursor:pointer; transition:0.3s; }
+  nav button:hover { background:#27ae60; }
+  section { display:none; margin-top:20px; }
+  select,input,textarea,button { width:100%; padding:10px; margin:10px 0; border-radius:5px; border:none; }
+  a.button { display:inline-block; padding:10px 20px; background:#25D366; color:#fff; text-decoration:none; border-radius:5px; }
+</style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <h1>🔔 Enviar alerta de membresía</h1>
 
-      <!-- Menú desplegable de usuarios -->
-      <select id="contactos">
-        <option value="">Selecciona un usuario</option>
-      </select>
+<header>
+  <div class="container">
+    <h1>Panel Administrador Gym</h1>
+    <nav>
+      <button onclick="showSection('alerta')">Alerta Membresía</button>
+      <button onclick="showSection('proximos')">Usuarios Próximos a Vencer</button>
+      <button onclick="showSection('registro')">Registrar Pago</button>
+    </nav>
 
-      <!-- Botón de WhatsApp -->
-      <a id="btnAlerta" href="#" target="_blank">
-        🚀 Enviar Alerta por WhatsApp
-      </a>
+    <!-- Secciones -->
+    <section id="alerta">
+      <h2>🔔 Enviar alerta de membresía</h2>
+      <select id="contactos"><option value="">Selecciona un usuario</option></select>
+      <a id="btnAlerta" class="button" href="#" target="_blank">🚀 Enviar Alerta por WhatsApp</a>
+    </section>
 
-    </div>
-  </header>
+    <section id="proximos">
+      <h2>⏰ Usuarios próximos a vencer</h2>
+      <ul id="usuariosProximos"></ul>
+    </section>
+
+    <section id="registro">
+      <h2>💳 Registrar pago</h2>
+      <select id="usuariosPago"><option value="">Selecciona un usuario</option></select>
+      <input type="date" id="fechaPago">
+      <button onclick="registrarPago()">Registrar Pago</button>
+    </section>
+
+  </div>
+</header>
 
 <script>
-  function cargarUsuarios(data) {
-    const select = document.getElementById("contactos");
-    data.forEach(u => {
-      const option = document.createElement("option");
-      option.value = u["Numero de Contacto"] + "|" + encodeURIComponent(u["Mensaje"]);
-      option.textContent = u["Nombre Completo"];
-      select.appendChild(option);
-    });
-  }
+function showSection(id) {
+  document.querySelectorAll('section').forEach(sec => sec.style.display='none');
+  document.getElementById(id).style.display='block';
+}
 
-  var script = document.createElement('script');
-  script.src = "https://script.google.com/macros/s/AKfycbztRoPPZ6wSE7UUV87Tb8eObUr8gWbVk4CCatr13zuVnqV6x_Ab4OcEeuwg3XndufQ/exec?callback=cargarUsuarios";
-  document.body.appendChild(script);
+// Cargar usuarios desde tu Web App
+function cargarUsuarios(data) {
+  const select = document.getElementById("contactos");
+  const selectPago = document.getElementById("usuariosPago");
+  const proximos = document.getElementById("usuariosProximos");
 
-  document.getElementById("contactos").addEventListener("change", function() {
-    const val = this.value;
-    if(!val) return;
-    const [numero, mensaje] = val.split("|");
-    const btn = document.getElementById("btnAlerta");
-    btn.href = `https://api.whatsapp.com/send?phone=57${numero}&text=${decodeURIComponent(mensaje)}`;
+  const hoy = new Date();
+  const dosDias = new Date();
+  dosDias.setDate(hoy.getDate()+2);
+
+  data.forEach(u=>{
+    const option = document.createElement("option");
+    option.value = u["Numero de Contacto"]+"|"+encodeURIComponent(u["Mensaje"]);
+    option.textContent = u["Nombre Completo"];
+    select.appendChild(option);
+
+    const optionPago = document.createElement("option");
+    optionPago.value = u["Nombre Completo"];
+    optionPago.textContent = u["Nombre Completo"];
+    selectPago.appendChild(optionPago);
+
+    // Si tienes columna FechaVencimiento
+    if(u["FechaVencimiento"] && new Date(u["FechaVencimiento"]) <= dosDias) {
+      const li = document.createElement("li");
+      li.textContent = `${u["Nombre Completo"]} - Vence: ${u["FechaVencimiento"]}`;
+      proximos.appendChild(li);
+    }
   });
+}
+
+// JSONP
+var script = document.createElement('script');
+script.src = "https://script.google.com/macros/s/AKfycbztRoPPZ6wSE7UUV87Tb8eObUr8gWbVk4CCatr13zuVnqV6x_Ab4OcEeuwg3XndufQ/exec?callback=cargarUsuarios";
+document.body.appendChild(script);
+
+// Enviar WhatsApp
+document.getElementById("contactos").addEventListener("change", function() {
+  const val = this.value;
+  if(!val) return;
+  const [numero,mensaje] = val.split("|");
+  const btn = document.getElementById("btnAlerta");
+  btn.href = `https://api.whatsapp.com/send?phone=57${numero}&text=${decodeURIComponent(mensaje)}`;
+});
+
+// Registrar Pago
+function registrarPago() {
+  const usuario = document.getElementById("usuariosPago").value;
+  const fecha = document.getElementById("fechaPago").value;
+  if(!usuario || !fecha) { alert("Selecciona usuario y fecha"); return; }
+  alert(`Pago registrado para ${usuario} el ${fecha}`);
+  // Aquí luego puedes llamar tu Apps Script para guardar en la hoja
+}
 </script>
-  
+
 </body>
 </html>
