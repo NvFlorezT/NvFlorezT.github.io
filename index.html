@@ -2,14 +2,95 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Portafolio de Viviana</title>
+  <title>Entrenador Personal - Juan Pérez</title>
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
-    h1 { color: #4CAF50; }
+    body { margin: 0; font-family: Arial, sans-serif; background: #f4f4f4; color: #333; }
+    header { background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; padding: 40px 20px; text-align: center; }
+    header h1 { margin: 0; font-size: 2.5em; }
+    header p { font-size: 1.2em; }
+
+    nav { background: #222; padding: 10px; text-align: center; }
+    nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+    nav a:hover { color: #2ecc71; }
+
+    section { padding: 40px 20px; max-width: 900px; margin: auto; }
+    h2 { color: #27ae60; text-align: center; margin-bottom: 20px; }
+
+    .card { background: white; padding: 20px; margin: 20px auto; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); }
+    .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+
+    footer { background: #222; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+    footer a { color: #2ecc71; text-decoration: none; font-weight: bold; }
   </style>
 </head>
 <body>
-  <h1>Hola, soy Viviana 👩‍💻</h1>
-  <p>Este es mi primer sitio web con GitHub Pages 🚀</p>
+
+  <!-- ENCABEZADO -->
+  <header>
+    <h1>Juan Pérez 💪</h1>
+    <p>Entrenador Personal | Transformación Física y Bienestar</p>
+  </header>
+
+  <!-- MENÚ -->
+  <nav>
+    <a href="#sobre-mi">Sobre mí</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#testimonios">Testimonios</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <!-- SOBRE MI -->
+  <section id="sobre-mi">
+    <h2>Sobre mí</h2>
+    <div class="card">
+      <p>Soy Juan Pérez, entrenador personal certificado con más de 5 años de experiencia ayudando a personas a lograr sus objetivos: bajar de peso, ganar masa muscular y mejorar su salud. 💥</p>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section id="servicios">
+    <h2>Servicios</h2>
+    <div class="services">
+      <div class="card">
+        <h3>🏋️‍♂️ Plan de Fuerza</h3>
+        <p>Rutinas personalizadas para ganar músculo y mejorar el rendimiento.</p>
+      </div>
+      <div class="card">
+        <h3>🔥 Pérdida de Peso</h3>
+        <p>Entrenamientos efectivos y asesoría nutricional básica para alcanzar tu mejor versión.</p>
+      </div>
+      <div class="card">
+        <h3>🤸‍♀️ Entrenamiento Funcional</h3>
+        <p>Ejercicios dinámicos que mejoran resistencia, movilidad y energía.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section id="testimonios">
+    <h2>Testimonios</h2>
+    <div class="card">
+      <p>"Gracias a Juan bajé 10 kilos en 3 meses y me siento con más energía que nunca" – Andrea G.</p>
+    </div>
+    <div class="card">
+      <p>"Excelente entrenador, siempre motivándome a dar lo mejor" – Carlos M.</p>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <div class="card">
+      <p>📩 Escríbeme: <a href="mailto:ViviTique@gmail.com">ViviTique@gmail.com</a></p>
+      <p>📱 Teléfono: 321 615 6819</p>
+      <p>📷 Instagram: <a href="https://instagram.com/usuario" target="_blank">@usuario</a></p>
+    </div>
+  </section>
+
+  <!-- PIE -->
+  <footer>
+    <p>&copy; 2025 Juan Pérez | Entrenador Personal</p>
+  </footer>
+
 </body>
 </html>
