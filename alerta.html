@@ -27,38 +27,37 @@ a.button { display:inline-block; padding:10px 20px; background:#25D366; color:#f
 <button onclick="showSection('registro')">Registrar Pago</button>
 </nav>
 
-<!-- Secciones -->
+<!-- Sección alerta -->
 <section id="alerta">
 <h2>🔔 Enviar alerta de membresía</h2>
 <select id="contactos"><option value="">Selecciona un usuario</option></select>
 <a id="btnAlerta" class="button" href="#" target="_blank">🚀 Enviar Alerta por WhatsApp</a>
 </section>
-    <!-- Botón para registrar nuevo usuario -->
-    <div style="text-align:center; margin-top:20px;">
-      <a href="https://docs.google.com/forms/d/14j3geGs0-9HYeDyF24Y3v5wufc5ZryCHa8rJvKDQ_E4/edit" target="_blank"
-         style="display:inline-block; padding:15px 35px; background:#e74c3c; color:#fff; font-weight:bold;
-                border-radius:50px; text-decoration:none; font-size:18px;
-                box-shadow:0px 4px 10px rgba(0,0,0,0.4); transition:0.3s;">
-        🆕 Registrar nuevo usuario
-      </a>
-    </div>
 
+<!-- Botón para registrar nuevo usuario en Google Form -->
+<div style="text-align:center; margin-top:20px;">
+  <a href="https://docs.google.com/forms/d/14j3geGs0-9HYeDyF24Y3v5wufc5ZryCHa8rJvKDQ_E4/edit" target="_blank"
+     style="display:inline-block; padding:15px 35px; background:#e74c3c; color:#fff; font-weight:bold;
+            border-radius:50px; text-decoration:none; font-size:18px;
+            box-shadow:0px 4px 10px rgba(0,0,0,0.4); transition:0.3s;">
+    🆕 Registrar nuevo usuario
+  </a>
+</div>
 
+<!-- Sección próximos a vencer -->
 <section id="proximos">
 <h2>⏰ Usuarios próximos a vencer</h2>
 <ul id="usuariosProximos"></ul>
 </section>
 
+<!-- Sección registrar pago -->
 <section id="registro">
 <h2>Registrar nuevo pago</h2>
 <form id="formPago">
 <input type="date" id="fechaPago" required />
-
-<!-- Selección de usuario en lugar de escribir el nombre -->
 <select id="usuariosPago" required>
 <option value="">Selecciona Usuario</option>
 </select>
-
 <input type="number" id="montoPago" placeholder="Monto" required />
 <select id="medioPago" required>
 <option value="">Selecciona Medio de Pago</option>
@@ -74,89 +73,95 @@ a.button { display:inline-block; padding:10px 20px; background:#25D366; color:#f
 </header>
 
 <script>
+/* Mostrar sección activa */
 function showSection(id) {
-document.querySelectorAll('section').forEach(sec => sec.style.display='none');
-document.getElementById(id).style.display='block';
+  document.querySelectorAll('section').forEach(sec => sec.style.display='none');
+  document.getElementById(id).style.display='block';
 }
 
-// Cargar usuarios desde tu Web App
+/* Cargar usuarios desde Web App */
 function cargarUsuarios(data) {
-const select = document.getElementById("contactos");
-const selectPago = document.getElementById("usuariosPago");
-const proximos = document.getElementById("usuariosProximos");
+  const select = document.getElementById("contactos");
+  const selectPago = document.getElementById("usuariosPago");
+  const proximos = document.getElementById("usuariosProximos");
 
-const hoy = new Date();
-const dosDias = new Date();
-dosDias.setDate(hoy.getDate()+2);
+  const hoy = new Date();
+  const dosDias = new Date();
+  dosDias.setDate(hoy.getDate() + 2);
 
-data.forEach(u=>{
-const option = document.createElement("option");
-option.value = u["Numero de Contacto"]+"|"+encodeURIComponent(u["Mensaje"]);
-option.textContent = u["Nombre Completo"];
-select.appendChild(option);
+  data.forEach(u => {
+    const nombre = u["Nombre Completo"];
+    const numero = u["Numero de Contacto"];
+    const mensaje = u["Mensaje"];
+    const fechaVenc = u["FechaVencimiento"]; // opcional, si existe
 
-const optionPago = document.createElement("option");
-optionPago.value = u["Nombre Completo"];
-optionPago.textContent = u["Nombre Completo"];
-selectPago.appendChild(optionPago);
+    // Dropdown alerta
+    const option = document.createElement("option");
+    option.value = numero + "|" + encodeURIComponent(mensaje);
+    option.textContent = nombre;
+    select.appendChild(option);
 
-// Si tienes columna FechaVencimiento
-if(u["FechaVencimiento"] && new Date(u["FechaVencimiento"]) <= dosDias) {
-const li = document.createElement("li");
-li.textContent = `${u["Nombre Completo"]} - Vence: ${u["FechaVencimiento"]}`;
-proximos.appendChild(li);
+    // Dropdown pago
+    const optionPago = document.createElement("option");
+    optionPago.value = nombre;
+    optionPago.textContent = nombre;
+    selectPago.appendChild(optionPago);
+
+    // Próximos a vencer
+    if(fechaVenc && new Date(fechaVenc) <= dosDias) {
+      const li = document.createElement("li");
+      li.textContent = `${nombre} - Vence: ${fechaVenc}`;
+      proximos.appendChild(li);
+    }
+  });
 }
-});
-}
 
-// JSONP
+/* JSONP para cargar usuarios */
 var script = document.createElement('script');
 script.src = "https://script.google.com/macros/s/AKfycbztRoPPZ6wSE7UUV87Tb8eObUr8gWbVk4CCatr13zuVnqV6x_Ab4OcEeuwg3XndufQ/exec?callback=cargarUsuarios";
 document.body.appendChild(script);
 
-// Enviar WhatsApp
+/* Enviar WhatsApp */
 document.getElementById("contactos").addEventListener("change", function() {
-const val = this.value;
-if(!val) return;
-const [numero,mensaje] = val.split("|");
-const btn = document.getElementById("btnAlerta");
-btn.href = `https://api.whatsapp.com/send?phone=57${numero}&text=${decodeURIComponent(mensaje)}`;
+  const val = this.value;
+  if(!val) return;
+  const [numero,mensaje] = val.split("|");
+  const btn = document.getElementById("btnAlerta");
+  btn.href = `https://api.whatsapp.com/send?phone=57${numero}&text=${decodeURIComponent(mensaje)}`;
 });
 
-// Registrar Pago con Web App usando POST
+/* Registrar Pago */
 document.getElementById("formPago").addEventListener("submit", function(e) {
-e.preventDefault(); // Evita recargar la página
+  e.preventDefault();
 
-const fecha = document.getElementById("fechaPago").value;
-const nombre = document.getElementById("usuariosPago").value;
-const monto = document.getElementById("montoPago").value;
-const medio = document.getElementById("medioPago").value;
+  const fecha = document.getElementById("fechaPago").value;
+  const nombre = document.getElementById("usuariosPago").value;
+  const monto = document.getElementById("montoPago").value;
+  const medio = document.getElementById("medioPago").value;
 
-const url = "https://script.google.com/macros/s/AKfycbwNbYVD5FGUYMS7lDB-9Ij3jkShlExnvcq28K4ZGxlD9hnp7zhrfz7q64waZGHOwbg/exec";
+  const url = "https://script.google.com/macros/s/AKfycbwNbYVD5FGUYMS7lDB-9Ij3jkShlExnvcq28K4ZGxlD9hnp7zhrfz7q64waZGHOwbg/exec";
 
-fetch(url, {
-method: "POST",
-body: JSON.stringify({
-fechaPago: fecha,
-nombre: nombre,
-monto: monto,
-medioPago: medio
-})
-})
-.then(res => res.json())
-.then(res => {
-if(res.status === "ok") alert("Pago registrado correctamente");
-else alert("Error al registrar pago: " + (res.message || ""));
-document.getElementById("formPago").reset(); // limpiar formulario
-})
-.catch(err => {
-console.error(err);
-alert("Error al registrar pago: " + err);
+  fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      fechaPago: fecha,
+      nombre: nombre,
+      monto: monto,
+      medioPago: medio
+    })
+  })
+  .then(res => res.json())
+  .then(res => {
+    if(res.status === "ok") alert("Pago registrado correctamente");
+    else alert("Error al registrar pago: " + (res.message || ""));
+    document.getElementById("formPago").reset();
+  })
+  .catch(err => {
+    console.error(err);
+    alert("Error al registrar pago: " + err);
+  });
 });
-});
-
-
-  
 </script>
 
 </body>
