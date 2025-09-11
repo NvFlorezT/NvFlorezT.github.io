@@ -52,15 +52,36 @@ function showSection(id) {
   document.getElementById(id).style.display = 'block';
 }
 
-// Cargar usuarios desde Web App
+// Array global para guardar los datos de los usuarios cargados
+let usuariosData = [];
+
+// Función para cargar usuarios desde la Web App
 function cargarUsuarios(data) {
   const select = document.getElementById("contactos");
   select.innerHTML = '<option value="">Selecciona un usuario</option>';
 
-  data.forEach(u => {
+  // Guardar datos globalmente para poder accederlos después
+  usuariosData = data.map(u => {
+    // Calcular FechaVencimiento sumando 1 mes a FechaPago
+    let fechaVenc = null;
+    if (u["FechaPago"]) {
+      const fechaPago = new Date(u["FechaPago"]);
+      fechaVenc = new Date(fechaPago);
+      fechaVenc.setMonth(fechaVenc.getMonth() + 1);
+    }
+    return {
+      "NombreCompleto": u["Nombre Completo"],
+      "NumeroContacto": u["Numero de Contacto"],
+      "FechaPago": u["FechaPago"] || "",
+      "FechaVencimiento": fechaVenc
+    };
+  });
+
+  // Llenar el dropdown
+  usuariosData.forEach(u => {
     const option = document.createElement("option");
-    option.value = u["Numero de Contacto"];
-    option.textContent = u["Nombre Completo"];
+    option.value = u["NumeroContacto"];
+    option.textContent = u["NombreCompleto"];
     select.appendChild(option);
   });
 }
@@ -70,15 +91,37 @@ var script = document.createElement('script');
 script.src = "https://script.google.com/macros/s/AKfycbxny5x1P_HUdiB1kLrJ_rxhSxyPlQKxadfhzCBjAPCqVS-67pPFx29gMPBeHhrT1QE/exec?callback=cargarUsuarios";
 document.body.appendChild(script);
 
-// Actualizar link de WhatsApp cuando cambie usuario o mensaje
+// Función para actualizar el link de WhatsApp
 function actualizarWhatsApp() {
   const numero = document.getElementById("contactos").value;
-  const mensaje = document.getElementById("mensajeAlerta").value.trim();
+  const textoManual = document.getElementById("mensajeAlerta")?.value.trim(); // opcional si tienes textarea
   const btn = document.getElementById("btnAlerta");
-  if(!numero || !mensaje) {
+
+  if (!numero) {
     btn.href = "#";
     return;
   }
+
+  // Buscar el usuario seleccionado
+  const usuario = usuariosData.find(u => u["NumeroContacto"] === numero);
+  let mensaje = textoManual || "";
+
+  // Generar mensaje automático si no hay texto manual
+  if (!mensaje && usuario && usuario["FechaVencimiento"]) {
+    const hoy = new Date();
+    const diffDias = Math.ceil((usuario["FechaVencimiento"] - hoy) / (1000 * 60 * 60 * 24));
+
+    if (diffDias < 0) {
+      mensaje = `Hola ${usuario["NombreCompleto"]}, espero te encuentres muy bien. Tu membresía ya venció, por favor renueva cuanto antes.`;
+    } else if (diffDias <= 3) {
+      mensaje = `Hola ${usuario["NombreCompleto"]}, tu membresía vence en ${diffDias} día(s). ¡No te quedes sin acceso!`;
+    } else {
+      const opciones = { year: 'numeric', month: '2-digit', day: '2-digit' };
+      const fechaStr = usuario["FechaVencimiento"].toLocaleDateString('es-CO', opciones);
+      mensaje = `Hola ${usuario["NombreCompleto"]}, tu membresía sigue activa hasta el ${fechaStr}.`;
+    }
+  }
+
   btn.href = `https://api.whatsapp.com/send?phone=57${numero}&text=${encodeURIComponent(mensaje)}`;
 }
 
