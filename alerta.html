@@ -88,7 +88,8 @@ document.body.appendChild(script);
 
 // Función para actualizar el link de WhatsApp al seleccionar usuario
 document.getElementById("contactos").addEventListener("change", function() {
-  const numero = this.value;
+  // Limpiar el número (solo dígitos)
+  const numero = this.value.replace(/\D/g,''); 
   const btn = document.getElementById("btnAlerta");
 
   if (!numero) {
@@ -96,30 +97,28 @@ document.getElementById("contactos").addEventListener("change", function() {
     return;
   }
 
-  const usuario = usuariosData.find(u => u["NumeroContacto"] === numero);
+  // Buscar el usuario seleccionado, también limpiando el número
+  const usuario = usuariosData.find(u => u["NumeroContacto"].replace(/\D/g,'') === numero);
   if (!usuario) return;
 
   let mensaje = "";
   const hoy = new Date();
   const diffDias = Math.ceil((usuario["FechaVencimiento"] - hoy) / (1000*60*60*24));
 
-  if (diffDias < 0) {
+  if(diffDias < 0) {
     mensaje = `Hola ${usuario["NombreCompleto"]}, tu membresía ya venció. Por favor renueva cuanto antes.`;
-  } else if (diffDias <= 3) {
+  } else if(diffDias <= 3) {
     mensaje = `Hola ${usuario["NombreCompleto"]}, tu membresía vence en ${diffDias} día(s). ¡No te quedes sin acceso!`;
   } else {
     const opciones = { year: 'numeric', month: '2-digit', day: '2-digit' };
     const fechaStr = usuario["FechaVencimiento"].toLocaleDateString('es-CO', opciones);
     mensaje = `Hola ${usuario["NombreCompleto"]}, tu membresía sigue activa hasta el ${fechaStr}.`;
   }
- // Detectar si es escritorio o móvil
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  const whatsappUrl = isMobile
-    ? `https://api.whatsapp.com/send?phone=57${numero}&text=${encodeURIComponent(mensaje)}`
-    : `https://web.whatsapp.com/send?phone=57${numero}&text=${encodeURIComponent(mensaje)}`;
 
-  btn.href = whatsappUrl;
+  // Redirigir a WhatsApp
+  btn.href = `https://api.whatsapp.com/send?phone=57${numero}&text=${encodeURIComponent(mensaje)}`;
 });
+
 </script>
 
 </body>
