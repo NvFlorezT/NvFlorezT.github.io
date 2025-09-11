@@ -128,10 +128,75 @@
 </header>
 
 <script>
-function showSection(id) {
-  document.querySelectorAll('section').forEach(sec => sec.style.display='none');
+<script>
+function showSection(id){
+  document.querySelectorAll('section').forEach(sec=>sec.style.display='none');
   document.getElementById(id).style.display='block';
 }
+
+// Cargar usuarios desde Apps Script
+function cargarUsuarios(data){
+  const select = document.getElementById("contactos");
+  const selectPago = document.getElementById("usuariosPago");
+  select.innerHTML = '<option value="">Selecciona un usuario</option>';
+  selectPago.innerHTML = '<option value="">Selecciona Usuario</option>';
+
+  data.forEach(u=>{
+    // Dropdown alerta
+    const option = document.createElement("option");
+    option.value = u.NumeroContacto + "|" + encodeURIComponent(u.MensajeAlerta);
+    option.textContent = u.NombreCompleto;
+    select.appendChild(option);
+
+    // Dropdown pago
+    const optionPago = document.createElement("option");
+    optionPago.value = u.NombreCompleto;
+    optionPago.textContent = u.NombreCompleto;
+    selectPago.appendChild(optionPago);
+  });
+}
+
+// JSONP
+const script = document.createElement('script');
+script.src = "https://script.google.com/macros/s/AKfycbxny5x1P_HUdiB1kLrJ_rxhSxyPlQKxadfhzCBjAPCqVS-67pPFx29gMPBeHhrT1QE/exec?callback=cargarUsuarios";
+document.body.appendChild(script);
+
+// Cambiar enlace WhatsApp
+document.getElementById("contactos").addEventListener("change",function(){
+  const val=this.value;
+  if(!val) return;
+  const [numero,mensaje]=val.split("|");
+  const btn=document.getElementById("btnAlerta");
+  btn.href=`https://api.whatsapp.com/send?phone=57${numero}&text=${decodeURIComponent(mensaje)}`;
+});
+
+// Registrar pago
+document.getElementById("formPago").addEventListener("submit",function(e){
+  e.preventDefault();
+  const fecha=document.getElementById("fechaPago").value;
+  const nombre=document.getElementById("usuariosPago").value;
+  const monto=document.getElementById("montoPago").value;
+  const medio=document.getElementById("medioPago").value;
+
+  const url="https://script.google.com/macros/s/AKfycbxny5x1P_HUdiB1kLrJ_rxhSxyPlQKxadfhzCBjAPCqVS-67pPFx29gMPBeHhrT1QE/exec";
+
+  fetch(url,{
+    method:"POST",
+    headers:{ "Content-Type": "application/json" },
+    body: JSON.stringify({ FechaPago:fecha, NombreCompleto:nombre, Monto:monto, MedioPago:medio })
+  })
+  .then(res=>res.json())
+  .then(res=>{
+    if(res.status==="ok") alert("Pago registrado correctamente");
+    else alert("Error: "+(res.message||""));
+    document.getElementById("formPago").reset();
+  })
+  .catch(err=>{
+    console.error(err);
+    alert("Error: "+err);
+  });
+});
+</script>
 </script>
 
 </body>
