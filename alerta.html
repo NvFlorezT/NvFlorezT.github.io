@@ -2,12 +2,11 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Panel Administrador Gym - Estilo Moderno</title>
+<title>Panel Administrador Gym</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Arial', sans-serif; background: #111; color: #f4f4f4; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Arial', sans-serif; background:#111; color:#f4f4f4; }
 
-  /* ENCABEZADO */
   header {
     background: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438') no-repeat center center/cover;
     height: 90vh;
@@ -20,83 +19,65 @@
     padding: 20px;
     position: relative;
   }
-  header::before {
-    content: "";
-    position: absolute;
-    top:0; left:0;
-    width:100%; height:100%;
-    background: rgba(0,0,0,0.6);
-    z-index:0;
-  }
+
   header h1 {
     font-size: 3em;
     text-shadow: 2px 2px 6px #000;
-    position: relative;
-    z-index:1;
   }
+
   header p {
     font-size: 1.3em;
     margin-top: 10px;
     text-shadow: 1px 1px 4px #000;
-    position: relative;
-    z-index:1;
   }
 
-  /* CONTENEDOR */
-  .container {
-    position: relative;
-    z-index:1;
+  .panel {
+    margin-top: 20px; /* Separación del texto */
     background: rgba(0,0,0,0.7);
-    padding: 40px;
+    padding: 30px;
     border-radius: 15px;
-    max-width: 500px;
+    max-width: 600px;
     width: 90%;
     text-align: center;
-    margin-top: -50px;
   }
 
-  /* NAVEGACION */
   nav {
     display: flex;
     justify-content: space-around;
     margin-bottom: 20px;
   }
+
   nav button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background: #2ecc71;
-    color: #fff;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
+    padding:10px 20px;
+    border:none;
+    border-radius:5px;
+    background:#2ecc71;
+    color:#fff;
+    cursor:pointer;
+    transition:0.3s;
   }
-  nav button:hover { background: #27ae60; }
 
-  /* SECCIONES */
-  section { display: none; margin-top: 20px; text-align: left; }
-  select, input, textarea, button { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; }
+  nav button:hover { background:#27ae60; }
+
+  section { display:none; margin-top:20px; }
+
+  select,input,textarea,button {
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:5px;
+    border:none;
+  }
+
   a.button {
-    display: inline-block;
-    padding: 12px 25px;
-    background: #25D366;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: 0.3s;
+    display:inline-block;
+    padding:10px 20px;
+    background:#25D366;
+    color:#fff;
+    text-decoration:none;
+    border-radius:5px;
   }
-  a.button:hover { background: #1ebe57; }
 
-  /* FORMULARIO */
-  button[type="submit"] {
-    background: #2ecc71;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  button[type="submit"]:hover { background: #27ae60; }
 </style>
 </head>
 <body>
@@ -104,109 +85,53 @@
 <header>
   <h1>Panel Administrador Gym</h1>
   <p>Gestiona alertas y pagos de tus miembros</p>
+
+  <!-- Panel dentro del header -->
+  <div class="panel">
+    <nav>
+      <button onclick="showSection('alerta')">Alerta Membresía</button>
+      <button onclick="showSection('proximos')">Usuarios Próximos a Vencer</button>
+      <button onclick="showSection('registro')">Registrar Pago</button>
+    </nav>
+
+    <!-- Secciones -->
+    <section id="alerta">
+      <h2>🔔 Enviar alerta de membresía</h2>
+      <select id="contactos"><option value="">Selecciona un usuario</option></select>
+      <a id="btnAlerta" class="button" href="#" target="_blank">🚀 Enviar Alerta por WhatsApp</a>
+    </section>
+
+    <section id="proximos">
+      <h2>⏰ Usuarios próximos a vencer</h2>
+      <ul id="usuariosProximos"></ul>
+    </section>
+
+    <section id="registro">
+      <h2>Registrar nuevo pago</h2>
+      <form id="formPago">
+        <input type="date" id="fechaPago" required />
+        <select id="usuariosPago" required>
+          <option value="">Selecciona Usuario</option>
+        </select>
+        <input type="number" id="montoPago" placeholder="Monto" required />
+        <select id="medioPago" required>
+          <option value="">Selecciona Medio de Pago</option>
+          <option value="Efectivo">Efectivo</option>
+          <option value="Transferencia">Transferencia</option>
+          <option value="Tarjeta">Tarjeta</option>
+        </select>
+        <button type="submit">Registrar Pago</button>
+      </form>
+    </section>
+
+  </div>
 </header>
 
-<div class="container">
-  <nav>
-    <button onclick="showSection('alerta')">Alerta Membresía</button>
-    <button onclick="showSection('registro')">Registrar Pago</button>
-  </nav>
-
-  <!-- Alerta -->
-  <section id="alerta">
-    <h2>🔔 Enviar alerta de membresía</h2>
-    <select id="contactos"><option value="">Selecciona un usuario</option></select>
-    <a id="btnAlerta" class="button" href="#" target="_blank">🚀 Enviar Alerta por WhatsApp</a>
-  </section>
-
-  <!-- Registrar Pago -->
-  <section id="registro">
-    <h2>💳 Registrar nuevo pago</h2>
-    <form id="formPago">
-      <input type="date" id="fechaPago" required />
-      <select id="usuariosPago" required>
-        <option value="">Selecciona Usuario</option>
-      </select>
-      <input type="number" id="montoPago" placeholder="Monto" required />
-      <select id="medioPago" required>
-        <option value="">Selecciona Medio de Pago</option>
-        <option value="Efectivo">Efectivo</option>
-        <option value="Transferencia">Transferencia</option>
-        <option value="Tarjeta">Tarjeta</option>
-      </select>
-      <button type="submit">Registrar Pago</button>
-    </form>
-  </section>
-</div>
-
 <script>
-function showSection(id){
-  document.querySelectorAll('section').forEach(sec=>sec.style.display='none');
+function showSection(id) {
+  document.querySelectorAll('section').forEach(sec => sec.style.display='none');
   document.getElementById(id).style.display='block';
 }
-
-// Cargar usuarios desde Apps Script
-function cargarUsuarios(data){
-  const select = document.getElementById("contactos");
-  const selectPago = document.getElementById("usuariosPago");
-  select.innerHTML = '<option value="">Selecciona un usuario</option>';
-  selectPago.innerHTML = '<option value="">Selecciona Usuario</option>';
-
-  data.forEach(u=>{
-    // Dropdown alerta
-    const option = document.createElement("option");
-    option.value = u.NumeroContacto + "|" + encodeURIComponent(u.MensajeAlerta);
-    option.textContent = u.NombreCompleto;
-    select.appendChild(option);
-
-    // Dropdown pago
-    const optionPago = document.createElement("option");
-    optionPago.value = u.NombreCompleto;
-    optionPago.textContent = u.NombreCompleto;
-    selectPago.appendChild(optionPago);
-  });
-}
-
-// JSONP
-const script = document.createElement('script');
-script.src = "TU_URL_DE_APPS_SCRIPT?callback=cargarUsuarios";
-document.body.appendChild(script);
-
-// Cambiar enlace WhatsApp
-document.getElementById("contactos").addEventListener("change",function(){
-  const val=this.value;
-  if(!val) return;
-  const [numero,mensaje]=val.split("|");
-  const btn=document.getElementById("btnAlerta");
-  btn.href=`https://api.whatsapp.com/send?phone=57${numero}&text=${decodeURIComponent(mensaje)}`;
-});
-
-// Registrar pago
-document.getElementById("formPago").addEventListener("submit",function(e){
-  e.preventDefault();
-  const fecha=document.getElementById("fechaPago").value;
-  const nombre=document.getElementById("usuariosPago").value;
-  const monto=document.getElementById("montoPago").value;
-  const medio=document.getElementById("medioPago").value;
-
-  const url="TU_URL_DE_APPS_SCRIPT";
-
-  fetch(url,{
-    method:"POST",
-    headers:{ "Content-Type": "application/json" },
-    body: JSON.stringify({ FechaPago:fecha, NombreCompleto:nombre, Monto:monto, MedioPago:medio })
-  })
-  .then(res=>res.json())
-  .then(res=>{
-    if(res.status==="ok") alert("Pago registrado correctamente");
-    else alert("Error: "+(res.message||""));
-    document.getElementById("formPago").reset();
-  })
-  .catch(err=>{
-    console.error(err);
-    alert("Error: "+err);
-  });
-});
 </script>
 
 </body>
