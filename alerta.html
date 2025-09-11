@@ -23,8 +23,6 @@ a.button { display:inline-block; padding:10px 20px; background:#25D366; color:#f
 <h1>Panel Administrador Gym</h1>
 <nav>
 <button onclick="showSection('alerta')">Alerta Membresía</button>
-<button onclick="showSection('proximos')">Usuarios Próximos a Vencer</button>
-<button onclick="showSection('registro')">Registrar Pago</button>
 </nav>
 
 <!-- Sección alerta -->
@@ -34,119 +32,47 @@ a.button { display:inline-block; padding:10px 20px; background:#25D366; color:#f
 <a id="btnAlerta" class="button" href="#" target="_blank">🚀 Enviar Alerta por WhatsApp</a>
 </section>
 
-<!-- Sección próximos a vencer -->
-<section id="proximos">
-<h2>⏰ Usuarios próximos a vencer</h2>
-<ul id="usuariosProximos"></ul>
-</section>
-
-<!-- Sección registrar pago -->
-<section id="registro">
-<h2>Registrar nuevo pago</h2>
-<form id="formPago">
-<input type="date" id="fechaPago" required />
-<select id="usuariosPago" required>
-<option value="">Selecciona Usuario</option>
-</select>
-<input type="number" id="montoPago" placeholder="Monto" required />
-<select id="medioPago" required>
-<option value="">Selecciona Medio de Pago</option>
-<option value="Efectivo">Efectivo</option>
-<option value="Transferencia">Transferencia</option>
-<option value="Tarjeta">Tarjeta</option>
-</select>
-<button type="submit">Registrar Pago</button>
-</form>
-</section>
-
 </div>
 </header>
 
 <script>
-/* Mostrar sección activa */
+// Mostrar la sección activa
 function showSection(id) {
-  document.querySelectorAll('section').forEach(sec => sec.style.display='none');
-  document.getElementById(id).style.display='block';
+  document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
+  document.getElementById(id).style.display = 'block';
 }
 
-/* Cargar usuarios desde Web App */
+// Función para cargar usuarios desde Web App
 function cargarUsuarios(data) {
   const select = document.getElementById("contactos");
-  const selectPago = document.getElementById("usuariosPago");
-  const proximos = document.getElementById("usuariosProximos");
 
   data.forEach(u => {
     const nombre = u["Nombre Completo"];
     const numero = u["Numero de Contacto"];
     const mensaje = u["Mensaje"];
-    // const fechaVenc = u["FechaVencimiento"]; // ya no se usa si no hay columna real
 
-    // Dropdown alerta
     const option = document.createElement("option");
     option.value = numero + "|" + encodeURIComponent(mensaje);
     option.textContent = nombre;
     select.appendChild(option);
-
-    // Dropdown pago
-    const optionPago = document.createElement("option");
-    optionPago.value = nombre;
-    optionPago.textContent = nombre;
-    selectPago.appendChild(optionPago);
-
-    // Lista próximos (solo nombre)
-    const li = document.createElement("li");
-    li.textContent = nombre; // mostramos solo el nombre, no la fecha
-    proximos.appendChild(li);
   });
 }
 
-/* JSONP para cargar usuarios */
+// Cargar usuarios vía JSONP
 var script = document.createElement('script');
-script.src = "https://script.google.com/macros/s/AKfycbwNbYVD5FGUYMS7lDB-9Ij3jkShlExnvcq28K4ZGxlD9hnp7zhrfz7q64waZGHOwbg/exec?callback=cargarUsuarios";
+script.src = "https://script.google.com/macros/s/AKfycbxny5x1P_HUdiB1kLrJ_rxhSxyPlQKxadfhzCBjAPCqVS-67pPFx29gMPBeHhrT1QE/exec?callback=cargarUsuarios";
 document.body.appendChild(script);
 
-/* Enviar WhatsApp */
+// Actualizar link de WhatsApp según el usuario seleccionado
 document.getElementById("contactos").addEventListener("change", function() {
   const val = this.value;
   if(!val) return;
-  const [numero,mensaje] = val.split("|");
+  const [numero, mensaje] = val.split("|");
   const btn = document.getElementById("btnAlerta");
   btn.href = `https://api.whatsapp.com/send?phone=57${numero}&text=${decodeURIComponent(mensaje)}`;
-});
-
-/* Registrar Pago */
-document.getElementById("formPago").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  const fecha = document.getElementById("fechaPago").value;
-  const nombre = document.getElementById("usuariosPago").value;
-  const monto = document.getElementById("montoPago").value;
-  const medio = document.getElementById("medioPago").value;
-
-  const url = "https://script.google.com/macros/s/AKfycbwNbYVD5FGUYMS7lDB-9Ij3jkShlExnvcq28K4ZGxlD9hnp7zhrfz7q64waZGHOwbg/exec";
-
-  fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      fechaPago: fecha,
-      nombre: nombre,
-      monto: monto,
-      medioPago: medio
-    })
-  })
-  .then(res => res.json())
-  .then(res => {
-    if(res.status === "ok") alert("Pago registrado correctamente");
-    else alert("Error al registrar pago: " + (res.message || ""));
-    document.getElementById("formPago").reset();
-  })
-  .catch(err => {
-    console.error(err);
-    alert("Error al registrar pago: " + err);
-  });
 });
 </script>
 
 </body>
 </html>
+
