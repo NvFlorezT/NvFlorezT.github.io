@@ -14,6 +14,7 @@ nav button:hover { background:#27ae60; }
 section { display:none; margin-top:20px; }
 select,input,textarea,button { width:100%; padding:10px; margin:10px 0; border-radius:5px; border:none; }
 a.button { display:inline-block; padding:10px 20px; background:#25D366; color:#fff; text-decoration:none; border-radius:5px; }
+textarea { resize: none; height: 100px; }
 </style>
 </head>
 <body>
@@ -21,15 +22,24 @@ a.button { display:inline-block; padding:10px 20px; background:#25D366; color:#f
 <header>
 <div class="container">
 <h1>Panel Administrador Gym</h1>
+
+<!-- Navegación -->
 <nav>
 <button onclick="showSection('alerta')">Alerta Membresía</button>
 </nav>
 
 <!-- Sección alerta -->
 <section id="alerta">
-<h2>🔔 Enviar alerta de membresía</h2>
-<select id="contactos"><option value="">Selecciona un usuario</option></select>
-<a id="btnAlerta" class="button" href="#" target="_blank">🚀 Enviar Alerta por WhatsApp</a>
+  <h2>🔔 Enviar alerta de membresía</h2>
+  
+  <!-- Dropdown de usuarios -->
+  <select id="contactos"><option value="">Selecciona un usuario</option></select>
+  
+  <!-- Área para escribir mensaje -->
+  <textarea id="mensajeAlerta" placeholder="Escribe tu mensaje aquí"></textarea>
+  
+  <!-- Botón enviar WhatsApp -->
+  <a id="btnAlerta" class="button" href="#" target="_blank">🚀 Enviar Alerta por WhatsApp</a>
 </section>
 
 </div>
@@ -42,37 +52,39 @@ function showSection(id) {
   document.getElementById(id).style.display = 'block';
 }
 
-// Función para cargar usuarios desde Web App
+// Cargar usuarios desde Web App
 function cargarUsuarios(data) {
   const select = document.getElementById("contactos");
+  select.innerHTML = '<option value="">Selecciona un usuario</option>';
 
   data.forEach(u => {
-    const nombre = u["Nombre Completo"];
-    const numero = u["Numero de Contacto"];
-    const mensaje = u["Mensaje"];
-
     const option = document.createElement("option");
-    option.value = numero + "|" + encodeURIComponent(mensaje);
-    option.textContent = nombre;
+    option.value = u["Numero de Contacto"];
+    option.textContent = u["Nombre Completo"];
     select.appendChild(option);
   });
 }
 
-// Cargar usuarios vía JSONP
+// JSONP para cargar usuarios
 var script = document.createElement('script');
 script.src = "https://script.google.com/macros/s/AKfycbxny5x1P_HUdiB1kLrJ_rxhSxyPlQKxadfhzCBjAPCqVS-67pPFx29gMPBeHhrT1QE/exec?callback=cargarUsuarios";
 document.body.appendChild(script);
 
-// Actualizar link de WhatsApp según el usuario seleccionado
-document.getElementById("contactos").addEventListener("change", function() {
-  const val = this.value;
-  if(!val) return;
-  const [numero, mensaje] = val.split("|");
+// Actualizar link de WhatsApp cuando cambie usuario o mensaje
+function actualizarWhatsApp() {
+  const numero = document.getElementById("contactos").value;
+  const mensaje = document.getElementById("mensajeAlerta").value.trim();
   const btn = document.getElementById("btnAlerta");
-  btn.href = `https://api.whatsapp.com/send?phone=57${numero}&text=${decodeURIComponent(mensaje)}`;
-});
+  if(!numero || !mensaje) {
+    btn.href = "#";
+    return;
+  }
+  btn.href = `https://api.whatsapp.com/send?phone=57${numero}&text=${encodeURIComponent(mensaje)}`;
+}
+
+document.getElementById("contactos").addEventListener("change", actualizarWhatsApp);
+document.getElementById("mensajeAlerta").addEventListener("input", actualizarWhatsApp);
 </script>
 
 </body>
 </html>
-
