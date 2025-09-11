@@ -84,30 +84,31 @@
   </div>
 
   <script>
-    // Pega aquí la URL de tu Web App de Google Apps Script
-    const apiURL = "https://script.google.com/macros/s/AKfycby_2mg1jEwuamvxAFkGrbXUex2fpxy1QkGUbHI3XC2rBcczXyTSoLYiWJsZAzO9bLk/exec";
+  const apiURL = "https://script.google.com/macros/s/AKfycby_2mg1jEwuamvxAFkGrbXUex2fpxy1QkGUbHI3XC2rBcczXyTSoLYiWJsZAzO9bLk/exec";
 
-    // Cargar contactos desde Google Sheets
-    fetch(apiURL)
-      .then(res => res.json())
-      .then(data => {
-        const select = document.getElementById("contactos");
-        data.forEach(u => {
-          const option = document.createElement("option");
-          option.value = u.telefono + "|" + encodeURIComponent(u.mensaje);
-          option.textContent = u.nombre;
-          select.appendChild(option);
-        });
+  // Cargar contactos desde Google Sheets
+  fetch(apiURL)
+    .then(res => res.json())
+    .then(data => {
+      const select = document.getElementById("contactos");
+      data.forEach(u => {
+        const option = document.createElement("option");
+        // Usamos Numero de Contacto (columna 3) + mensaje
+        option.value = u.numero + "|" + encodeURIComponent(u.mensaje);
+        option.textContent = u.nombre;
+        select.appendChild(option);
       });
-
-    // Actualizar enlace del botón según el contacto seleccionado
-    document.getElementById("contactos").addEventListener("change", function() {
-      const val = this.value;
-      if(!val) return;
-      const [telefono, mensaje] = val.split("|");
-      const btn = document.getElementById("btnAlerta");
-      btn.href = `https://api.whatsapp.com/send?phone=57${telefono}&text=${mensaje}`;
     });
-  </script>
+
+  // Actualizar enlace del botón según el contacto seleccionado
+  document.getElementById("contactos").addEventListener("change", function() {
+    const val = this.value;
+    if(!val) return;
+    const [numero, mensaje] = val.split("|");
+    const btn = document.getElementById("btnAlerta");
+    btn.href = `https://api.whatsapp.com/send?phone=57${numero}&text=${decodeURIComponent(mensaje)}`;
+  });
+</script>
+
 </body>
 </html>
