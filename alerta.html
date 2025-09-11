@@ -21,7 +21,7 @@
       border-radius: 15px;
       text-align: center;
       box-shadow: 0px 8px 20px rgba(0,0,0,0.6);
-      max-width: 400px;
+      max-width: 450px;
       width: 90%;
     }
 
@@ -29,6 +29,15 @@
       color: #2ecc71;
       margin-bottom: 30px;
       font-size: 24px;
+    }
+
+    select {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: none;
+      margin-bottom: 20px;
+      font-size: 16px;
     }
 
     a {
@@ -61,12 +70,44 @@
   <div class="container">
     <h1>🔔 Enviar alerta de membresía</h1>
 
-    <a href="https://api.whatsapp.com/send?phone=573136248283&text=Hola%20👋%20recuerda%20que%20tu%20membresía%20está%20por%20vencer%20⚡"
-       target="_blank">
-       🚀 Enviar Alerta por WhatsApp
+    <!-- Menú desplegable de usuarios -->
+    <select id="contactos">
+      <option value="">Selecciona un usuario</option>
+    </select>
+
+    <!-- Botón de WhatsApp -->
+    <a id="btnAlerta" href="#" target="_blank">
+      🚀 Enviar Alerta por WhatsApp
     </a>
 
     <p>⚠️ Solo tú conoces esta página, no está enlazada en el menú.</p>
   </div>
+
+  <script>
+    // Pega aquí la URL de tu Web App de Google Apps Script
+    const apiURL = "https://script.google.com/macros/s/AKfycby_2mg1jEwuamvxAFkGrbXUex2fpxy1QkGUbHI3XC2rBcczXyTSoLYiWJsZAzO9bLk/exec";
+
+    // Cargar contactos desde Google Sheets
+    fetch(apiURL)
+      .then(res => res.json())
+      .then(data => {
+        const select = document.getElementById("contactos");
+        data.forEach(u => {
+          const option = document.createElement("option");
+          option.value = u.telefono + "|" + encodeURIComponent(u.mensaje);
+          option.textContent = u.nombre;
+          select.appendChild(option);
+        });
+      });
+
+    // Actualizar enlace del botón según el contacto seleccionado
+    document.getElementById("contactos").addEventListener("change", function() {
+      const val = this.value;
+      if(!val) return;
+      const [telefono, mensaje] = val.split("|");
+      const btn = document.getElementById("btnAlerta");
+      btn.href = `https://api.whatsapp.com/send?phone=57${telefono}&text=${mensaje}`;
+    });
+  </script>
 </body>
 </html>
