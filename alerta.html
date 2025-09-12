@@ -175,51 +175,34 @@ document.getElementById("contactos").addEventListener("change",function(){
 document.getElementById("formPago").addEventListener("submit", function(e) {
   e.preventDefault();
 
-  // leer valores y limpiar espacios
-  const fecha = document.getElementById("fechaPago").value.trim();
-  const nombre = document.getElementById("usuariosPago").value.trim();
-  const monto = document.getElementById("montoPago").value.trim();
-  const medio = document.getElementById("medioPago").value;
+  const fecha = document.getElementById("fechaPago").value;
+  const nombre = document.getElementById("usuariosPago").value;
+  const monto  = document.getElementById("montoPago").value;
+  const medio  = document.getElementById("medioPago").value;
 
-  // validación simple en cliente
-  if (!fecha || !nombre || !monto || !medio) {
-    alert("Por favor completa todos los campos: fecha, nombre, monto y medio de pago.");
-    return;
-  }
+  console.log("DEBUG >>>", { fecha, nombre, monto, medio }); // 👀 Verifica en consola
 
-  const url = "https://script.google.com/macros/s/AKfycbxny5x1P_HUdiB1kLrJ_rxhSxyPlQKxadfhzCBjAPCqVS-67pPFx29gMPBeHhrT1QE/exec";
-
-  // Construimos body form-urlencoded (evita preflight CORS)
-  const body = new URLSearchParams();
-  body.append("fechaPago", fecha);     // <- nombre que espera doPost
-  body.append("nombre", nombre);       // <- nombre que espera doPost
-  body.append("monto", monto);         // <- nombre que espera doPost
-  body.append("medioPago", medio);     // <- nombre que espera doPost
-
-  fetch(url, {
+  fetch("https://script.google.com/macros/s/AKfycbxny5x1P_HUdiB1kLrJ_rxhSxyPlQKxadfhzCBjAPCqVS-67pPFx29gMPBeHhrT1QE/exec", {
     method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
-    body: body.toString()
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      fechaPago: fecha,
+      nombre: nombre,
+      monto: monto,
+      medioPago: medio
+    })
   })
-  .then(res => res.text()) // leer crudo por si hay respuesta no-JSON
-  .then(txt => {
-    // intentar parsear JSON si es posible
-    try {
-      const json = JSON.parse(txt);
-      if (json.status === "ok") {
-        alert("✅ Pago registrado correctamente");
-        document.getElementById("formPago").reset();
-      } else {
-        alert("❌ Error servidor: " + (json.message || txt));
-      }
-    } catch (err) {
-      // si no es JSON, mostrar texto
-      alert("Respuesta del servidor: " + txt);
+  .then(res => res.json())
+  .then(json => {
+    if (json.status === "ok") {
+      alert("✅ Pago registrado correctamente");
+      document.getElementById("formPago").reset();
+    } else {
+      alert("❌ Error servidor: " + (json.message || "Error desconocido"));
     }
   })
   .catch(err => {
-    console.error("Fetch error:", err);
-    alert("Error de conexión al registrar pago: " + err);
+    alert("🚨 Error de red: " + err);
   });
 });
 </script>
