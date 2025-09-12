@@ -220,7 +220,52 @@ document.getElementById("formPago").addEventListener("submit", function(e) {
   });
 });
 
- 
+//INGRESAR USUARIO NUEVO
+document.getElementById("formNuevoUsuario").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const nombre = document.getElementById("nombreUsuario").value.trim();
+  const correo = document.getElementById("correoUsuario").value.trim();
+  const telefono = document.getElementById("telefonoUsuario").value.trim();
+
+  if(!nombre || !correo || !telefono) return;
+
+  // Crear objeto a enviar
+  const nuevoUsuario = { nombre, correo, telefono, mensaje: "" }; // mensaje vacío
+
+  fetch("https://script.google.com/macros/s/.../exec", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ accion: "nuevoUsuario", data: nuevoUsuario })
+  })
+  .then(res => res.json())
+  .then(json => {
+    if(json.status === "ok") {
+      alert("✅ Usuario agregado correctamente");
+      document.getElementById("formNuevoUsuario").reset();
+
+      // Agregar al dropdown inmediatamente
+      const select = document.getElementById("contactos");
+      const selectPago = document.getElementById("usuariosPago");
+
+      const option = document.createElement("option");
+      option.value = telefono + "|" + encodeURIComponent(""); // mensaje vacío
+      option.textContent = nombre;
+      select.appendChild(option);
+
+      const optionPago = document.createElement("option");
+      optionPago.value = nombre;
+      optionPago.textContent = nombre;
+      selectPago.appendChild(optionPago);
+
+    } else {
+      alert("❌ Error: " + (json.message || "Error desconocido"));
+    }
+  })
+  .catch(err => alert("🚨 Error de red: " + err));
+});
+
+
 </script>
 
 </body>
