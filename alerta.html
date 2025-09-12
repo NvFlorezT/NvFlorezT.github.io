@@ -84,7 +84,7 @@
 
 <header>
   <h1>🏋️‍♀️ Panel del Coach Pro</h1>
-  <p>¡Tu gimnasio bajo control! Supervisa pagos, envía recordatorios y ayuda a tus miembros a alcanzar sus metas 💥</p>
+  <p>🚨Tu gimnasio bajo control! Supervisa pagos, envía recordatorios y ayuda a tus miembros a alcanzar sus metas 💥</p>
 
 
   <!-- Panel dentro del header -->
@@ -103,14 +103,14 @@
       <a id="btnAlerta" class="button" href="#" target="_blank">🚀 Enviar Alerta por WhatsApp</a>
     </section>
 
+   
     <section id="nuevoUsuario">
       <h2> ➕ Agregar Nuevo Usuario</h2>
-      <form action="https://script.google.com/macros/s/AKfycbxny5x1P_HUdiB1kLrJ_rxhSxyPlQKxadfhzCBjAPCqVS-67pPFx29gMPBeHhrT1QE/exec" method="POST" target="hiddenFrame">
-        <input type="text" name="nombre" placeholder="Nombre" required>
-        <input type="email" name="correo" placeholder="Correo" required>
-        <input type="text" name="telefono" placeholder="Teléfono" required>
+      <form id="formNuevoUsuario">
+        <input type="text" name="nombre" id="nombreUsuario" placeholder="Nombre" required>
+        <input type="email" name="correo" id="correoUsuario" placeholder="Correo" required>
+        <input type="text" name="telefono" id="telefonoUsuario" placeholder="Teléfono" required>
         <input type="hidden" name="mensaje" value="">
-        <input type="hidden" name="accion" value="nuevoUsuario">
         <button type="submit">Agregar Usuario</button>
       </form>
       <iframe name="hiddenFrame" style="display:none;"></iframe>
