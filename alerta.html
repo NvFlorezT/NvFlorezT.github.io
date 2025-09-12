@@ -84,7 +84,7 @@
 
 <header>
   <h1>Panel Administrador Gym</h1>
-  <p>Gestiona alertas y pagos de tus miembros!!!</p>
+  <p>Gestiona alertas y pagos de tus miembros!</p>
 
   <!-- Panel dentro del header -->
   <div class="panel">
@@ -172,36 +172,55 @@ document.getElementById("contactos").addEventListener("change",function(){
   btn.href=`https://api.whatsapp.com/send?phone=57${numero}&text=${decodeURIComponent(mensaje)}`;
 });
 
-// Registrar Pago con Web App usando POST
 document.getElementById("formPago").addEventListener("submit", function(e) {
-e.preventDefault(); // Evita recargar la página
+  e.preventDefault();
 
-const fecha = document.getElementById("fechaPago").value;
-const nombre = document.getElementById("usuariosPago").value;
-const monto = document.getElementById("montoPago").value;
-const medio = document.getElementById("medioPago").value;
+  // leer valores y limpiar espacios
+  const fecha = document.getElementById("fechaPago").value.trim();
+  const nombre = document.getElementById("usuariosPago").value.trim();
+  const monto = document.getElementById("montoPago").value.trim();
+  const medio = document.getElementById("medioPago").value;
 
-const url = "https://script.google.com/macros/s/AKfycbxny5x1P_HUdiB1kLrJ_rxhSxyPlQKxadfhzCBjAPCqVS-67pPFx29gMPBeHhrT1QE/exec";
+  // validación simple en cliente
+  if (!fecha || !nombre || !monto || !medio) {
+    alert("Por favor completa todos los campos: fecha, nombre, monto y medio de pago.");
+    return;
+  }
 
-fetch(url, {
-   method: "POST",
-   body: JSON.stringify({
-   fechaPago: fecha,
-   nombre: nombre,
-   monto: monto,
-   medioPago: medio
-})
-})
-   .then(res => res.json())
-   .then(res => {
-   if(res.status === "ok") alert("Pago registrado correctamente");
-   else alert("Error al registrar pago: " + (res.message || ""));
-   document.getElementById("formPago").reset(); // limpiar formulario
-   })
-   .catch(err => {
-   console.error(err);
-   alert("Error al registrar pago: " + err);
-   });
+  const url = "https://script.google.com/macros/s/AKfycbxny5x1P_HUdiB1kLrJ_rxhSxyPlQKxadfhzCBjAPCqVS-67pPFx29gMPBeHhrT1QE/exec";
+
+  // Construimos body form-urlencoded (evita preflight CORS)
+  const body = new URLSearchParams();
+  body.append("fechaPago", fecha);     // <- nombre que espera doPost
+  body.append("nombre", nombre);       // <- nombre que espera doPost
+  body.append("monto", monto);         // <- nombre que espera doPost
+  body.append("medioPago", medio);     // <- nombre que espera doPost
+
+  fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+    body: body.toString()
+  })
+  .then(res => res.text()) // leer crudo por si hay respuesta no-JSON
+  .then(txt => {
+    // intentar parsear JSON si es posible
+    try {
+      const json = JSON.parse(txt);
+      if (json.status === "ok") {
+        alert("✅ Pago registrado correctamente");
+        document.getElementById("formPago").reset();
+      } else {
+        alert("❌ Error servidor: " + (json.message || txt));
+      }
+    } catch (err) {
+      // si no es JSON, mostrar texto
+      alert("Respuesta del servidor: " + txt);
+    }
+  })
+  .catch(err => {
+    console.error("Fetch error:", err);
+    alert("Error de conexión al registrar pago: " + err);
+  });
 });
 </script>
 
