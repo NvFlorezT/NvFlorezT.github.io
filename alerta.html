@@ -92,6 +92,7 @@
       <button onclick="showSection('alerta')">Alerta Membresía</button>
       <button onclick="showSection('proximos')">Usuarios Próximos a Vencer</button>
       <button onclick="showSection('registro')">Registrar Pago</button>
+      <button onclick="showSection('nuevoUsuario')">Registrar Pago</button>
     </nav>
 
     <!-- Secciones -->
@@ -99,6 +100,18 @@
       <h2>🔔 Enviar alerta de membresía</h2>
       <select id="contactos"><option value="">Selecciona un usuario</option></select>
       <a id="btnAlerta" class="button" href="#" target="_blank">🚀 Enviar Alerta por WhatsApp</a>
+    </section>
+
+   
+    <section id="nuevoUsuario">
+      <h2>➕ Ingresar nuevo usuario</h2>
+      <form id="formNuevoUsuario">
+        <input type="text" id="nombreUsuario" placeholder="Nombre completo" required />
+        <input type="text" id="correoUsuario" placeholder="Correo" required />
+        <input type="text" id="telefonoUsuario" placeholder="Número de contacto" required />
+        <textarea id="mensajeUsuario" placeholder="Mensaje de alerta" required></textarea>
+        <button type="submit">Agregar Usuario</button>
+      </form>
     </section>
 
     <section id="proximos">
