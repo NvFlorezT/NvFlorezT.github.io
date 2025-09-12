@@ -233,7 +233,7 @@ document.getElementById("formNuevoUsuario").addEventListener("submit", function(
   // Crear objeto a enviar
   const nuevoUsuario = { nombre, correo, telefono, mensaje: "" }; // mensaje vacío
 
-  fetch("https://script.google.com/macros/s/.../exec", {
+  fetch("https://script.google.com/macros/s/AKfycbxny5x1P_HUdiB1kLrJ_rxhSxyPlQKxadfhzCBjAPCqVS-67pPFx29gMPBeHhrT1QE/exec", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ accion: "nuevoUsuario", data: nuevoUsuario })
