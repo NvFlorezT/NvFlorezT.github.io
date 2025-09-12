@@ -224,7 +224,6 @@ document.getElementById("formPago").addEventListener("submit", function(e) {
   });
 });
 
-//INGRESAR USUARIO NUEVO
 document.getElementById("formNuevoUsuario").addEventListener("submit", function(e){
   e.preventDefault();
 
@@ -234,13 +233,17 @@ document.getElementById("formNuevoUsuario").addEventListener("submit", function(
 
   if(!nombre || !correo || !telefono) return;
 
-  // Crear objeto a enviar
-  const nuevoUsuario = { nombre, correo, telefono, mensaje: "" }; // mensaje vacío
+  // Crear FormData
+  const formData = new FormData();
+  formData.append("accion", "nuevoUsuario");
+  formData.append("nombre", nombre);
+  formData.append("correo", correo);
+  formData.append("telefono", telefono);
+  formData.append("mensaje", ""); // mensaje vacío
 
   fetch("https://script.google.com/macros/s/AKfycbxny5x1P_HUdiB1kLrJ_rxhSxyPlQKxadfhzCBjAPCqVS-67pPFx29gMPBeHhrT1QE/exec", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ accion: "nuevoUsuario", data: nuevoUsuario })
+    body: formData
   })
   .then(res => res.json())
   .then(json => {
@@ -268,6 +271,7 @@ document.getElementById("formNuevoUsuario").addEventListener("submit", function(
   })
   .catch(err => alert("🚨 Error de red: que paso " + err));
 });
+
 
 
 </script>
