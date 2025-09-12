@@ -10,6 +10,7 @@
       font-family: 'Arial', sans-serif;
       background: #111;
       color: #f4f4f4;
+      scroll-behavior: smooth;
     }
     header {
       background: #222;
@@ -37,7 +38,7 @@
       transition: color 0.3s;
     }
     nav ul li a:hover {
-      color: #ff6b00;
+      color: #00c896;
     }
     section {
       padding: 100px 20px;
@@ -59,18 +60,28 @@
       margin: 0 auto 20px;
       line-height: 1.6;
     }
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
     .btn {
-      background: #ff6b00;
+      background: #00c896;
       color: white;
-      padding: 12px 25px;
+      padding: 15px 30px;
       border: none;
-      border-radius: 25px;
+      border-radius: 30px;
       cursor: pointer;
       font-size: 16px;
-      transition: background 0.3s;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
     }
     .btn:hover {
-      background: #e55a00;
+      background: #009e74;
+      transform: scale(1.05);
     }
   </style>
 </head>
@@ -89,7 +100,14 @@
   <section class="hero" id="inicio">
     <h1>¡Bienvenido! Soy Brahyan</h1>
     <p>Entrenador personal dedicado a transformar tu vida con rutinas efectivas, motivación constante y resultados reales.</p>
-    <button class="btn">Comienza hoy</button>
+    
+    <!-- Botones en el hero -->
+    <div class="buttons">
+      <a href="#acerca" class="btn">Acerca de mí</a>
+      <a href="#planes" class="btn">Planes</a>
+      <a href="#testimonios" class="btn">Testimonios</a>
+      <a href="#contacto" class="btn">Contacto</a>
+    </div>
   </section>
 
   <section id="acerca">
@@ -100,7 +118,6 @@
   <section id="planes">
     <h2>Planes</h2>
     <p>Elige el plan que se adapte a ti: rutinas personalizadas, asesoría nutricional y acompañamiento 24/7.</p>
-    <button class="btn">Ver planes</button>
   </section>
 
   <section id="testimonios">
@@ -111,9 +128,8 @@
 
   <section id="contacto">
     <h2>Contacto</h2>
-    <p>📞 WhatsApp: <a href="https://wa.me/573001112233" target="_blank">+57 300 111 2233</a></p>
+    <p>📞 WhatsApp: <a href="https://wa.me/573216156819" target="_blank">+57 3216156819</a></p>
     <p>📧 Email: contacto@brahyanfitness.com</p>
-    <button class="btn">Escríbeme</button>
   </section>
 </body>
 </html>
