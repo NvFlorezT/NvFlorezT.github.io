@@ -2,12 +2,39 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coach Brahyan Cortes Castañeda - Entrenador Personal</title>
+  <title>Coach Brahyan Cortes Castañeda</title>
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family: 'Arial', sans-serif; background:#111; color:#f4f4f4; line-height:1.6; }
+    html { scroll-behavior: smooth; }
 
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.9);
+      padding: 15px;
+      z-index: 1000;
+    }
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    .navbar a:hover {
+      color: #2ecc71;
+    }
+
+    /* Hero */
     header {
       background: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438') no-repeat center center/cover;
       height: 100vh;
@@ -18,107 +45,161 @@
       text-align: center;
       color: white;
       padding: 20px;
+      position: relative;
     }
-    header h1 { font-size: 3rem; margin-bottom: 10px; }
-    header p { font-size: 1.3rem; max-width: 700px; margin: 0 auto; }
-    header .cta { margin-top: 20px; padding: 12px 25px; background:#28a745; color:white; font-size:1.1rem; border:none; border-radius:8px; cursor:pointer; }
-    header .cta:hover { background:#218838; }
+    header h1 {
+      font-size: 3em;
+      text-shadow: 2px 2px 6px #000;
+      margin-top: 60px; /* para que no se tape con navbar */
+    }
+    header p {
+      font-size: 1.3em;
+      margin-top: 10px;
+      text-shadow: 1px 1px 4px #000;
+    }
+    .cta {
+      margin-top: 20px;
+      padding: 12px 25px;
+      background:#2ecc71;
+      color:white;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:bold;
+      transition:0.3s;
+    }
+    .cta:hover { background:#27ae60; }
 
-    section { padding: 60px 20px; max-width: 1100px; margin: auto; }
-    section h2 { font-size: 2rem; text-align: center; margin-bottom: 30px; color: #28a745; }
+    section {
+      padding: 80px 20px;
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+    }
+    section h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    .planes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+      gap: 20px;
+    }
+    .plan {
+      background:#222;
+      padding:20px;
+      border-radius:10px;
+      box-shadow:0 4px 8px rgba(0,0,0,0.4);
+    }
+    .plan h3 { margin-bottom: 10px; }
+    .plan p { margin-bottom: 15px; }
+    .plan a {
+      background:#2ecc71;
+      color:#fff;
+      padding:10px 15px;
+      border-radius:5px;
+      text-decoration:none;
+    }
+    .plan a:hover { background:#27ae60; }
 
-    .about p { text-align: center; font-size: 1.2rem; }
+    /* Testimonios */
+    .testimonios {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+      gap: 20px;
+    }
+    .testimonio {
+      background:#1a1a1a;
+      padding:20px;
+      border-radius:10px;
+      font-style: italic;
+    }
 
-    .plans { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-    .plan { background:#1c1c1c; padding:25px; border-radius:12px; flex:1; min-width:250px; text-align:center; box-shadow:0 4px 10px rgba(0,0,0,0.5); }
-    .plan h3 { margin-bottom:10px; color:#f4f4f4; }
-    .plan p { margin-bottom:15px; }
-    .plan button { padding:10px 20px; border:none; border-radius:8px; background:#28a745; color:white; cursor:pointer; }
-    .plan button:hover { background:#218838; }
+    /* Contacto */
+    #contacto p { margin-bottom: 15px; }
 
-    .testimonios { display: flex; overflow-x: auto; gap:20px; padding:10px; }
-    .testimonial { flex:0 0 300px; background:#1c1c1c; padding:20px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.5); }
-
-    .whatsapp-btn { position:fixed; bottom:20px; right:20px; background:#25D366; color:white; padding:15px 20px; border-radius:50px; font-size:1.2rem; text-decoration:none; box-shadow:0 4px 10px rgba(0,0,0,0.3); }
-    .whatsapp-btn:hover { background:#1ebe5d; }
-
-    .admin-btn { position:fixed; top:20px; left:20px; background:#ffc107; color:#111; padding:10px 15px; border-radius:8px; cursor:pointer; font-weight:bold; }
-
-    .admin-panel { display:none; position:fixed; top:70px; left:20px; background:#222; padding:20px; border-radius:12px; width:300px; box-shadow:0 4px 10px rgba(0,0,0,0.5); }
-    .admin-panel input, .admin-panel textarea { width:100%; padding:8px; margin:8px 0; border-radius:6px; border:none; }
-    .admin-panel button { background:#28a745; color:white; padding:10px; border:none; border-radius:8px; cursor:pointer; }
+    /* Botón flotante WhatsApp */
+    .whatsapp {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background:#25D366;
+      padding:15px;
+      border-radius:50%;
+      box-shadow:0 4px 8px rgba(0,0,0,0.3);
+    }
+    .whatsapp img {
+      width:30px;
+      height:30px;
+    }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Brahyan Cortes Castañeda</h1>
-    <p>Entrenador personal especializado en transformación física, rendimiento deportivo y hábitos saludables. 💪 Te ayudo a alcanzar tu mejor versión con disciplina, constancia y resultados reales.</p>
-    <button class="cta" onclick="window.location.href='https://wa.me/573216156819?text=Hola%20Coach%20Brahyan,%20quiero%20más%20información%20sobre%20los%20planes'">Agenda tu entrenamiento</button>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <ul>
+      <li><a href="#planes">Planes</a></li>
+      <li><a href="#testimonios">Testimonios</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <header id="inicio">
+    <h1>Coach Brahyan Cortes Castañeda</h1>
+    <p>Entrenador Personal – Especialista en transformación física y rendimiento deportivo 💪</p>
+    <a href="#planes" class="cta">Ver Planes</a>
   </header>
 
-  <section class="about">
-    <h2>Sobre mí</h2>
-    <p>Con más de 6 años de experiencia en entrenamiento personalizado, he trabajado con personas de diferentes niveles y objetivos: desde principiantes que buscan mejorar su salud hasta atletas que buscan maximizar su rendimiento. Mi misión es guiarte de manera profesional, motivarte y diseñar un plan que se adapte a ti.</p>
-  </section>
-
-  <section class="plans">
-    <h2>Planes Personalizados</h2>
-    <div class="plans">
+  <!-- Sección Planes -->
+  <section id="planes">
+    <h2>🔥 Planes de Entrenamiento</h2>
+    <div class="planes">
       <div class="plan">
-        <h3>Básico</h3>
-        <p>Rutinas personalizadas y seguimiento mensual.</p>
-        <button onclick="window.location.href='https://wa.me/573216156819?text=Quiero%20el%20plan%20Básico'">Seleccionar</button>
+        <h3>Plan Básico</h3>
+        <p>Rutinas personalizadas para comenzar tu camino fitness.</p>
+        <a href="https://wa.me/573001112233?text=Hola%20quiero%20más%20info%20del%20Plan%20Básico">Contactar</a>
       </div>
       <div class="plan">
-        <h3>Intermedio</h3>
-        <p>Rutinas + asesoría continua por WhatsApp.</p>
-        <button onclick="window.location.href='https://wa.me/573216156819?text=Quiero%20el%20plan%20Intermedio'">Seleccionar</button>
+        <h3>Plan Intermedio</h3>
+        <p>Entrenamiento con seguimiento semanal y asesoría en nutrición.</p>
+        <a href="https://wa.me/573001112233?text=Hola%20quiero%20más%20info%20del%20Plan%20Intermedio">Contactar</a>
       </div>
       <div class="plan">
-        <h3>Premium</h3>
-        <p>Rutinas + llamadas semanales + plan de nutrición.</p>
-        <button onclick="window.location.href='https://wa.me/573216156819?text=Quiero%20el%20plan%20Premium'">Seleccionar</button>
+        <h3>Plan Premium</h3>
+        <p>Acompañamiento total, rutinas avanzadas y seguimiento constante.</p>
+        <a href="https://wa.me/573001112233?text=Hola%20quiero%20más%20info%20del%20Plan%20Premium">Contactar</a>
       </div>
     </div>
   </section>
 
-  <section class="testimonios">
-    <h2>Testimonios</h2>
-    <div class="testimonial">
-      <p>“Gracias al coach Brahyan logré bajar 10kg en 4 meses. Su motivación y disciplina son increíbles.”</p>
-      <small>- Andrea</small>
-    </div>
-    <div class="testimonial">
-      <p>“Me ayudó a mejorar mi resistencia y rendimiento en competencias de CrossFit. ¡100% recomendado!”</p>
-      <small>- Carlos</small>
-    </div>
-    <div class="testimonial">
-      <p>“Nunca pensé que disfrutaría tanto entrenar. Ahora me siento con más energía cada día.”</p>
-      <small>- Laura</small>
+  <!-- Sección Testimonios -->
+  <section id="testimonios">
+    <h2>✨ Testimonios de Clientes</h2>
+    <div class="testimonios">
+      <div class="testimonio">
+        "Gracias al coach Brahyan bajé 8kg en 3 meses. Nunca me había sentido tan fuerte."
+      </div>
+      <div class="testimonio">
+        "Su motivación y disciplina me ayudaron a no rendirme. 100% recomendado."
+      </div>
+      <div class="testimonio">
+        "El plan Premium cambió mi vida. Ahora entrenar es parte de mí."
+      </div>
     </div>
   </section>
 
-  <a href="https://wa.me/573216156819?text=Hola%20Coach%20Brahyan,%20quiero%20más%20información" class="whatsapp-btn">💬 WhatsApp</a>
+  <!-- Sección Contacto -->
+  <section id="contacto">
+    <h2>📩 Contacto</h2>
+    <p>¿Listo para transformar tu cuerpo? Escríbele directamente por WhatsApp:</p>
+    <a href="https://wa.me/573001112233" class="cta">Hablar con Brahyan</a>
+  </section>
 
-  <div class="admin-btn" onclick="toggleAdmin()">Modo Admin</div>
-  <div class="admin-panel" id="adminPanel">
-    <h3>Panel Administrativo</h3>
-    <input type="text" id="nombreCoach" placeholder="Nombre del Coach" value="Brahyan Cortes Castañeda">
-    <textarea id="descripcionCoach" placeholder="Descripción">Entrenador personal especializado en transformación física, rendimiento deportivo y hábitos saludables.</textarea>
-    <input type="text" id="whatsappCoach" placeholder="Número WhatsApp" value="3216156819">
-    <button onclick="guardarConfig()">Guardar</button>
-  </div>
-
-  <script>
-    function toggleAdmin(){
-      const panel = document.getElementById('adminPanel');
-      panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
-    }
-    function guardarConfig(){
-      alert('Configuración guardada (demo)');
-    }
-  </script>
+  <!-- Botón flotante WhatsApp -->
+  <a href="https://wa.me/573001112233" class="whatsapp" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  </a>
 
 </body>
 </html>
