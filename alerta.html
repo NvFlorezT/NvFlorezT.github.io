@@ -172,6 +172,8 @@ document.getElementById("contactos").addEventListener("change",function(){
   btn.href=`https://api.whatsapp.com/send?phone=57${numero}&text=${decodeURIComponent(mensaje)}`;
 });
 
+
+//ingresar pagos
 document.getElementById("formPago").addEventListener("submit", function(e) {
   e.preventDefault();
 
@@ -180,17 +182,17 @@ document.getElementById("formPago").addEventListener("submit", function(e) {
   const monto  = document.getElementById("montoPago").value;
   const medio  = document.getElementById("medioPago").value;
 
-  console.log("DEBUG >>>", { fecha, nombre, monto, medio }); // 👀 Verifica en consola
+  console.log("DEBUG >>>", { fecha, nombre, monto, medio });
+
+  const formData = new FormData();
+  formData.append("fechaPago", fecha);
+  formData.append("nombre", nombre);
+  formData.append("monto", monto);
+  formData.append("medioPago", medio);
 
   fetch("https://script.google.com/macros/s/AKfycbxny5x1P_HUdiB1kLrJ_rxhSxyPlQKxadfhzCBjAPCqVS-67pPFx29gMPBeHhrT1QE/exec", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      fechaPago: fecha,
-      nombre: nombre,
-      monto: monto,
-      medioPago: medio
-    })
+    body: formData
   })
   .then(res => res.json())
   .then(json => {
@@ -205,6 +207,8 @@ document.getElementById("formPago").addEventListener("submit", function(e) {
     alert("🚨 Error de red: " + err);
   });
 });
+
+ 
 </script>
 
 </body>
