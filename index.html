@@ -83,20 +83,25 @@
       background: #009e74;
       transform: scale(1.05);
     }
+    .btn-volver {
+      background: #444;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 14px;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-volver:hover {
+      background: #666;
+      transform: scale(1.05);
+    }
   </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#acerca">Acerca de mí</a></li>
-        <li><a href="#planes">Planes</a></li>
-        <li><a href="#testimonios">Testimonios</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-      </ul>
-    </nav>
-  </header>
-
   <section class="hero" id="inicio">
     <h1>¡Bienvenido! Soy Brahyan</h1>
     <p>Entrenador personal dedicado a transformar tu vida con rutinas efectivas, motivación constante y resultados reales.</p>
@@ -107,29 +112,34 @@
       <a href="#planes" class="btn">Planes</a>
       <a href="#testimonios" class="btn">Testimonios</a>
       <a href="#contacto" class="btn">Contacto</a>
+      <a href="#inicio" class="btn-volver">⬆ Volver al Inicio</a>
     </div>
   </section>
 
   <section id="acerca">
     <h2>Acerca de mí</h2>
     <p>Soy un apasionado del fitness con más de 5 años de experiencia ayudando a personas a alcanzar sus metas. Mi misión es inspirarte, guiarte y acompañarte en cada paso de tu transformación.</p>
+    <a href="#inicio" class="btn-volver">⬆ Volver al Inicio</a>
   </section>
 
   <section id="planes">
     <h2>Planes</h2>
     <p>Elige el plan que se adapte a ti: rutinas personalizadas, asesoría nutricional y acompañamiento 24/7.</p>
+    <a href="#inicio" class="btn-volver">⬆ Volver al Inicio</a>
   </section>
 
   <section id="testimonios">
     <h2>Testimonios</h2>
     <p>"Gracias a Brahyan logré perder 10 kg y ahora tengo más energía que nunca." – Andrea</p>
     <p>"Su apoyo me motivó a no rendirme. Hoy tengo la mejor versión de mí mismo." – Carlos</p>
+    <a href="#inicio" class="btn-volver">⬆ Volver al Inicio</a>
   </section>
 
   <section id="contacto">
     <h2>Contacto</h2>
     <p>📞 WhatsApp: <a href="https://wa.me/573216156819" target="_blank">+57 3216156819</a></p>
     <p>📧 Email: contacto@brahyanfitness.com</p>
+    <a href="#inicio" class="btn-volver">⬆ Volver al Inicio</a>
   </section>
 </body>
 </html>
