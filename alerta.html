@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Panel Administrador Gym</title>
+<title> Administrador Gym</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family: 'Arial', sans-serif; background:#111; color:#f4f4f4; }
@@ -152,8 +152,12 @@ function showSection(id){
   document.getElementById(id).style.display='block';
 }
 
-// Cargar usuarios desde Apps Script
+// Creamos un array global para mantener todos los usuarios cargados
+let usuarios = [];
+
+// Modificamos cargarUsuarios para guardar los usuarios
 function cargarUsuarios(data){
+  usuarios = data; // Guardamos globalmente
   const select = document.getElementById("contactos");
   const selectPago = document.getElementById("usuariosPago");
   select.innerHTML = '<option value="">Selecciona un usuario</option>';
@@ -272,7 +276,35 @@ document.getElementById("formNuevoUsuario").addEventListener("submit", function(
   .catch(err => alert("🚨 Error de red: que paso " + err));
 });
 
+// Función para mostrar usuarios próximos a vencer
+function mostrarUsuariosProximos() {
+  const lista = document.getElementById("usuariosProximos");
+  lista.innerHTML = ""; // Limpiar lista
 
+  // Filtrar solo los que tienen MensajeAlerta distinto de "false" y no vacío
+  const filtrados = usuarios.filter(u => u.MensajeAlerta && u.MensajeAlerta.toLowerCase() !== "false");
+
+  if(filtrados.length === 0){
+    const li = document.createElement("li");
+    li.textContent = "No hay usuarios con alerta pendiente.";
+    lista.appendChild(li);
+    return;
+  }
+
+  filtrados.forEach(u=>{
+    const li = document.createElement("li");
+    li.textContent = `${u.NombreCompleto} - Mensaje: ${u.MensajeAlerta}`;
+    lista.appendChild(li);
+  });
+}
+
+// Ajustamos el botón para que además de mostrar la sección, llame a mostrarUsuariosProximos
+document.querySelector("button[onclick=\"showSection('proximos')\"]")
+  .addEventListener("click", function(){
+    showSection('proximos');
+    mostrarUsuariosProximos();
+});
+ 
 
 </script>
 
