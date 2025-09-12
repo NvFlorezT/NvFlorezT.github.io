@@ -107,20 +107,24 @@
     </section>
 
     <section id="registro">
-      <h2>Registrar nuevo pago</h2>
-      <form id="formPago">
-        <input type="date" id="fechaPago" required />
-        <input type="text" id="usuariosPago" placeholder="Nombre completo" required />
-        <input type="email" id="emailPago" placeholder="Correo electrónico" required />
-        <input type="text" id="contactoPago" placeholder="Número de contacto" required />
-        <input type="number" id="montoPago" placeholder="Monto" required />
-        <select id="medioPago" required>
-          <option value="">Seleccione medio</option>
-          <option value="Efectivo">Efectivo</option>
-          <option value="Transferencia">Transferencia</option>
-        </select>
-        <button type="submit">Registrar Pago</button>
-      </form>
+       <h2>Registrar nuevo pago</h2>
+       <form id="formPago">
+       <input type="date" id="fechaPago" required />
+       
+       <!-- Selección de usuario en lugar de escribir el nombre -->
+       <select id="usuariosPago" required>
+       <option value="">Selecciona Usuario</option>
+       </select>
+       
+       <input type="number" id="montoPago" placeholder="Monto" required />
+       <select id="medioPago" required>
+       <option value="">Selecciona Medio de Pago</option>
+       <option value="Efectivo">Efectivo</option>
+       <option value="Transferencia">Transferencia</option>
+       <option value="Tarjeta">Tarjeta</option>
+       </select>
+       <button type="submit">Registrar Pago</button>
+       </form>
     </section>
 
   </div>
@@ -168,43 +172,37 @@ document.getElementById("contactos").addEventListener("change",function(){
   btn.href=`https://api.whatsapp.com/send?phone=57${numero}&text=${decodeURIComponent(mensaje)}`;
 });
 
-// Registrar pago
+// Registrar Pago con Web App usando POST
 document.getElementById("formPago").addEventListener("submit", function(e) {
-  e.preventDefault();
+e.preventDefault(); // Evita recargar la página
 
-  const fecha = document.getElementById("fechaPago").value;
-  const nombre = document.getElementById("usuariosPago").value;
-  const email = document.getElementById("emailPago").value;
-  const contacto = document.getElementById("contactoPago").value;
-  const monto = document.getElementById("montoPago").value;
-  const medio = document.getElementById("medioPago").value;
+const fecha = document.getElementById("fechaPago").value;
+const nombre = document.getElementById("usuariosPago").value;
+const monto = document.getElementById("montoPago").value;
+const medio = document.getElementById("medioPago").value;
 
-  const url = "https://script.google.com/macros/s/AKfycbxny5x1P_HUdiB1kLrJ_rxhSxyPlQKxadfhzCBjAPCqVS-67pPFx29gMPBeHhrT1QE/exec";
+const url = "https://script.google.com/macros/s/AKfycbxny5x1P_HUdiB1kLrJ_rxhSxyPlQKxadfhzCBjAPCqVS-67pPFx29gMPBeHhrT1QE/exec";
 
-  fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      FechaPago: fecha,
-      NombreCompleto: nombre,
-      Email: email,
-      Contacto: contacto,
-      Monto: monto,
-      MedioPago: medio
-    })
-  })
-  .then(res => res.json())
-  .then(res => {
-    if (res.status === "ok") alert("Pago registrado correctamente");
-    else alert("Error: " + (res.message || ""));
-    document.getElementById("formPago").reset();
-  })
-  .catch(err => {
-    console.error(err);
-    alert("Error: " + err);
-  });
+fetch(url, {
+   method: "POST",
+   body: JSON.stringify({
+   fechaPago: fecha,
+   nombre: nombre,
+   monto: monto,
+   medioPago: medio
+})
+})
+   .then(res => res.json())
+   .then(res => {
+   if(res.status === "ok") alert("Pago registrado correctamente");
+   else alert("Error al registrar pago: " + (res.message || ""));
+   document.getElementById("formPago").reset(); // limpiar formulario
+   })
+   .catch(err => {
+   console.error(err);
+   alert("Error al registrar pago: " + err);
+   });
 });
-
 </script>
 
 </body>
