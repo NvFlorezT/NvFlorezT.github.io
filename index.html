@@ -11,13 +11,13 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Montserrat', sans-serif; /* Texto general */
+      font-family: 'Montserrat', sans-serif;
       background: #111;
       color: #f4f4f4;
       scroll-behavior: smooth;
     }
     h1, h2, h3 {
-      font-family: 'Poppins', sans-serif; /* Títulos */
+      font-family: 'Poppins', sans-serif;
     }
     header {
       background: #222;
@@ -110,11 +110,11 @@
     /* 🔥 Estilos para las cards de planes */
     .planes-opciones {
       display: flex;
-      justify-content: center;  /* Centra en horizontal */
-      align-items: stretch;     /* Igual altura */
-      gap: 30px;                /* Espacio entre cards */
+      justify-content: center;
+      align-items: stretch;
+      gap: 30px;
       margin-top: 40px;
-      flex-wrap: wrap;          /* Responsive: se bajan en celular */
+      flex-wrap: wrap;
     }
     .card-plan {
       background: #222;
@@ -139,7 +139,7 @@
 
     /* Estilos detalle planes */
     .detalle-plan {
-      display: none; /* Oculto por defecto */
+      display: none;
       margin-top: 30px;
       padding: 20px;
       background: #f4f4f4;
@@ -166,6 +166,34 @@
       left: 0;
     }
 
+    /* 🎨 Galería con estilo dinámico */
+    .galeria-acerca {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin: 40px auto;
+      max-width: 900px;
+      position: relative;
+    }
+    .galeria-acerca .foto {
+      width: 220px;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+    .galeria-acerca .foto:hover {
+      transform: scale(1.08) rotate(0deg);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+      z-index: 2;
+    }
+    .galeria-acerca .f1 { transform: rotate(-5deg); }
+    .galeria-acerca .f2 { transform: rotate(3deg); }
+    .galeria-acerca .f3 { transform: rotate(-2deg); }
+    .galeria-acerca .f4 { transform: rotate(4deg); }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
@@ -187,53 +215,30 @@
   </section>
 
   <!-- Sección Acerca de mí -->
-<section id="acerca">
-  <h2>🙋‍♂️ Acerca de mí</h2>
-  <p>
-    Soy un coach apasionado por transformar vidas a través del ejercicio y la motivación. 
-    Me gusta asumir retos y acompañar a mis alumnos hasta que alcancen la mejor versión de sí mismos.
-  </p>
-  <p>
-    Tengo una carrera profesional en Educación Física y Deporte, además de diplomados en 
-    entrenamiento personalizado y alimentación saludable. Llevo más de 2 años trabajando en este campo,
-    ayudando a personas como tú a alcanzar sus objetivos.
-  </p>
+  <section id="acerca">
+    <h2>🙋‍♂️ Acerca de mí</h2>
+    <p>
+      Soy un coach apasionado por transformar vidas a través del ejercicio y la motivación. 
+      Me gusta asumir retos y acompañar a mis alumnos hasta que alcancen la mejor versión de sí mismos.
+    </p>
+    <p>
+      Tengo una carrera profesional en Educación Física y Deporte, además de diplomados en 
+      entrenamiento personalizado y alimentación saludable. Llevo más de 2 años trabajando en este campo,
+      ayudando a personas como tú a alcanzar sus objetivos.
+    </p>
 
-  <!-- ✅ Galería de imágenes -->
-  <div class="galeria-acerca">
-    <img src="https://images.unsplash.com/photo-1571019613576-2b22c76fd955" alt="Entrenando con pesas">
-    <img src="https://images.unsplash.com/photo-1579758629938-03607ccdbaba" alt="Ejercicio al aire libre">
-    <img src="https://images.unsplash.com/photo-1594737625785-cb90f3b0e1df" alt="Motivación fitness">
-    <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1" alt="Rutina de entrenamiento">
-  </div>
+    <!-- ✅ Nueva galería con estilo -->
+    <div class="galeria-acerca">
+      <img src="https://images.unsplash.com/photo-1571019613576-2b22c76fd955" class="foto f1" alt="Entrenando con pesas">
+      <img src="https://images.unsplash.com/photo-1579758629938-03607ccdbaba" class="foto f2" alt="Ejercicio al aire libre">
+      <img src="https://images.unsplash.com/photo-1594737625785-cb90f3b0e1df" class="foto f3" alt="Motivación fitness">
+      <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1" class="foto f4" alt="Rutina de entrenamiento">
+    </div>
 
-  <div class="buttons">
-    <a href="#planes" class="btn">💪 Ver Planes</a>
-  </div>
-</section>
-
-<style>
-/* 🔥 Galería dentro de Acerca de mí */
-.galeria-acerca {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  margin: 30px auto;
-  max-width: 900px;
-}
-.galeria-acerca img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.galeria-acerca img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-}
-</style
+    <div class="buttons">
+      <a href="#planes" class="btn">💪 Ver Planes</a>
+    </div>
+  </section>
 
   <section id="planes">
     <h2>💪 Planes de Entrenamiento</h2>
