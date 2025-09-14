@@ -145,13 +145,7 @@
     </div>
   </section>
 
-  <section id="acerca">
-    <h2>Acerca de mí</h2>
-    <p>Soy un apasionado del fitness con más de 5 años de experiencia ayudando a personas a alcanzar sus metas. Mi misión es inspirarte, guiarte y acompañarte en cada paso de tu transformación.</p>
-    <a href="#inicio" class="btn-volver">⬆ Volver al Inicio</a>
-  </section>
-
-  <section id="planes">
+ <section id="planes">
   <h2>💪 Planes de Entrenamiento</h2>
   <p>
     *"Nuestros planes están diseñados para ti, sin importar en qué punto te encuentres. 💪🔥
@@ -250,7 +244,7 @@
 }
 
 .detalle-plan {
-  display: none;
+  display: none; /* Oculto por defecto */
   margin-top: 30px;
   padding: 20px;
   background: #f4f4f4;
@@ -308,23 +302,22 @@ function toggleDetalle(plan) {
   document.getElementById("detalle-personalizado").style.display = "none";
   document.getElementById("detalle-asesoria").style.display = "none";
 
-  let target = null;
-
   // Mostrar el seleccionado
+  let detalle;
   if(plan === "personalizado") {
-    target = document.getElementById("detalle-personalizado");
-    target.style.display = "block";
+    detalle = document.getElementById("detalle-personalizado");
   } else if(plan === "asesoria") {
-    target = document.getElementById("detalle-asesoria");
-    target.style.display = "block";
+    detalle = document.getElementById("detalle-asesoria");
   }
 
-  // Hacer scroll automático hacia el detalle
-  if (target) {
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  if(detalle) {
+    detalle.style.display = "block";
+    // Desplazamiento suave hacia el detalle
+    detalle.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 }
 </script>
+
 
 
   
