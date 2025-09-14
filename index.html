@@ -150,19 +150,14 @@
   <p>
     *"Nuestros planes están diseñados para ti, sin importar en qué punto te encuentres. 💪🔥
       Con cada plan recibirás rutinas efectivas 🏋️‍♂️, acompañamiento real 🤝 y la motivación necesaria para mantenerte constante ⚡.
-
-    ✨ Imagina cómo te verías y sentirías en unas semanas: más energía 🌟, más fuerza 🦾, más confianza en ti mismo 😎.
-    No se trata solo de entrenar 🏃‍♂️, se trata de construir la mejor versión de ti 🌈 y disfrutar cada paso del proceso 🎯.
-
-    ⏳ Tus metas no pueden esperar.
-    🚀 Hoy es el mejor momento para empezar."*
+      🚀 Hoy es el mejor momento para empezar."*
   </p>
   <p>
     Aquí puedes conocer un poco más sobre mis servicios. 
     Escoge el plan que mejor se adapte a ti.
   </p>
 
-  <!-- Cards en lugar de botones -->
+  <!-- Cards -->
   <div class="planes-opciones">
     <div class="card-plan">
       <span class="icon">🏋️</span>
@@ -185,6 +180,8 @@
       <li>Consejos de nutrición básicos</li>
       <li>Acompañamiento y soporte 24/7</li>
     </ul>
+    <!-- Botón volver a planes -->
+    <a href="javascript:void(0)" class="btn-volver" onclick="volverAPlanes()">⬅ Volver a Planes</a>
   </div>
 
   <!-- Detalle Asesoría -->
@@ -196,9 +193,12 @@
       <li>Sugerencias de mejoras personalizadas</li>
       <li>Resolución de dudas en vivo</li>
     </ul>
+    <!-- Botón volver a planes -->
+    <a href="javascript:void(0)" class="btn-volver" onclick="volverAPlanes()">⬅ Volver a Planes</a>
   </div>
 
-  <a href="#inicio" class="btn-volver">⬆ Volver al Inicio</a>
+  <!-- Volver al inicio -->
+  <a href="javascript:void(0)" class="btn-volver" onclick="volverAlInicio()">⬆ Volver al Inicio</a>
 </section>
 
 <style>
@@ -277,7 +277,7 @@
 
 .btn-volver {
   display: block;
-  margin-top: 40px;
+  margin-top: 20px;
   text-align: center;
   background: #333;
   color: #fff;
@@ -312,9 +312,26 @@ function toggleDetalle(plan) {
 
   if(detalle) {
     detalle.style.display = "block";
-    // Desplazamiento suave hacia el detalle
     detalle.scrollIntoView({ behavior: "smooth", block: "start" });
   }
+}
+
+function volverAPlanes() {
+  // Ocultar detalles
+  document.getElementById("detalle-personalizado").style.display = "none";
+  document.getElementById("detalle-asesoria").style.display = "none";
+
+  // Scroll hacia la sección planes
+  document.getElementById("planes").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function volverAlInicio() {
+  // Ocultar detalles
+  document.getElementById("detalle-personalizado").style.display = "none";
+  document.getElementById("detalle-asesoria").style.display = "none";
+
+  // Scroll hacia el inicio
+  document.getElementById("inicio").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 </script>
 
