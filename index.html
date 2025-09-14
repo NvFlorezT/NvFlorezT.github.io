@@ -152,21 +152,21 @@
   </section>
 
   <section id="planes">
-    <h2>💪 Planes de Entrenamiento</h2>
-    <p>
-      *"Nuestros planes están diseñados para ti, sin importar en qué punto te encuentres. 💪🔥
-        Con cada plan recibirás rutinas efectivas 🏋️‍♂️, acompañamiento real 🤝 y la motivación necesaria para mantenerte constante ⚡.
+  <h2>💪 Planes de Entrenamiento</h2>
+  <p>
+    *"Nuestros planes están diseñados para ti, sin importar en qué punto te encuentres. 💪🔥
+      Con cada plan recibirás rutinas efectivas 🏋️‍♂️, acompañamiento real 🤝 y la motivación necesaria para mantenerte constante ⚡.
 
-      ✨ Imagina cómo te verías y sentirías en unas semanas: más energía 🌟, más fuerza 🦾, más confianza en ti mismo 😎.
-      No se trata solo de entrenar 🏃‍♂️, se trata de construir la mejor versión de ti 🌈 y disfrutar cada paso del proceso 🎯.
+    ✨ Imagina cómo te verías y sentirías en unas semanas: más energía 🌟, más fuerza 🦾, más confianza en ti mismo 😎.
+    No se trata solo de entrenar 🏃‍♂️, se trata de construir la mejor versión de ti 🌈 y disfrutar cada paso del proceso 🎯.
 
-      ⏳ Tus metas no pueden esperar.
-      🚀 Hoy es el mejor momento para empezar."*
-    </p>
-    <p>
-      Aquí puedes conocer un poco más sobre mis servicios. 
-      Escoge el plan que mejor se adapte a ti.
-    </p>
+    ⏳ Tus metas no pueden esperar.
+    🚀 Hoy es el mejor momento para empezar."*
+  </p>
+  <p>
+    Aquí puedes conocer un poco más sobre mis servicios. 
+    Escoge el plan que mejor se adapte a ti.
+  </p>
 
   <!-- Cards en lugar de botones -->
   <div class="planes-opciones">
@@ -308,14 +308,24 @@ function toggleDetalle(plan) {
   document.getElementById("detalle-personalizado").style.display = "none";
   document.getElementById("detalle-asesoria").style.display = "none";
 
+  let target = null;
+
   // Mostrar el seleccionado
   if(plan === "personalizado") {
-    document.getElementById("detalle-personalizado").style.display = "block";
+    target = document.getElementById("detalle-personalizado");
+    target.style.display = "block";
   } else if(plan === "asesoria") {
-    document.getElementById("detalle-asesoria").style.display = "block";
+    target = document.getElementById("detalle-asesoria");
+    target.style.display = "block";
+  }
+
+  // Hacer scroll automático hacia el detalle
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 }
 </script>
+
 
   
   <section id="testimonios">
