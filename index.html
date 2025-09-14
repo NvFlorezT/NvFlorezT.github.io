@@ -164,20 +164,163 @@
       🚀 Hoy es el mejor momento para empezar."*
     </p>
 
-    <!-- Cards en lugar de botones -->
-    <div class="planes-opciones">
-      <div class="card-plan">
-        <span class="icon">🏋️</span>
-        <a href="#" class="btn">Personalizado</a>
-      </div>
-      <div class="card-plan">
-        <span class="icon">📲</span>
-        <a href="#" class="btn">Asesorías</a>
-      </div>
-    </div>
+   <!-- Sección de Planes -->
+<section id="planes">
+  <h2>Planes</h2>
+  <p>
+    Aquí puedes conocer un poco más sobre mis servicios. 
+    Escoge el plan que mejor se adapte a ti.
+  </p>
 
-    <a href="#inicio" class="btn-volver">⬆ Volver al Inicio</a>
-  </section>
+  <!-- Cards en lugar de botones -->
+  <div class="planes-opciones">
+    <div class="card-plan">
+      <span class="icon">🏋️</span>
+      <a href="javascript:void(0)" class="btn" onclick="toggleDetalle('personalizado')">Personalizado</a>
+    </div>
+    <div class="card-plan">
+      <span class="icon">📲</span>
+      <a href="javascript:void(0)" class="btn" onclick="toggleDetalle('asesoria')">Asesorías</a>
+    </div>
+  </div>
+
+  <!-- Detalle Personalizado -->
+  <div id="detalle-personalizado" class="detalle-plan">
+    <h3>Plan Personalizado</h3>
+    <ul>
+      <li>Evaluación inicial de tu condición física</li>
+      <li>Plan de entrenamiento adaptado a tus objetivos</li>
+      <li>Rutinas semanales actualizadas</li>
+      <li>Seguimiento de avances y ajustes</li>
+      <li>Consejos de nutrición básicos</li>
+      <li>Acompañamiento y soporte 24/7</li>
+    </ul>
+  </div>
+
+  <!-- Detalle Asesoría -->
+  <div id="detalle-asesoria" class="detalle-plan">
+    <h3>Plan Asesorías</h3>
+    <ul>
+      <li>Sesiones virtuales de asesoría</li>
+      <li>Revisión de tu rutina actual</li>
+      <li>Sugerencias de mejoras personalizadas</li>
+      <li>Resolución de dudas en vivo</li>
+    </ul>
+  </div>
+
+  <a href="#inicio" class="btn-volver">⬆ Volver al Inicio</a>
+</section>
+
+<style>
+.planes-opciones {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.card-plan {
+  background: #fff;
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+  width: 200px;
+}
+
+.card-plan:hover {
+  transform: translateY(-5px);
+}
+
+.card-plan .icon {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.card-plan .btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.card-plan .btn:hover {
+  background: linear-gradient(135deg, #ff4b2b, #ff416c);
+}
+
+.detalle-plan {
+  display: none;
+  margin-top: 30px;
+  padding: 20px;
+  background: #f4f4f4;
+  border-radius: 12px;
+  color: #333;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.detalle-plan h3 {
+  margin-bottom: 15px;
+  color: #ff416c;
+}
+
+.detalle-plan ul {
+  list-style: none;
+  padding: 0;
+}
+
+.detalle-plan ul li {
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.detalle-plan ul li::before {
+  content: "✔️";
+  position: absolute;
+  left: 0;
+}
+
+.btn-volver {
+  display: block;
+  margin-top: 40px;
+  text-align: center;
+  background: #333;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.btn-volver:hover {
+  background: #555;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+
+<script>
+function toggleDetalle(plan) {
+  // Ocultar todos
+  document.getElementById("detalle-personalizado").style.display = "none";
+  document.getElementById("detalle-asesoria").style.display = "none";
+
+  // Mostrar el seleccionado
+  if(plan === "personalizado") {
+    document.getElementById("detalle-personalizado").style.display = "block";
+  } else if(plan === "asesoria") {
+    document.getElementById("detalle-asesoria").style.display = "block";
+  }
+}
+</script>
+
   
   <section id="testimonios">
     <h2>Testimonios</h2>
