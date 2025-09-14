@@ -4,13 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brahyan - Entrenador Personal</title>
+
+  <!-- ✅ Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
+      font-family: 'Montserrat', sans-serif; /* Texto general */
       background: #111;
       color: #f4f4f4;
       scroll-behavior: smooth;
+    }
+    h1, h2, h3 {
+      font-family: 'Poppins', sans-serif; /* Títulos modernos */
+      font-weight: 700;
+      letter-spacing: 1px;
     }
     header {
       background: #222;
@@ -52,13 +61,11 @@
       background: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438') no-repeat center center/cover;
       color: white;
     }
-    h1, h2 {
-      margin-bottom: 20px;
-    }
     p {
       max-width: 700px;
       margin: 0 auto 20px;
-      line-height: 1.6;
+      line-height: 1.7;
+      font-size: 1rem;
     }
     .buttons {
       display: flex;
@@ -75,7 +82,8 @@
       border-radius: 30px;
       cursor: pointer;
       font-size: 16px;
-      font-weight: bold;
+      font-weight: 600;
+      font-family: 'Montserrat', sans-serif;
       text-decoration: none;
       transition: background 0.3s, transform 0.2s;
     }
@@ -93,6 +101,7 @@
       font-size: 14px;
       text-decoration: none;
       margin-top: 20px;
+      font-family: 'Montserrat', sans-serif;
       transition: background 0.3s, transform 0.2s;
     }
     .btn-volver:hover {
@@ -103,11 +112,11 @@
     /* 🔥 Estilos para las cards de planes */
     .planes-opciones {
       display: flex;
-      justify-content: center;  /* Centra en horizontal */
-      align-items: stretch;     /* Igual altura */
-      gap: 30px;                /* Espacio entre cards */
+      justify-content: center;
+      align-items: stretch;
+      gap: 30px;
       margin-top: 40px;
-      flex-wrap: wrap;          /* Responsive: se bajan en celular */
+      flex-wrap: wrap;
     }
     .card-plan {
       background: #222;
@@ -129,14 +138,49 @@
       margin-bottom: 15px;
       display: block;
     }
+
+    /* Detalles de planes */
+    .detalle-plan {
+      display: none;
+      margin-top: 30px;
+      padding: 20px;
+      background: #f4f4f4;
+      border-radius: 12px;
+      color: #333;
+      animation: fadeIn 0.5s ease-in-out;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .detalle-plan h3 {
+      margin-bottom: 15px;
+      color: #ff416c;
+      font-family: 'Poppins', sans-serif;
+    }
+    .detalle-plan ul {
+      list-style: none;
+      padding: 0;
+    }
+    .detalle-plan ul li {
+      margin-bottom: 10px;
+      padding-left: 20px;
+      position: relative;
+    }
+    .detalle-plan ul li::before {
+      content: "✔️";
+      position: absolute;
+      left: 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
+  <!-- HERO -->
   <section class="hero" id="inicio">
     <h1>¡Bienvenido! Soy Brahyan</h1>
     <p>Entrenador personal dedicado a transformar tu vida con rutinas efectivas, motivación constante y resultados reales.</p>
-    
-    <!-- Botones en el hero -->
     <div class="buttons">
       <a href="#acerca" class="btn">Acerca de mí</a>
       <a href="#planes" class="btn">Planes</a>
@@ -145,287 +189,109 @@
     </div>
   </section>
 
-  <!-- aca se esta diseñando la parte de Acerca de mi -->
+  <!-- ACERCA DE MI -->
   <section id="acerca">
-  <h2>👨‍🏫 Acerca de Mí</h2>
-  <div class="acerca-contenido">
-    <!-- Texto -->
-    <div class="acerca-texto">
-      <p>
-        Soy <strong>Brahyan</strong>, un entrenador personal apasionado por transformar vidas a través del movimiento y la disciplina.  
-        Me encanta asumir retos y acompañar a mis alumnos a superar sus límites.  
-      </p>
-      <p>
-        🎓 Profesional en <strong>Educación Física y Deporte</strong>, con diplomados en  
-        <strong>Entrenamiento Personalizado</strong> y <strong>Alimentación Saludable</strong>.  
-      </p>
-      <p>
-        💪 Con más de <strong>2 años de experiencia</strong>, he ayudado a decenas de personas a alcanzar su mejor versión, no solo en su físico, sino también en su confianza y bienestar.
-      </p>
-      <p>
-        🌟 Mi objetivo es inspirarte, guiarte y motivarte para que cada entrenamiento sea un paso firme hacia tus metas.
-      </p>
+    <h2>👨‍🏫 Acerca de Mí</h2>
+    <p>
+      Soy <strong>Brahyan</strong>, un entrenador personal apasionado por transformar vidas a través del movimiento y la disciplina.
+      🎓 Profesional en <strong>Educación Física y Deporte</strong>, especializado en entrenamiento y alimentación saludable.
+    </p>
+    <a href="#inicio" class="btn-volver" onclick="volverAlInicio()">⬆ Volver al Inicio</a>
+  </section>
+
+  <!-- PLANES -->
+  <section id="planes">
+    <h2>💪 Planes de Entrenamiento</h2>
+    <p>
+      Nuestros planes están diseñados para ti, sin importar en qué punto te encuentres.
+      Recibirás rutinas efectivas, acompañamiento real y motivación constante.
+    </p>
+    <div class="planes-opciones">
+      <div class="card-plan">
+        <span class="icon">🏋️</span>
+        <a href="javascript:void(0)" class="btn" onclick="toggleDetalle('personalizado')">Personalizado</a>
+      </div>
+      <div class="card-plan">
+        <span class="icon">📲</span>
+        <a href="javascript:void(0)" class="btn" onclick="toggleDetalle('asesoria')">Asesorías</a>
+      </div>
     </div>
 
-    <!-- Imagen -->
-    <div class="acerca-imagen">
-      <img src="https://images.unsplash.com/photo-1558611848-73f7eb4001a1" alt="Coach Brahyan en acción">
+    <!-- Detalle Personalizado -->
+    <div id="detalle-personalizado" class="detalle-plan">
+      <h3>Plan Personalizado</h3>
+      <ul>
+        <li>Evaluación inicial de tu condición física</li>
+        <li>Plan de entrenamiento adaptado a tus objetivos</li>
+        <li>Rutinas semanales actualizadas</li>
+        <li>Seguimiento de avances y ajustes</li>
+        <li>Consejos de nutrición básicos</li>
+        <li>Acompañamiento y soporte 24/7</li>
+      </ul>
+      <a href="javascript:void(0)" class="btn-volver" onclick="volverAPlanes()">⬅ Volver a Planes</a>
     </div>
-  </div>
 
-  <!-- Botón volver -->
-  <a href="#inicio" class="btn-volver">⬆ Volver al Inicio</a>
-</section>
-
-<style>
-#acerca {
-  background: #1b1b1b;
-  padding: 80px 20px;
-  color: #f4f4f4;
-}
-
-#acerca h2 {
-  margin-bottom: 40px;
-  color: #00c896;
-}
-
-.acerca-contenido {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap; /* Responsive */
-}
-
-.acerca-texto {
-  max-width: 500px;
-  text-align: left;
-  line-height: 1.8;
-}
-
-.acerca-texto strong {
-  color: #00c896;
-}
-
-.acerca-imagen img {
-  width: 300px;
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-  transition: transform 0.3s;
-}
-
-.acerca-imagen img:hover {
-  transform: scale(1.05);
-}
-</style>
-
-
-
- <section id="planes">
-  <h2>💪 Planes de Entrenamiento</h2>
-  <p>
-    *"Nuestros planes están diseñados para ti, sin importar en qué punto te encuentres. 💪🔥
-      Con cada plan recibirás rutinas efectivas 🏋️‍♂️, acompañamiento real 🤝 y la motivación necesaria para mantenerte constante ⚡.
-      🚀 Hoy es el mejor momento para empezar."*
-  </p>
-  <p>
-    Aquí puedes conocer un poco más sobre mis servicios. 
-    Escoge el plan que mejor se adapte a ti.
-  </p>
-
-  <!-- Cards -->
-  <div class="planes-opciones">
-    <div class="card-plan">
-      <span class="icon">🏋️</span>
-      <a href="javascript:void(0)" class="btn" onclick="toggleDetalle('personalizado')">Personalizado</a>
+    <!-- Detalle Asesorías -->
+    <div id="detalle-asesoria" class="detalle-plan">
+      <h3>Plan Asesorías</h3>
+      <ul>
+        <li>Sesiones virtuales de asesoría</li>
+        <li>Revisión de tu rutina actual</li>
+        <li>Sugerencias de mejoras personalizadas</li>
+        <li>Resolución de dudas en vivo</li>
+      </ul>
+      <a href="javascript:void(0)" class="btn-volver" onclick="volverAPlanes()">⬅ Volver a Planes</a>
     </div>
-    <div class="card-plan">
-      <span class="icon">📲</span>
-      <a href="javascript:void(0)" class="btn" onclick="toggleDetalle('asesoria')">Asesorías</a>
-    </div>
-  </div>
 
-  <!-- Detalle Personalizado -->
-  <div id="detalle-personalizado" class="detalle-plan">
-    <h3>Plan Personalizado</h3>
-    <ul>
-      <li>Evaluación inicial de tu condición física</li>
-      <li>Plan de entrenamiento adaptado a tus objetivos</li>
-      <li>Rutinas semanales actualizadas</li>
-      <li>Seguimiento de avances y ajustes</li>
-      <li>Consejos de nutrición básicos</li>
-      <li>Acompañamiento y soporte 24/7</li>
-    </ul>
-    <!-- Botón volver a planes -->
-    <a href="javascript:void(0)" class="btn-volver" onclick="volverAPlanes()">⬅ Volver a Planes</a>
-  </div>
+    <a href="javascript:void(0)" class="btn-volver" onclick="volverAlInicio()">⬆ Volver al Inicio</a>
+  </section>
 
-  <!-- Detalle Asesoría -->
-  <div id="detalle-asesoria" class="detalle-plan">
-    <h3>Plan Asesorías</h3>
-    <ul>
-      <li>Sesiones virtuales de asesoría</li>
-      <li>Revisión de tu rutina actual</li>
-      <li>Sugerencias de mejoras personalizadas</li>
-      <li>Resolución de dudas en vivo</li>
-    </ul>
-    <!-- Botón volver a planes -->
-    <a href="javascript:void(0)" class="btn-volver" onclick="volverAPlanes()">⬅ Volver a Planes</a>
-  </div>
-
-  <!-- Volver al inicio -->
-  <a href="javascript:void(0)" class="btn-volver" onclick="volverAlInicio()">⬆ Volver al Inicio</a>
-</section>
-
-<style>
-.planes-opciones {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 40px;
-}
-
-.card-plan {
-  background: #fff;
-  padding: 25px;
-  border-radius: 15px;
-  text-align: center;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-  transition: transform 0.3s;
-  width: 200px;
-}
-
-.card-plan:hover {
-  transform: translateY(-5px);
-}
-
-.card-plan .icon {
-  font-size: 40px;
-  display: block;
-  margin-bottom: 15px;
-}
-
-.card-plan .btn {
-  display: inline-block;
-  background: linear-gradient(135deg, #ff416c, #ff4b2b);
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 10px;
-  text-decoration: none;
-  transition: background 0.3s;
-}
-
-.card-plan .btn:hover {
-  background: linear-gradient(135deg, #ff4b2b, #ff416c);
-}
-
-.detalle-plan {
-  display: none; /* Oculto por defecto */
-  margin-top: 30px;
-  padding: 20px;
-  background: #f4f4f4;
-  border-radius: 12px;
-  color: #333;
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-.detalle-plan h3 {
-  margin-bottom: 15px;
-  color: #ff416c;
-}
-
-.detalle-plan ul {
-  list-style: none;
-  padding: 0;
-}
-
-.detalle-plan ul li {
-  margin-bottom: 10px;
-  padding-left: 20px;
-  position: relative;
-}
-
-.detalle-plan ul li::before {
-  content: "✔️";
-  position: absolute;
-  left: 0;
-}
-
-.btn-volver {
-  display: block;
-  margin-top: 20px;
-  text-align: center;
-  background: #333;
-  color: #fff;
-  padding: 12px 20px;
-  border-radius: 10px;
-  text-decoration: none;
-}
-
-.btn-volver:hover {
-  background: #555;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-</style>
-
-<script>
-function toggleDetalle(plan) {
-  // Ocultar todos
-  document.getElementById("detalle-personalizado").style.display = "none";
-  document.getElementById("detalle-asesoria").style.display = "none";
-
-  // Mostrar el seleccionado
-  let detalle;
-  if(plan === "personalizado") {
-    detalle = document.getElementById("detalle-personalizado");
-  } else if(plan === "asesoria") {
-    detalle = document.getElementById("detalle-asesoria");
-  }
-
-  if(detalle) {
-    detalle.style.display = "block";
-    detalle.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-}
-
-function volverAPlanes() {
-  // Ocultar detalles
-  document.getElementById("detalle-personalizado").style.display = "none";
-  document.getElementById("detalle-asesoria").style.display = "none";
-
-  // Scroll hacia la sección planes
-  document.getElementById("planes").scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
-function volverAlInicio() {
-  // Ocultar detalles
-  document.getElementById("detalle-personalizado").style.display = "none";
-  document.getElementById("detalle-asesoria").style.display = "none";
-
-  // Scroll hacia el inicio
-  document.getElementById("inicio").scrollIntoView({ behavior: "smooth", block: "start" });
-}
-</script>
-
-
-
-  
+  <!-- TESTIMONIOS -->
   <section id="testimonios">
-    <h2>Testimonios</h2>
+    <h2>✨ Testimonios</h2>
     <p>"Gracias a Brahyan logré perder 10 kg y ahora tengo más energía que nunca." – Andrea</p>
     <p>"Su apoyo me motivó a no rendirme. Hoy tengo la mejor versión de mí mismo." – Carlos</p>
-    <a href="#inicio" class="btn-volver">⬆ Volver al Inicio</a>
+    <a href="#inicio" class="btn-volver" onclick="volverAlInicio()">⬆ Volver al Inicio</a>
   </section>
 
+  <!-- CONTACTO -->
   <section id="contacto">
-    <h2>Contacto</h2>
+    <h2>📩 Contacto</h2>
     <p>📞 WhatsApp: <a href="https://wa.me/573216156819" target="_blank">+57 3216156819</a></p>
     <p>📧 Email: contacto@brahyanfitness.com</p>
-    <a href="#inicio" class="btn-volver">⬆ Volver al Inicio</a>
+    <a href="#inicio" class="btn-volver" onclick="volverAlInicio()">⬆ Volver al Inicio</a>
   </section>
+
+  <!-- JS -->
+  <script>
+  function toggleDetalle(plan) {
+    document.getElementById("detalle-personalizado").style.display = "none";
+    document.getElementById("detalle-asesoria").style.display = "none";
+
+    let detalle;
+    if(plan === "personalizado") {
+      detalle = document.getElementById("detalle-personalizado");
+    } else if(plan === "asesoria") {
+      detalle = document.getElementById("detalle-asesoria");
+    }
+
+    if(detalle) {
+      detalle.style.display = "block";
+      detalle.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+
+  function volverAPlanes() {
+    document.getElementById("detalle-personalizado").style.display = "none";
+    document.getElementById("detalle-asesoria").style.display = "none";
+    document.getElementById("planes").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function volverAlInicio() {
+    document.getElementById("detalle-personalizado").style.display = "none";
+    document.getElementById("detalle-asesoria").style.display = "none";
+    document.getElementById("inicio").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  </script>
 </body>
 </html>
