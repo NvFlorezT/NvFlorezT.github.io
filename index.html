@@ -99,6 +99,36 @@
       background: #666;
       transform: scale(1.05);
     }
+
+    /* 🔥 Estilos para las cards de planes */
+    .planes-opciones {
+      display: flex;
+      justify-content: center;  /* Centra en horizontal */
+      align-items: stretch;     /* Igual altura */
+      gap: 30px;                /* Espacio entre cards */
+      margin-top: 40px;
+      flex-wrap: wrap;          /* Responsive: se bajan en celular */
+    }
+    .card-plan {
+      background: #222;
+      color: white;
+      padding: 30px;
+      width: 250px;
+      border-radius: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    .card-plan:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    }
+    .card-plan .icon {
+      font-size: 2.5em;
+      margin-bottom: 15px;
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -122,32 +152,32 @@
   </section>
 
   <section id="planes">
-  <h2>💪 Planes de Entrenamiento</h2>
-  <p>
-    *"Nuestros planes están diseñados para ti, sin importar en qué punto te encuentres. 💪🔥
-      Con cada plan recibirás rutinas efectivas 🏋️‍♂️, acompañamiento real 🤝 y la motivación necesaria para mantenerte constante ⚡.
+    <h2>💪 Planes de Entrenamiento</h2>
+    <p>
+      *"Nuestros planes están diseñados para ti, sin importar en qué punto te encuentres. 💪🔥
+        Con cada plan recibirás rutinas efectivas 🏋️‍♂️, acompañamiento real 🤝 y la motivación necesaria para mantenerte constante ⚡.
 
-    ✨ Imagina cómo te verías y sentirías en unas semanas: más energía 🌟, más fuerza 🦾, más confianza en ti mismo 😎.
-    No se trata solo de entrenar 🏃‍♂️, se trata de construir la mejor versión de ti 🌈 y disfrutar cada paso del proceso 🎯.
+      ✨ Imagina cómo te verías y sentirías en unas semanas: más energía 🌟, más fuerza 🦾, más confianza en ti mismo 😎.
+      No se trata solo de entrenar 🏃‍♂️, se trata de construir la mejor versión de ti 🌈 y disfrutar cada paso del proceso 🎯.
 
-    ⏳ Tus metas no pueden esperar.
-    🚀 Hoy es el mejor momento para empezar."*
-  </p>
+      ⏳ Tus metas no pueden esperar.
+      🚀 Hoy es el mejor momento para empezar."*
+    </p>
 
-  <!-- Cards en lugar de botones -->
-  <div class="planes-opciones">
-    <div class="card-plan">
-      <span class="icon">🏋️</span>
-      <a href="#" class="btn">Personalizado</a>
+    <!-- Cards en lugar de botones -->
+    <div class="planes-opciones">
+      <div class="card-plan">
+        <span class="icon">🏋️</span>
+        <a href="#" class="btn">Personalizado</a>
+      </div>
+      <div class="card-plan">
+        <span class="icon">📲</span>
+        <a href="#" class="btn">Asesorías</a>
+      </div>
     </div>
-    <div class="card-plan">
-      <span class="icon">📲</span>
-      <a href="#" class="btn">Asesorías</a>
-    </div>
-  </div>
 
-  <a href="#inicio" class="btn-volver">⬆ Volver al Inicio</a>
-</section>
+    <a href="#inicio" class="btn-volver">⬆ Volver al Inicio</a>
+  </section>
   
   <section id="testimonios">
     <h2>Testimonios</h2>
