@@ -3,50 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brahyan - Entrenador Personal</title>
-  
-  <!-- ✅ Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-
+  <title>Mi Página Fitness</title>
   <style>
+    /* 🎨 Estilos generales */
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
-      background: #111;
+      background: linear-gradient(135deg, #111, #1a1a1a, #222);
       color: #f4f4f4;
       scroll-behavior: smooth;
     }
-    h1, h2, h3 {
-      font-family: 'Poppins', sans-serif;
+
+    h1, h2 {
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
-    header {
-      background: #222;
-      padding: 15px 0;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      margin: 0;
-      padding: 0;
-    }
-    nav ul li {
-      margin: 0 20px;
-    }
-    nav ul li a {
-      color: #f4f4f4;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-    nav ul li a:hover {
-      color: #00c896;
-    }
+
     section {
       padding: 100px 20px;
       min-height: 100vh;
@@ -54,311 +26,98 @@
       flex-direction: column;
       justify-content: center;
       text-align: center;
-    }
-    .hero {
-      background: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438') no-repeat center center/cover;
-      color: white;
-    }
-    h1, h2 {
-      margin-bottom: 20px;
-    }
-    p {
-      max-width: 700px;
-      margin: 0 auto 20px;
-      line-height: 1.6;
-    }
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 30px;
-    }
-    .btn {
-      background: #00c896;
-      color: white;
-      padding: 15px 30px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: background 0.3s, transform 0.2s;
-    }
-    .btn:hover {
-      background: #009e74;
-      transform: scale(1.05);
-    }
-    .btn-volver {
-      background: #444;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      font-size: 14px;
-      text-decoration: none;
-      margin-top: 20px;
-      transition: background 0.3s, transform 0.2s;
-    }
-    .btn-volver:hover {
-      background: #666;
-      transform: scale(1.05);
-    }
-
-    /* 🔥 Estilos para las cards de planes */
-    .planes-opciones {
-      display: flex;
-      justify-content: center;
-      align-items: stretch;
-      gap: 30px;
-      margin-top: 40px;
-      flex-wrap: wrap;
-    }
-    .card-plan {
-      background: #222;
-      color: white;
-      padding: 30px;
-      width: 250px;
+      background: rgba(255,255,255,0.02);
       border-radius: 20px;
+      margin: 40px auto;
+      max-width: 1100px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    /* 🌟 Hero con imagen de fondo */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                  url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438') no-repeat center center/cover;
+      color: white;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       text-align: center;
-      cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
-    .card-plan:hover {
-      transform: translateY(-10px) scale(1.05);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-    }
-    .card-plan .icon {
-      font-size: 2.5em;
-      margin-bottom: 15px;
-      display: block;
+      padding: 0 20px;
+      border-radius: 0; /* Hero ocupa todo, sin bordes */
+      box-shadow: none;
     }
 
-    /* Estilos detalle planes */
-    .detalle-plan {
-      display: none;
-      margin-top: 30px;
-      padding: 20px;
-      background: #f4f4f4;
-      border-radius: 12px;
-      color: #333;
-      animation: fadeIn 0.5s ease-in-out;
-    }
-    .detalle-plan h3 {
-      margin-bottom: 15px;
-      color: #ff416c;
-    }
-    .detalle-plan ul {
-      list-style: none;
-      padding: 0;
-    }
-    .detalle-plan ul li {
-      margin-bottom: 10px;
-      padding-left: 20px;
-      position: relative;
-    }
-    .detalle-plan ul li::before {
-      content: "✔️";
-      position: absolute;
-      left: 0;
+    .hero h1 {
+      font-size: 3rem;
+      margin: 0;
     }
 
-    /* 🎨 Galería con estilo dinámico */
+    .hero p {
+      font-size: 1.3rem;
+      margin-top: 20px;
+    }
+
+    /* 📸 Galería de imágenes */
     .galeria-acerca {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
+      flex-wrap: wrap;
       gap: 20px;
-      margin: 40px auto;
-      max-width: 900px;
-      position: relative;
+      margin-top: 30px;
     }
-    .galeria-acerca .foto {
-      width: 220px;
-      height: 280px;
+
+    .galeria-acerca img {
+      width: 180px; /* 🔥 más pequeñas */
+      height: 220px;
       object-fit: cover;
       border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-      transition: transform 0.4s, box-shadow 0.4s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .galeria-acerca .foto:hover {
-      transform: scale(1.08) rotate(0deg);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.7);
-      z-index: 2;
-    }
-    .galeria-acerca .f1 { transform: rotate(-5deg); }
-    .galeria-acerca .f2 { transform: rotate(3deg); }
-    .galeria-acerca .f3 { transform: rotate(-2deg); }
-    .galeria-acerca .f4 { transform: rotate(4deg); }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* 📐 Estilo "desordenado con clase" */
+    .galeria-acerca img:nth-child(1) {
+      transform: rotate(-5deg);
+    }
+    .galeria-acerca img:nth-child(2) {
+      transform: rotate(4deg);
+    }
+    .galeria-acerca img:nth-child(3) {
+      transform: rotate(-3deg);
+    }
+    .galeria-acerca img:hover {
+      transform: scale(1.1) rotate(0);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.8);
     }
   </style>
 </head>
 <body>
-  <section class="hero" id="inicio">
-    <h1>¡Bienvenido! Soy Brahyan</h1>
-    <p>Entrenador personal dedicado a transformar tu vida con rutinas efectivas, motivación constante y resultados reales.</p>
-    
-    <!-- Botones en el hero -->
-    <div class="buttons">
-      <a href="#acerca" class="btn">Acerca de mí</a>
-      <a href="#planes" class="btn">Planes</a>
-      <a href="#testimonios" class="btn">Testimonios</a>
-      <a href="#contacto" class="btn">Contactos</a>
-    </div>
+
+  <!-- 🌟 Hero principal -->
+  <section class="hero">
+    <h1>Bienvenido a Mi Mundo Fitness</h1>
+    <p>Disciplina, esfuerzo y resultados</p>
   </section>
 
-  <!-- Sección Acerca de mí -->
+  <!-- ℹ️ Sección Acerca de mí -->
   <section id="acerca">
-    <h2>🙋‍♂️ Acerca de mí</h2>
-    <p>
-      Soy un coach apasionado por transformar vidas a través del ejercicio y la motivación. 
-      Me gusta asumir retos y acompañar a mis alumnos hasta que alcancen la mejor versión de sí mismos.
-    </p>
-    <p>
-      Tengo una carrera profesional en Educación Física y Deporte, además de diplomados en 
-      entrenamiento personalizado y alimentación saludable. Llevo más de 2 años trabajando en este campo,
-      ayudando a personas como tú a alcanzar sus objetivos.
-    </p>
+    <h2>Acerca de mí</h2>
+    <p>Mi pasión es entrenar, motivar y acompañar a las personas en su proceso de transformación.</p>
 
-   <!-- ✅ Nueva galería con estilo -->
-<div class="galeria-acerca">
-  <img src="https://images.unsplash.com/photo-1571019613576-2b22c76fd955" class="foto f1" alt="Entrenando con pesas">
-  <img src="https://images.unsplash.com/photo-1579758629938-03607ccdbaba" class="foto f2" alt="Ejercicio al aire libre">
-  <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1" class="foto f3" alt="Rutina de entrenamiento">
-</div>
-
-<style>
-.galeria-acerca {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 30px;
-}
-
-.foto {
-  width: 180px;   /* 🔥 tamaño más pequeño */
-  height: auto;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease;
-}
-
-.foto:hover {
-  transform: scale(1.05) rotate(-2deg);
-}
-
-/* 🔄 Posiciones con estilo */
-.f1 { transform: rotate(-5deg); }
-.f2 { transform: rotate(3deg); }
-.f3 { transform: rotate(-2deg); }
-</style>
-
-    <div class="buttons">
-      <a href="#planes" class="btn">💪 Ver Planes</a>
+    <!-- ✅ Galería con estilo -->
+    <div class="galeria-acerca">
+      <img src="https://images.unsplash.com/photo-1571019613576-2b22c76fd955" alt="Entrenando con pesas">
+      <img src="https://images.unsplash.com/photo-1579758629938-03607ccdbaba" alt="Ejercicio al aire libre">
+      <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1" alt="Rutina de entrenamiento">
     </div>
   </section>
 
-  <section id="planes">
-    <h2>💪 Planes de Entrenamiento</h2>
-    <p>
-      *"Nuestros planes están diseñados para ti, sin importar en qué punto te encuentres. 💪🔥
-      Con cada plan recibirás rutinas efectivas 🏋️‍♂️, acompañamiento real 🤝 y la motivación necesaria para mantenerte constante ⚡.
-      🚀 Hoy es el mejor momento para empezar."*
-    </p>
-    <p>
-      Aquí puedes conocer un poco más sobre mis servicios. 
-      Escoge el plan que mejor se adapte a ti.
-    </p>
-
-    <!-- Cards -->
-    <div class="planes-opciones">
-      <div class="card-plan">
-        <span class="icon">🏋️</span>
-        <a href="javascript:void(0)" class="btn" onclick="toggleDetalle('personalizado')">Personalizado</a>
-      </div>
-      <div class="card-plan">
-        <span class="icon">📲</span>
-        <a href="javascript:void(0)" class="btn" onclick="toggleDetalle('asesoria')">Asesorías</a>
-      </div>
-    </div>
-
-    <!-- Detalle Personalizado -->
-    <div id="detalle-personalizado" class="detalle-plan">
-      <h3>Plan Personalizado</h3>
-      <ul>
-        <li>Evaluación inicial de tu condición física</li>
-        <li>Plan de entrenamiento adaptado a tus objetivos</li>
-        <li>Rutinas semanales actualizadas</li>
-        <li>Seguimiento de avances y ajustes</li>
-        <li>Consejos de nutrición básicos</li>
-        <li>Acompañamiento y soporte 24/7</li>
-      </ul>
-      <a href="javascript:void(0)" class="btn-volver" onclick="volverAPlanes()">⬅ Volver a Planes</a>
-    </div>
-
-    <!-- Detalle Asesoría -->
-    <div id="detalle-asesoria" class="detalle-plan">
-      <h3>Plan Asesorías</h3>
-      <ul>
-        <li>Sesiones virtuales de asesoría</li>
-        <li>Revisión de tu rutina actual</li>
-        <li>Sugerencias de mejoras personalizadas</li>
-        <li>Resolución de dudas en vivo</li>
-      </ul>
-      <a href="javascript:void(0)" class="btn-volver" onclick="volverAPlanes()">⬅ Volver a Planes</a>
-    </div>
-
-    <a href="javascript:void(0)" class="btn-volver" onclick="volverAlInicio()">⬆ Volver al Inicio</a>
-  </section>
-
-  <section id="testimonios">
-    <h2>Testimonios</h2>
-    <p>"Gracias a Brahyan logré perder 10 kg y ahora tengo más energía que nunca." – Andrea</p>
-    <p>"Su apoyo me motivó a no rendirme. Hoy tengo la mejor versión de mí mismo." – Carlos</p>
-    <a href="#inicio" class="btn-volver">⬆ Volver al Inicio</a>
-  </section>
-
+  <!-- 📞 Contacto -->
   <section id="contacto">
     <h2>Contacto</h2>
-    <p>📞 WhatsApp: <a href="https://wa.me/573216156819" target="_blank">+57 3216156819</a></p>
-    <p>📧 Email: contacto@brahyanfitness.com</p>
-    <a href="#inicio" class="btn-volver">⬆ Volver al Inicio</a>
+    <p>¿Quieres entrenar conmigo? Escríbeme y comencemos tu transformación.</p>
   </section>
 
-  <script>
-    function toggleDetalle(plan) {
-      document.getElementById("detalle-personalizado").style.display = "none";
-      document.getElementById("detalle-asesoria").style.display = "none";
-      let detalle;
-      if(plan === "personalizado") {
-        detalle = document.getElementById("detalle-personalizado");
-      } else if(plan === "asesoria") {
-        detalle = document.getElementById("detalle-asesoria");
-      }
-      if(detalle) {
-        detalle.style.display = "block";
-        detalle.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-
-    function volverAPlanes() {
-      document.getElementById("detalle-personalizado").style.display = "none";
-      document.getElementById("detalle-asesoria").style.display = "none";
-      document.getElementById("planes").scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    function volverAlInicio() {
-      document.getElementById("detalle-personalizado").style.display = "none";
-      document.getElementById("detalle-asesoria").style.display = "none";
-      document.getElementById("inicio").scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  </script>
 </body>
 </html>
