@@ -3,221 +3,177 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brahyan Cortes Castañeda - Entrenador Personal</title>
+  <title>Brahyan Cortes - Entrenador Personal</title>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #111;
+      font-family: 'Poppins', sans-serif;
+      background-color: #111;
       color: #fff;
-      line-height: 1.6;
+      scroll-behavior: smooth;
     }
 
-    /* ===== HEADER ===== */
-    header {
-      background: #000;
-      padding: 15px;
+    /* 🔹 Pantalla de bienvenida */
+    .welcome {
+      height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(135deg, #0f0f0f, #1c1c1c, #222);
     }
-    header .logo {
-      background: #00d084;
-      color: #000;
+
+    .welcome h1 {
+      font-size: 3rem;
+      margin: 0;
+      background: linear-gradient(90deg, #00ff88, #00c3ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .welcome p {
+      font-size: 1.2rem;
+      margin: 15px 0;
+      color: #bbb;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    .welcome button {
+      margin-top: 20px;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background: linear-gradient(90deg, #00ff88, #00c3ff);
+      color: #111;
       font-weight: bold;
-      padding: 10px;
-      border-radius: 8px;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 18px;
-    }
-    header p {
-      margin: 0;
-      font-size: 14px;
-      color: #aaa;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    /* ===== MENÚ LATERAL ===== */
-    .sidebar {
-      height: 100%;
-      width: 0;
-      position: fixed;
-      top: 0;
-      left: 0;
-      background: #000;
-      overflow-x: hidden;
-      transition: 0.3s;
-      padding-top: 60px;
-      z-index: 2000;
-    }
-    .sidebar a {
-      padding: 12px 25px;
-      text-decoration: none;
-      font-size: 18px;
-      color: #fff;
-      display: block;
-      transition: 0.3s;
-    }
-    .sidebar a:hover {
-      background: #00d084;
-      color: #000;
-    }
-    .sidebar .closebtn {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 30px;
-      cursor: pointer;
+    .welcome button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #00ff88aa;
     }
 
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 🔹 Secciones normales */
     section {
-      padding: 40px 20px;
-      max-width: 800px;
+      padding: 80px 20px;
+      max-width: 1000px;
       margin: auto;
     }
 
     h2 {
-      font-size: 24px;
-      margin-bottom: 15px;
+      color: #00ff88;
     }
 
-    /* Botones */
-    .btn {
-      display: inline-block;
-      background: linear-gradient(90deg, #ff4d4d, #ff7b7b);
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-    .btn:hover {
-      background: linear-gradient(90deg, #ff3333, #ff6666);
+    /* 🔹 Botones de planes */
+    .planes-opciones {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 30px;
     }
 
-    /* Galería estilo polaroid */
-    .galeria-acerca{
-      display:flex;
-      justify-content:center;
-      flex-wrap:wrap;
-      gap:18px;
-      margin-top:22px;
-    }
-    .galeria-acerca .foto{
-      width:140px;      
-      height:170px;
-      object-fit:cover;
-      border-radius:12px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-      transition: transform .35s, box-shadow .35s;
-      cursor:pointer;
-      transform-origin:center;
-    }
-    .galeria-acerca .foto:hover{
-      transform: scale(1.08) rotate(0deg);
-      z-index:30;
-      box-shadow: 0 28px 60px rgba(0,0,0,0.75);
-    }
-    .galeria-acerca .foto.f1{ transform: rotate(-6deg) }
-    .galeria-acerca .foto.f2{ transform: rotate(4deg) }
-    .galeria-acerca .foto.f3{ transform: rotate(-3deg) }
-    .galeria-acerca .foto.f4{ transform: rotate(5deg) }
-
-    /* Tarjetas */
-    .card {
+    .card-plan {
       background: #1a1a1a;
       padding: 20px;
       border-radius: 15px;
-      margin-bottom: 20px;
       text-align: center;
+      width: 200px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .card h3 {
-      margin: 10px 0;
+
+    .card-plan:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 20px #00ff8880;
+    }
+
+    .card-plan .icon {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .card-plan a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      color: #111;
+      background: linear-gradient(90deg, #00ff88, #00c3ff);
+      transition: transform 0.3s ease;
+    }
+
+    .card-plan a:hover {
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
-  <!-- SIDEBAR -->
-  <div id="mySidebar" class="sidebar">
-    <span class="closebtn" onclick="closeNav()">&times;</span>
-    <a href="#inicio" onclick="closeNav()">Inicio</a>
-    <a href="#acerca" onclick="closeNav()">Acerca</a>
-    <a href="#planes" onclick="closeNav()">Planes</a>
-    <a href="#testimonios" onclick="closeNav()">Testimonios</a>
-    <a href="#contacto" onclick="closeNav()">Contacto</a>
+
+  <!-- ✅ Pantalla de bienvenida -->
+  <div class="welcome">
+    <h1>👋 Hola, soy Brahyan Cortes</h1>
+    <p>Entrenador Personal | Transformación Física y Mental</p>
+    <button onclick="document.getElementById('inicio').scrollIntoView({behavior:'smooth'})">
+      🚀 Entrar
+    </button>
   </div>
 
-  <!-- HEADER -->
-  <header onclick="openNav()">
-    <div class="logo">BC</div>
-    <div>
-      <h1>Brahyan Cortes</h1>
-      <p>Entrenador Personal</p>
-    </div>
-  </header>
-
-  <!-- INICIO -->
+  <!-- ✅ Sección Inicio -->
   <section id="inicio">
     <h2>Inicio</h2>
     <p>Bienvenido a mi página de entrenamiento personal 💪</p>
   </section>
 
-  <!-- ACERCA -->
+  <!-- ✅ Sección Acerca de mí -->
   <section id="acerca">
-    <h2>🙋‍♂️ Acerca de mí</h2>
-    <p>Soy <strong>Brahyan Cortes Castañeda</strong>, coach apasionado por el deporte y la transformación personal...</p>
-    <p>Formación: Profesional en Educación Física y Deporte...</p>
-    <div class="galeria-acerca">
-      <img class="foto f1" src="https://images.unsplash.com/photo-1571019613576-2b22c76fd955" alt="Entrenando con pesas">
-      <img class="foto f2" src="https://images.unsplash.com/photo-1579758629938-03607ccdbaba" alt="Ejercicio al aire libre">
-      <img class="foto f3" src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1" alt="Rutina de entrenamiento">
-      <img class="foto f4" src="https://images.unsplash.com/photo-1594737625785-cb90f3b0e1df" alt="Motivación fitness">
-    </div>
+    <h2>👨‍🏫 Acerca de mí</h2>
+    <p>
+      Soy <strong>Brahyan Cortes Castañeda</strong>, coach apasionado por el deporte y la transformación personal.
+      Me encanta asumir retos y acompañar a mis clientes con programas de entrenamiento físico personalizados,
+      asesorías, motivación constante y apoyo profesional.
+    </p>
+    <p><strong>Formación:</strong> Profesional en Educación Física y Deporte.</p>
   </section>
 
-  <!-- PLANES -->
+  <!-- ✅ Sección Planes -->
   <section id="planes">
-    <h2>🏋️‍♂️ Entrenamiento</h2>
-    <p>Planes diseñados para cada persona...</p>
-    <div class="card">
-      <h3>🏆 Personalizado</h3>
-      <p>Plan mensual a tu medida con rutinas semanales y seguimiento.</p>
-      <a href="#" class="btn">Ver detalle</a>
+    <h2>🏋️ Planes de Entrenamiento</h2>
+    <p>Planes diseñados para cada persona según sus metas y necesidades.</p>
+
+    <div class="planes-opciones">
+      <div class="card-plan">
+        <span class="icon">🏋️</span>
+        <a href="#detalle-personalizado">Personalizado</a>
+      </div>
+      <div class="card-plan">
+        <span class="icon">📲</span>
+        <a href="#detalle-asesoria">Asesorías</a>
+      </div>
     </div>
-    <div class="card">
-      <h3>📱 Asesorías</h3>
-      <p>Sesiones puntuales o seguimiento remoto para optimizar tu plan.</p>
-      <a href="#" class="btn">Ver detalle</a>
-    </div>
   </section>
 
-  <!-- TESTIMONIOS -->
-  <section id="testimonios">
-    <h2>✨ Testimonios</h2>
-    <p>Próximamente...</p>
+  <!-- ✅ Detalles ocultos (ejemplo) -->
+  <section id="detalle-personalizado">
+    <h2>📌 Plan Personalizado</h2>
+    <p>Entrenamiento diseñado para ti con seguimiento durante el mes.</p>
   </section>
 
-  <!-- CONTACTO -->
-  <section id="contacto">
-    <h2>📩 Contacto</h2>
-    <p>¿Listo para empezar tu transformación?</p>
-    <a href="https://wa.me/573001112233" class="btn">💬 WhatsApp</a>
+  <section id="detalle-asesoria">
+    <h2>📌 Asesorías</h2>
+    <p>Acompañamiento virtual y presencial según tu disponibilidad.</p>
   </section>
 
-  <!-- JS -->
-  <script>
-    function openNav() {
-      document.getElementById("mySidebar").style.width = "220px";
-    }
-    function closeNav() {
-      document.getElementById("mySidebar").style.width = "0";
-    }
-  </script>
 </body>
 </html>
