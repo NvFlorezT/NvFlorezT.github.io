@@ -1,123 +1,402 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Página Fitness</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Brahyan Cortes Castañeda — Entrenador Personal</title>
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
   <style>
-    /* 🎨 Estilos generales */
-    body {
-      margin: 0;
+    :root{
+      --accent: #00c896;
+      --accent-2: #009e74;
+      --bg-dark: #0f1112;
+      --card-bg: rgba(255,255,255,0.03);
+      --header-h: 68px;
+    }
+
+    /* Reset / base */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
       font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #111, #1a1a1a, #222);
-      color: #f4f4f4;
+      background: linear-gradient(135deg,#0b0b0b,#151515 60%);
+      color:#f4f4f4;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
       scroll-behavior: smooth;
     }
 
-    h1, h2 {
-      text-transform: uppercase;
-      letter-spacing: 2px;
+    /* Header fijo */
+    header{
+      height:var(--header-h);
+      background: rgba(14,14,14,0.75);
+      backdrop-filter: blur(6px);
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      z-index:1200;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 0 22px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+    }
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      color:#fff;
+      font-weight:700;
+      font-family:'Poppins',sans-serif;
+      letter-spacing:0.6px;
+    }
+    .brand .logo{
+      width:44px;height:44px;border-radius:10px;
+      background: linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;color:#08110d;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    }
+    nav ul{list-style:none;display:flex;gap:18px;align-items:center}
+    nav a{
+      color:#f4f4f4;text-decoration:none;font-weight:600;padding:8px 12px;border-radius:10px;transition:background .18s,transform .12s;
+    }
+    nav a:hover{background: rgba(255,255,255,0.03); transform:translateY(-2px); color:var(--accent)}
+
+    /* Hero (portada) */
+    .hero{
+      margin-top: var(--header-h); /* deja espacio para header */
+      min-height: calc(100vh - var(--header-h));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.45)),
+        url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1800&q=60') no-repeat center/cover;
+      padding: 40px 20px;
+    }
+    .hero .wrap{
+      max-width:1000px;
+      padding: 40px;
+    }
+    .hero h1{
+      font-family:'Poppins',sans-serif;
+      font-size: clamp(28px,4vw,44px);
+      line-height:1.02;
+      margin-bottom:14px;
+    }
+    .hero p{
+      font-size:clamp(14px,1.6vw,18px);
+      margin-bottom:20px;
+      opacity:0.95;
+    }
+    .hero .buttons{justify-content:center;margin-top:16px}
+
+    .btn{
+      background: linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:#07120f;
+      padding:12px 20px;
+      border-radius:28px;
+      display:inline-block;
+      text-decoration:none;
+      font-weight:600;
+      transition: transform .15s, box-shadow .15s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+    }
+    .btn:hover{ transform: translateY(-5px); box-shadow: 0 18px 40px rgba(0,0,0,0.6) }
+
+    /* Secciones con contenedor centrado, tarjetas suaves */
+    section.container{
+      margin: 34px auto;
+      max-width:1100px;
+      background: var(--card-bg);
+      border-radius:14px;
+      padding: 48px 28px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+    }
+    section.container h2{
+      font-family:'Poppins',sans-serif;
+      margin-bottom:14px;
+      color: #fff;
+    }
+    section.container p { color: #e9e9e9; line-height:1.7; max-width:900px; margin: 0 auto 16px }
+
+    /* Galería estilo "polaroid" - inclinadas */
+    .galeria-acerca{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:18px;
+      margin-top:22px;
+    }
+    .galeria-acerca .foto{
+      width:150px;
+      height:180px;
+      object-fit:cover;
+      border-radius:12px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+      transition: transform .35s, box-shadow .35s;
+      cursor:pointer;
+      transform-origin:center;
+    }
+    .galeria-acerca .foto:hover{
+      transform: scale(1.08) rotate(0deg);
+      z-index:30;
+      box-shadow: 0 28px 60px rgba(0,0,0,0.75);
+    }
+    .galeria-acerca .foto.f1{ transform: rotate(-6deg) }
+    .galeria-acerca .foto.f2{ transform: rotate(4deg) }
+    .galeria-acerca .foto.f3{ transform: rotate(-3deg) }
+    .galeria-acerca .foto.f4{ transform: rotate(5deg) }
+
+    /* Planes (cards) */
+    .planes-opciones{
+      display:flex;
+      gap:18px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:22px;
+    }
+    .card-plan{
+      width:260px;
+      padding:22px;
+      border-radius:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 10px 30px rgba(0,0,0,0.55);
+      text-align:center;
+    }
+    .card-plan .icon{ font-size:32px; margin-bottom:8px; display:block }
+    .card-plan .card-btn{ margin-top:12px; display:inline-block; text-decoration:none; padding:10px 16px; border-radius:12px; background: linear-gradient(135deg,#ff7a6b,#ff416c); color:#fff; font-weight:700 }
+    .card-plan:hover{ transform: translateY(-8px); transition: transform .25s }
+
+    /* Detalle Plan (light card) */
+    .detalle-plan{
+      display:none;
+      margin:26px auto 8px;
+      max-width:760px;
+      background:#fff;
+      color:#222;
+      padding:18px;
+      border-radius:12px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+    }
+    .detalle-plan h3{ color:#ff416c; margin-bottom:10px }
+
+    /* Testimonios */
+    .testimonios-container{ display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-top:18px }
+    .testimonio{ width:300px; background:rgba(255,255,255,0.03); padding:18px; border-radius:12px; box-shadow: 0 8px 24px rgba(0,0,0,0.45); font-style:italic; color:#eaeaea }
+
+    /* Contacto */
+    .contacto-info{ display:flex; flex-direction:column; gap:10px; align-items:center; margin-top:18px }
+    .contacto-info a{ color:var(--accent); text-decoration:none; font-weight:700 }
+
+    /* Botón pequeño volver */
+    .btn-volver{ display:inline-block; margin-top:18px; background:rgba(255,255,255,0.06); color:#fff; padding:8px 14px; border-radius:10px; text-decoration:none }
+
+    /* Responsive */
+    @media (max-width:900px){
+      .card-plan{ width:45% }
+      .galeria-acerca .foto{ width:130px; height:160px }
+    }
+    @media (max-width:600px){
+      header{padding:0 12px}
+      nav{display:none}
+      .galeria-acerca .foto{ width:120px; height:150px }
+      .card-plan{ width:100% }
+      section.container{ padding:28px 18px; margin:22px auto }
     }
 
-    section {
-      padding: 100px 20px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-      background: rgba(255,255,255,0.02);
-      border-radius: 20px;
-      margin: 40px auto;
-      max-width: 1100px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-    }
-
-    /* 🌟 Hero con imagen de fondo */
-    .hero {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-                  url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438') no-repeat center center/cover;
-      color: white;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-      padding: 0 20px;
-      border-radius: 0; /* Hero ocupa todo, sin bordes */
-      box-shadow: none;
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      margin: 0;
-    }
-
-    .hero p {
-      font-size: 1.3rem;
-      margin-top: 20px;
-    }
-
-    /* 📸 Galería de imágenes */
-    .galeria-acerca {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin-top: 30px;
-    }
-
-    .galeria-acerca img {
-      width: 180px; /* 🔥 más pequeñas */
-      height: 220px;
-      object-fit: cover;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    /* 📐 Estilo "desordenado con clase" */
-    .galeria-acerca img:nth-child(1) {
-      transform: rotate(-5deg);
-    }
-    .galeria-acerca img:nth-child(2) {
-      transform: rotate(4deg);
-    }
-    .galeria-acerca img:nth-child(3) {
-      transform: rotate(-3deg);
-    }
-    .galeria-acerca img:hover {
-      transform: scale(1.1) rotate(0);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.8);
-    }
   </style>
 </head>
 <body>
 
-  <!-- 🌟 Hero principal -->
-  <section class="hero">
-    <h1>Bienvenido a Mi Mundo Fitness</h1>
-    <p>Disciplina, esfuerzo y resultados</p>
-  </section>
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="logo">BC</div>
+      <div>
+        <div style="font-size:14px;opacity:.95">Brahyan Cortes</div>
+        <div style="font-size:12px;opacity:.7">Entrenador Personal</div>
+      </div>
+    </div>
 
-  <!-- ℹ️ Sección Acerca de mí -->
-  <section id="acerca">
-    <h2>Acerca de mí</h2>
-    <p>Mi pasión es entrenar, motivar y acompañar a las personas en su proceso de transformación.</p>
+    <nav>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#acerca">Acerca</a></li>
+        <li><a href="#planes">Planes</a></li>
+        <li><a href="#testimonios">Testimonios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <!-- ✅ Galería con estilo -->
-    <div class="galeria-acerca">
-      <img src="https://images.unsplash.com/photo-1571019613576-2b22c76fd955" alt="Entrenando con pesas">
-      <img src="https://images.unsplash.com/photo-1579758629938-03607ccdbaba" alt="Ejercicio al aire libre">
-      <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1" alt="Rutina de entrenamiento">
+  <!-- HERO -->
+  <section id="inicio" class="hero">
+    <div class="wrap">
+      <h1>Brahyan Cortes Castañeda — Coach Personal</h1>
+      <p>Entrenador profesional en Educación Física y Deporte. Diplomas en Entrenamiento Personalizado y Alimentación Saludable. Más de 2 años ayudando a personas a transformar su vida.</p>
+      <div class="buttons">
+        <a class="btn" href="#acerca">Acerca de mí</a>
+        <a class="btn" href="#planes">Ver Planes</a>
+        <a class="btn" href="#contacto">Contactarme</a>
+      </div>
     </div>
   </section>
 
-  <!-- 📞 Contacto -->
-  <section id="contacto">
-    <h2>Contacto</h2>
-    <p>¿Quieres entrenar conmigo? Escríbeme y comencemos tu transformación.</p>
+  <!-- ACERCA -->
+  <section id="acerca" class="container">
+    <h2>🙋‍♂️ Acerca de mí</h2>
+    <p>Soy <strong>Brahyan Cortes Castañeda</strong>, coach apasionado por el deporte y la transformación personal. Me encanta asumir retos y acompañar a mis clientes con programas claros, seguimiento constante y apoyo motivacional.</p>
+    <p>Formación: Profesional en Educación Física y Deporte; Diplomados en Entrenamiento Personalizado y Alimentación Saludable. Experiencia práctica entrenando y diseñando programas efectivos.</p>
+
+    <!-- Galería estilo polaroid -->
+    <div class="galeria-acerca">
+      <img class="foto f1" src="https://images.unsplash.com/photo-1571019613576-2b22c76fd955?auto=format&fit=crop&w=800&q=60" alt="Entrenando con pesas">
+      <img class="foto f2" src="https://images.unsplash.com/photo-1579758629938-03607ccdbaba?auto=format&fit=crop&w=800&q=60" alt="Ejercicio al aire libre">
+      <img class="foto f3" src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=800&q=60" alt="Rutina de entrenamiento">
+      <img class="foto f4" src="https://images.unsplash.com/photo-1594737625785-cb90f3b0e1df?auto=format&fit=crop&w=800&q=60" alt="Motivación">
+    </div>
+
+    <div style="display:flex;justify-content:center;margin-top:20px">
+      <a class="btn" href="#planes">💪 Ver Planes</a>
+    </div>
   </section>
 
+  <!-- PLANES -->
+  <section id="planes" class="container">
+    <h2>💪 Planes de Entrenamiento</h2>
+    <p>Planes diseñados para cada persona: desde quien empieza hasta quien busca potenciar rendimiento. Acompañamiento real, rutinas progresivas y orientación en alimentación.</p>
+
+    <div class="planes-opciones">
+      <div class="card-plan">
+        <span class="icon">🏋️</span>
+        <h3 style="font-family:'Poppins',sans-serif;margin-bottom:6px">Personalizado</h3>
+        <p style="font-size:14px;opacity:.9">Plan mensual a tu medida con rutinas semanales y seguimiento.</p>
+        <a class="card-btn" href="javascript:void(0)" onclick="toggleDetalle('personalizado')">Ver detalle</a>
+      </div>
+
+      <div class="card-plan">
+        <span class="icon">📲</span>
+        <h3 style="font-family:'Poppins',sans-serif;margin-bottom:6px">Asesorías</h3>
+        <p style="font-size:14px;opacity:.9">Sesiones puntuales o seguimiento remoto para optimizar tu plan.</p>
+        <a class="card-btn" href="javascript:void(0)" onclick="toggleDetalle('asesoria')">Ver detalle</a>
+      </div>
+    </div>
+
+    <!-- Detalles (ocultos por defecto) -->
+    <div id="detalle-personalizado" class="detalle-plan">
+      <h3>Plan Personalizado — ¿Qué incluye?</h3>
+      <ul>
+        <li>Evaluación inicial y prueba de condición física.</li>
+        <li>Plan de entrenamiento mensual adaptado a tus objetivos.</li>
+        <li>Rutinas semanales con videos y explicaciones.</li>
+        <li>Revisión semanal y ajustes según progreso.</li>
+        <li>Consejos básicos de alimentación y suplementación.</li>
+        <li>Soporte mediante WhatsApp para dudas rápidas.</li>
+      </ul>
+      <a class="btn-volver" href="javascript:void(0)" onclick="volverAPlanes()">⬅ Volver a Planes</a>
+    </div>
+
+    <div id="detalle-asesoria" class="detalle-plan">
+      <h3>Asesorías — ¿Qué incluye?</h3>
+      <ul>
+        <li>Sesión online (video) para evaluación y correcciones.</li>
+        <li>Revisión de tu rutina actual y guía de mejoras.</li>
+        <li>Planes cortos de 2-4 semanas para objetivos puntuales.</li>
+        <li>Resolución de dudas y seguimiento puntual.</li>
+      </ul>
+      <a class="btn-volver" href="javascript:void(0)" onclick="volverAPlanes()">⬅ Volver a Planes</a>
+    </div>
+
+    <div style="display:flex;justify-content:center;margin-top:18px">
+      <a class="btn-volver" href="javascript:void(0)" onclick="volverAlInicio()">⬆ Volver al Inicio</a>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section id="testimonios" class="container">
+    <h2>✨ Testimonios</h2>
+    <div class="testimonios-container">
+      <div class="testimonio">
+        <p>"Gracias a Brahyan logré perder 10 kg y ahora tengo más energía que nunca."</p>
+        <span>- Andrea</span>
+      </div>
+      <div class="testimonio">
+        <p>"Su apoyo y disciplina me ayudaron a mantener la constancia. ¡Recomendado!"</p>
+        <span>- Carlos</span>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:center;margin-top:18px">
+      <a class="btn-volver" href="#inicio">⬆ Volver al Inicio</a>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="container">
+    <h2>📞 Contacto</h2>
+    <p>¿Listo para empezar? Escríbeme por WhatsApp o correo y te doy una orientación inicial.</p>
+    <div class="contacto-info">
+      <a href="https://wa.me/573216156819" target="_blank">WhatsApp: +57 3216156819</a>
+      <a href="mailto:contacto@brahyanfitness.com">Email: contacto@brahyanfitness.com</a>
+    </div>
+    <div style="display:flex;justify-content:center;margin-top:18px">
+      <a class="btn-volver" href="#inicio">⬆ Volver al Inicio</a>
+    </div>
+  </section>
+
+  <!-- JS -->
+  <script>
+    // Muestra/oculta detalle (actúa como acordeón: si está abierto, lo cierra)
+    function toggleDetalle(plan) {
+      const detPers = document.getElementById('detalle-personalizado');
+      const detAs = document.getElementById('detalle-asesoria');
+      // cerrar ambos por defecto
+      detPers.style.display = 'none';
+      detAs.style.display = 'none';
+
+      let target = null;
+      if(plan === 'personalizado') target = detPers;
+      if(plan === 'asesoria') target = detAs;
+
+      // si ya estaba visible, lo cerramos (comportamiento acordeón)
+      if (target && target.style.display !== 'block') {
+        target.style.display = 'block';
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        // si ya visible, mantener cerrados
+        target.style.display = 'none';
+        // y regresar al contenedor de planes
+        document.getElementById('planes').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function volverAPlanes(){
+      document.getElementById('detalle-personalizado').style.display = 'none';
+      document.getElementById('detalle-asesoria').style.display = 'none';
+      document.getElementById('planes').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function volverAlInicio(){
+      document.getElementById('detalle-personalizado').style.display = 'none';
+      document.getElementById('detalle-asesoria').style.display = 'none';
+      document.getElementById('inicio').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Opcional: cerrar detalles si se hace clic en otro lugar de la página
+    document.addEventListener('click', function(e){
+      const isInsideDetail = e.target.closest('.detalle-plan') || e.target.closest('.card-btn');
+      // si el click no es en botones de detalle ni dentro de los detalles, ocultar detalles
+      if(!isInsideDetail){
+        document.getElementById('detalle-personalizado').style.display = 'none';
+        document.getElementById('detalle-asesoria').style.display = 'none';
+      }
+    });
+  </script>
 </body>
 </html>
