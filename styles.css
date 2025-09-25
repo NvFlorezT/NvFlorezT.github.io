@@ -1,8 +1,7 @@
 /* =========================
    styles.css
-   - Estilos globales y componentes.
-   - Sobrio, moderno, con acento suave.
    ========================= */
+
 /* General */
 body {
   margin: 0;
@@ -154,3 +153,4 @@ main {
   from {opacity: 0; transform: translateY(20px);}
   to {opacity: 1; transform: translateY(0);}
 }
+
