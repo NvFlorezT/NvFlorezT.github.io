@@ -7,104 +7,127 @@
      * mostrar/ocultar detalles de planes
    =========================== */
 
-/* References a elementos clave */
-const body = document.body;
-const welcome = document.getElementById('welcome');
-const enterBtn = document.getElementById('enterBtn');
-const menuToggle = document.getElementById('menuToggle');
-const sidebar = document.getElementById('sidebar');
-const site = document.getElementById('site');
+/* General */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  background: #F4F6F8;
+  color: #0A2540;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background: #0A2540;
+  color: white;
+  padding: 20px;
+  height: 100vh;
+  position: fixed;
+}
+
+.sidebar h2 {
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 10px;
+  margin: 5px 0;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.sidebar nav a:hover {
+  background: #1E90FF;
+}
+
+/* Main */
+main {
+  margin-left: 270px;
+  padding: 40px;
+  flex: 1;
+}
+
+.section {
+  display: none;
+  animation: fadeIn 0.6s;
+}
+
+.section.active {
+  display: block;
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  background: linear-gradient(135deg, #1E90FF, #00C896);
+  color: white;
+  padding: 80px 20px;
+  border-radius: 12px;
+}
+
+/* Galería */
+.galeria-acerca {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.galeria-acerca img {
+  width: 200px;
+  border-radius: 12px;
+  transform: rotate(-2deg);
+  transition: transform 0.3s;
+}
+
+.galeria-acerca img:hover {
+  transform: rotate(0deg) scale(1.05);
+}
 
 /* Planes */
-const planButtons = document.querySelectorAll('[data-plan]');
-const planDetails = document.querySelectorAll('.plan-detail');
-const backToPlansButtons = document.querySelectorAll('.back-to-plans');
-
-/* ---------- Funciones ---------- */
-
-/* 1) Entrar al sitio:
-   - oculta pantalla de bienvenida con transición
-   - añade clase 'entered' al body para mostrar app y control visual
-*/
-function startSite() {
-  welcome.classList.add('hidden');        // oculta con transición CSS
-  body.classList.add('entered');          // muestra app #site y botón menu
-  // aseguro que sidebar esté cerrado
-  sidebar.classList.remove('open');
-  // pequeñas mejoras: quitar foco del botón
-  enterBtn.blur();
+.planes-opciones {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
 }
 
-/* 2) Toggle sidebar (abrir/cerrar) - solo útil después de entrar */
-function toggleSidebar() {
-  sidebar.classList.toggle('open');
+.card-plan {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
 }
 
-/* 3) Ir a sección (scroll suave) y cerrar sidebar */
-function goToSection(id) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  sidebar.classList.remove('open'); // cierra el menú al navegar
+.card-plan .btn {
+  display: inline-block;
+  background: #1E90FF;
+  color: white;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border-radius: 8px;
+  text-decoration: none;
 }
 
-/* 4) Mostrar detalle de plan (solo uno visible a la vez) */
-function showPlanDetail(key) {
-  // ocultar todos
-  planDetails.forEach(d => d.classList.remove('visible'));
-  const target = document.querySelector(`.plan-detail[data-plan="${key}"]`);
-  if (target) {
-    target.classList.add('visible');
-    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
+.card-plan .btn:hover {
+  background: #00C896;
 }
 
-/* 5) Volver a lista de planes (oculta detalles) */
-function backToPlans() {
-  planDetails.forEach(d => d.classList.remove('visible'));
-  // ir al contenedor de planes
-  const plansSection = document.getElementById('planes');
-  if (plansSection) plansSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+/* Detalle plan */
+.detalle-plan {
+  display: none;
+  margin-top: 20px;
+  padding: 20px;
+  background: #F4F6F8;
+  border-left: 5px solid #1E90FF;
+  border-radius: 8px;
 }
 
-/* 6) Volver a pantalla de presentación */
-function backToWelcome() {
-  // cerrar sidebar y ocultar app
-  sidebar.classList.remove('open');
-  body.classList.remove('entered');
-  // mostrar welcome otra vez (con pequeño delay para asegurar transición)
-  setTimeout(() => welcome.classList.remove('hidden'), 50);
-  // ocultar detalles por seguridad
-  backToPlans();
+/* Animación */
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
 }
-
-/* 7) Atajos: cerrar sidebar con ESC */
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    sidebar.classList.remove('open');
-  }
-});
-
-/* ---------- Event listeners ---------- */
-enterBtn && enterBtn.addEventListener('click', startSite);
-menuToggle && menuToggle.addEventListener('click', toggleSidebar);
-
-/* Links del sidebar (data-target) */
-document.querySelectorAll('[data-target]').forEach(a => {
-  a.addEventListener('click', (e) => {
-    e.preventDefault();
-    const id = a.getAttribute('data-target');
-    goToSection(id);
-  });
-});
-
-/* Plan buttons */
-planButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const key = btn.getAttribute('data-plan');
-    showPlanDetail(key);
-  });
-});
-
-/* Volver a planes */
-backToPlansButtons.forEach(b => b.addEventListener('click', backToPlans));
