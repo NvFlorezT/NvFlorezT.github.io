@@ -1,273 +1,172 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brahyan Cortes - Entrenador Personal</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #111;
-      color: #fff;
-      scroll-behavior: smooth;
-      overflow-x: hidden;
-    }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Brahyan Cortes Castañeda — Entrenador Personal</title>
 
-    /* 🔹 Pantalla de bienvenida */
-    .welcome {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #0f0f0f, #1c1c1c, #222);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      transition: opacity 1s ease, visibility 1s ease;
-    }
+  <!-- Google font (opcional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    .welcome.hide {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .welcome h1 {
-      font-size: 3rem;
-      margin: 0;
-      background: linear-gradient(90deg, #00ff88, #00c3ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    .welcome p {
-      font-size: 1.2rem;
-      margin: 15px 0;
-      color: #bbb;
-      animation: fadeIn 3s ease-in-out;
-    }
-
-    .welcome button {
-      margin-top: 20px;
-      padding: 12px 30px;
-      font-size: 1.1rem;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      background: linear-gradient(90deg, #00ff88, #00c3ff);
-      color: #111;
-      font-weight: bold;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .welcome button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 20px #00ff88aa;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* 🔹 Menú lateral */
-    .sidebar {
-      position: fixed;
-      top: 0; left: -250px;
-      width: 250px;
-      height: 100%;
-      background: #1a1a1a;
-      transition: left 0.3s ease;
-      z-index: 999;
-      padding-top: 60px;
-    }
-
-    .sidebar.active {
-      left: 0;
-    }
-
-    .sidebar a {
-      display: block;
-      padding: 15px;
-      color: #fff;
-      text-decoration: none;
-      transition: background 0.3s;
-    }
-
-    .sidebar a:hover {
-      background: #00ff8850;
-    }
-
-    .menu-btn {
-      position: fixed;
-      top: 20px; left: 20px;
-      background: #00ff88;
-      color: #111;
-      padding: 10px 20px;
-      border-radius: 30px;
-      cursor: pointer;
-      font-weight: bold;
-      z-index: 1001;
-    }
-
-    /* 🔹 Secciones */
-    section {
-      padding: 80px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    h2 {
-      color: #00ff88;
-    }
-
-    /* 🔹 Botones de planes */
-    .planes-opciones {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      margin-top: 30px;
-      flex-wrap: wrap;
-    }
-
-    .card-plan {
-      background: #1a1a1a;
-      padding: 20px;
-      border-radius: 15px;
-      text-align: center;
-      width: 220px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card-plan:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 0 20px #00ff8880;
-    }
-
-    .card-plan .icon {
-      font-size: 2rem;
-      display: block;
-      margin-bottom: 10px;
-    }
-
-    .card-plan a {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 8px 16px;
-      border-radius: 20px;
-      text-decoration: none;
-      font-weight: bold;
-      color: #111;
-      background: linear-gradient(90deg, #00ff88, #00c3ff);
-      transition: transform 0.3s ease;
-    }
-
-    .card-plan a:hover {
-      transform: scale(1.05);
-    }
-
-    /* 🔹 Botón volver */
-    .btn-volver {
-      display: block;
-      margin: 40px auto;
-      padding: 10px 20px;
-      text-align: center;
-      border-radius: 30px;
-      background: #00c3ff;
-      color: #111;
-      font-weight: bold;
-      text-decoration: none;
-      width: fit-content;
-    }
-  </style>
+  <!-- Enlaza el CSS (archivo creado en el repo) -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- ✅ Pantalla de bienvenida -->
-  <div class="welcome" id="welcome">
-    <h1>👋 Hola, soy Brahyan Cortes</h1>
-    <p>Entrenador Personal | Transformación Física y Mental</p>
-    <button onclick="startPage()">🚀 Entrar</button>
-  </div>
-
-  <!-- ✅ Botón menú -->
-  <div class="menu-btn" onclick="toggleMenu()">☰ Menú</div>
-
-  <!-- ✅ Sidebar -->
-  <div class="sidebar" id="sidebar">
-    <a href="#inicio">Inicio</a>
-    <a href="#acerca">Acerca de mí</a>
-    <a href="#planes">Planes</a>
-    <a href="#detalle-personalizado">Personalizado</a>
-    <a href="#detalle-asesoria">Asesorías</a>
-    <a href="#inicio" onclick="hideDetails()">Volver al Inicio</a>
-  </div>
-
-  <!-- ✅ Sección Inicio -->
-  <section id="inicio">
-    <h2>Inicio</h2>
-    <p>Bienvenido a mi página de entrenamiento personal 💪</p>
-  </section>
-
-  <!-- ✅ Sección Acerca de mí -->
-  <section id="acerca">
-    <h2>👨‍🏫 Acerca de mí</h2>
-    <p>
-      Soy <strong>Brahyan Cortes Castañeda</strong>, coach apasionado por el deporte y la transformación personal.
-      Me encanta asumir retos y acompañar a mis clientes con programas de entrenamiento físico personalizados,
-      asesorías, motivación constante y apoyo profesional.
-    </p>
-    <p><strong>Formación:</strong> Profesional en Educación Física y Deporte.</p>
-  </section>
-
-  <!-- ✅ Sección Planes -->
-  <section id="planes">
-    <h2>🏋️ Planes de Entrenamiento</h2>
-    <p>Planes diseñados para cada persona según sus metas y necesidades.</p>
-
-    <div class="planes-opciones">
-      <div class="card-plan">
-        <span class="icon">🏋️</span>
-        <a href="#detalle-personalizado">Personalizado</a>
+  <!-- =========================
+       PANTALLA DE BIENVENIDA (FULLSCREEN)
+       Visible al cargar la página. Oculta al pulsar "Entrar".
+       ========================= -->
+  <div id="welcome" aria-hidden="false">
+    <div class="card" role="region" aria-label="Bienvenida">
+      <div class="left">
+        <h1>Hola, soy <strong>Brahyan Cortes Castañeda</strong></h1>
+        <p>Entrenador Personal — Educación Física y Deporte. Diplomas en entrenamiento personalizado y alimentación saludable. +2 años acompañando transformaciones reales.</p>
+        <div class="cta">
+          <button id="enterBtn" class="btn-primary">🚀 Entrar</button>
+          <button class="btn-ghost" onclick="alert('Contacto: +57 321 615 6819')">¿Contactar?</button>
+        </div>
       </div>
-      <div class="card-plan">
-        <span class="icon">📲</span>
-        <a href="#detalle-asesoria">Asesorías</a>
+
+      <div class="avatar" title="Foto de Brahyan">
+        <!-- puedes cambiar esta URL por tu foto -->
+        <img src="https://images.unsplash.com/photo-1571019613576-2b22c76fd955?auto=format&fit=crop&w=900&q=60" alt="Avatar Brahyan">
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ✅ Detalles -->
-  <section id="detalle-personalizado">
-    <h2>📌 Plan Personalizado</h2>
-    <p>Entrenamiento diseñado para ti con seguimiento durante el mes.</p>
-    <a href="#planes" class="btn-volver">⬅ Volver a Planes</a>
-  </section>
+  <!-- -------------------------
+       BOTÓN MENU (aparece tras entrar)
+       ------------------------- -->
+  <button id="menuToggle" aria-label="Abrir menú">☰</button>
 
-  <section id="detalle-asesoria">
-    <h2>📌 Asesorías</h2>
-    <p>Acompañamiento virtual y presencial según tu disponibilidad.</p>
-    <a href="#planes" class="btn-volver">⬅ Volver a Planes</a>
-  </section>
+  <!-- =========================
+       SIDEBAR LATERAL (OFF-CANVAS)
+       - inicial cerrado
+       - usa data-target para navegar secciones
+       ========================= -->
+  <aside id="sidebar" role="navigation" aria-hidden="true">
+    <div class="brand">
+      <div class="logo">BC</div>
+      <div>
+        <div style="font-weight:700">Brahyan Cortes</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.6)">Entrenador Personal</div>
+      </div>
+    </div>
 
-  <script>
-    function startPage() {
-      document.getElementById('welcome').classList.add('hide');
-      document.getElementById('inicio').scrollIntoView({ behavior: 'smooth' });
-    }
+    <nav>
+      <a href="#inicio" data-target="inicio">🏠 Inicio</a>
+      <a href="#acerca" data-target="acerca">🙋 Acerca de mí</a>
+      <a href="#planes" data-target="planes">💪 Planes</a>
+      <a href="#testimonios" data-target="testimonios">✨ Testimonios</a>
+      <a href="#contacto" data-target="contacto">📩 Contacto</a>
 
-    function toggleMenu() {
-      document.getElementById('sidebar').classList.toggle('active');
-    }
+      <hr style="margin:14px 0; border-color: rgba(255,255,255,0.03)">
 
-    function hideDetails() {
-      document.getElementById('detalle-personalizado').style.display = 'none';
-      document.getElementById('detalle-asesoria').style.display = 'none';
-    }
-  </script>
+      <a href="javascript:void(0)" onclick="backToWelcome()">Volver a presentación</a>
+    </nav>
+  </aside>
 
+  <!-- =========================
+       APLICACIÓN PRINCIPAL (oculta hasta entrar)
+       Contenedor con todas las secciones
+       ========================= -->
+  <div id="site" class="app" aria-hidden="true">
+
+    <main class="main" id="mainContent">
+
+      <!-- INICIO -->
+      <section id="inicio" class="section" aria-labelledby="title-inicio">
+        <h2 id="title-inicio">Inicio</h2>
+        <p>Bienvenido a mi espacio. Aquí encontrarás planes, testimonios y formas de contactarme.</p>
+        <button class="btn-back" onclick="backToWelcome()">⬆ Volver a presentación</button>
+      </section>
+
+      <!-- ACERCA DE MI -->
+      <section id="acerca" class="section" aria-labelledby="title-acerca">
+        <h2 id="title-acerca">🙋 Acerca de mí</h2>
+        <p>Soy <strong>Brahyan Cortes Castañeda</strong>. Profesional en Educación Física y Deporte. Diplomas en Entrenamiento Personalizado y Alimentación Saludable. Más de 2 años de experiencia ayudando a personas a conseguir resultados sostenibles.</p>
+
+        <!-- Galería estilo 'polaroid' -->
+        <div class="galeria" aria-hidden="false">
+          <img class="foto f1" src="https://images.unsplash.com/photo-1571019613576-2b22c76fd955?auto=format&fit=crop&w=900&q=60" alt="Entrenando con pesas">
+          <img class="foto f2" src="https://images.unsplash.com/photo-1579758629938-03607ccdbaba?auto=format&fit=crop&w=900&q=60" alt="Ejercicio al aire libre">
+          <img class="foto f3" src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=900&q=60" alt="Rutina">
+          <img class="foto f4" src="https://images.unsplash.com/photo-1594737625785-cb90f3b0e1df?auto=format&fit=crop&w=900&q=60" alt="Motivación">
+        </div>
+
+        <div style="margin-top:16px"><button class="btn-back" onclick="backToWelcome()">⬆ Volver a presentación</button></div>
+      </section>
+
+      <!-- PLANES -->
+      <section id="planes" class="section" aria-labelledby="title-planes">
+        <h2 id="title-planes">💪 Planes de Entrenamiento</h2>
+        <p>Escoge el plan ideal para ti. Al pulsar uno se mostrará su detalle; al pulsar "Volver a planes" se oculta.</p>
+
+        <div class="planes">
+          <div class="plan-card">
+            <div style="font-size:24px">🏋️</div>
+            <div style="font-weight:700;margin-top:8px">Personalizado</div>
+            <div style="margin-top:8px;color:var(--muted);font-size:14px">Plan mensual con seguimiento y ajuste semanal</div>
+            <button data-plan="personalizado">Ver detalle</button>
+          </div>
+
+          <div class="plan-card">
+            <div style="font-size:24px">📲</div>
+            <div style="font-weight:700;margin-top:8px">Asesoría</div>
+            <div style="margin-top:8px;color:var(--muted);font-size:14px">Sesiones puntuales y soporte remoto</div>
+            <button data-plan="asesoria">Ver detalle</button>
+          </div>
+        </div>
+
+        <!-- DETALLES: ocultos por defecto y mostrados con .visible -->
+        <div class="plan-detail" data-plan="personalizado" aria-hidden="true">
+          <h3>Plan Personalizado</h3>
+          <ul>
+            <li>Evaluación inicial</li>
+            <li>Rutinas semanales</li>
+            <li>Revisión y ajuste</li>
+            <li>Consejos de alimentación</li>
+            <li>Soporte mediante WhatsApp</li>
+          </ul>
+          <button class="back-to-plans btn-back">⬅ Volver a planes</button>
+        </div>
+
+        <div class="plan-detail" data-plan="asesoria" aria-hidden="true">
+          <h3>Asesoría</h3>
+          <ul>
+            <li>Sesión de análisis en video</li>
+            <li>Correcciones y recomendaciones</li>
+            <li>Planes cortos (2–4 semanas)</li>
+          </ul>
+          <button class="back-to-plans btn-back">⬅ Volver a planes</button>
+        </div>
+
+        <div style="margin-top:12px">
+          <button class="btn-back" onclick="backToWelcome()">⬆ Volver a presentación</button>
+        </div>
+      </section>
+
+      <!-- TESTIMONIOS -->
+      <section id="testimonios" class="section">
+        <h2>✨ Testimonios</h2>
+        <p>"Gracias a Brahyan perdí 10 kg y mantuve la motivación" — Andrea</p>
+        <p>"Mi rendimiento mejoró y ahora tengo hábitos" — Carlos</p>
+        <div style="margin-top:12px"><button class="btn-back" onclick="backToWelcome()">⬆ Volver a presentación</button></div>
+      </section>
+
+      <!-- CONTACTO -->
+      <section id="contacto" class="section">
+        <h2>📩 Contacto</h2>
+        <p>WhatsApp: <a href="https://wa.me/573216156819" target="_blank">+57 321 615 6819</a></p>
+        <p>Email: <a href="mailto:contacto@brahyanfitness.com">contacto@brahyanfitness.com</a></p>
+        <div style="margin-top:12px"><button class="btn-back" onclick="backToWelcome()">⬆ Volver a presentación</button></div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Enlazamos el JS (archivo creado en repo) -->
+  <script src="script.js"></script>
 </body>
 </html>
