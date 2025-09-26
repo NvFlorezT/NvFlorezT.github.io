@@ -1,7 +1,3 @@
-/* =========================
-   styles.css
-   ========================= */
-
 /* Importar fuentes */
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600&display=swap');
 
@@ -18,14 +14,14 @@ body {
 .sidebar {
   width: 260px;
   background: linear-gradient(180deg, #000000, #1C1C1C);
-  color: #C9A227; /* dorado suave */
+  color: #C9A227;
   padding: 20px;
   height: 100vh;
   position: fixed;
   box-shadow: 4px 0 12px rgba(0,0,0,0.5);
   left: 0;
   top: 0;
-  transition: left 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   z-index: 1000;
 }
 
@@ -46,7 +42,6 @@ body {
   text-decoration: none;
   border-radius: 6px;
   transition: all 0.3s;
-  font-family: 'Montserrat', sans-serif;
 }
 
 .sidebar nav a:hover {
@@ -59,7 +54,7 @@ main {
   margin-left: 280px;
   padding: 40px;
   flex: 1;
-  transition: margin-top 0.3s ease; /* transición para móviles */
+  transition: margin-top 0.3s ease;
 }
 
 .section {
@@ -211,86 +206,59 @@ main {
    Responsive Design
    ========================= */
 
-/* Tablets (pantallas menores a 1024px) */
+/* Tablets */
 @media (max-width: 1024px) {
-  .sidebar {
-    width: 200px;
-  }
-  main {
-    margin-left: 220px;
-    padding: 20px;
-  }
+  .sidebar { width: 200px; }
+  main { margin-left: 220px; padding: 20px; }
 }
 
-/* Celulares (pantallas menores a 768px) */
+/* Celulares */
 @media (max-width: 768px) {
-  body {
-    flex-direction: column;
-  }
+  body { flex-direction: column; }
 
-  /* Sidebar oculto */
+  /* Sidebar como menú superior oculto */
   .sidebar {
-    width: 260px;
-    height: 100vh;
+    width: 100%;
+    height: auto;
     position: fixed;
     top: 0;
-    left: -260px; /* oculto inicialmente */
-    box-shadow: 4px 0 12px rgba(0,0,0,0.5);
+    left: 0;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
   }
 
   .sidebar.active {
-    left: 0; /* se muestra al dar clic */
+    transform: translateY(0);
   }
 
   main {
     margin-left: 0;
     padding: 20px;
     margin-top: 0;
+    transition: margin-top 0.3s ease;
   }
 
-  /* cuando el menú está abierto, bajamos el main */
   main.menu-open {
-    margin-top: 260px; /* mismo alto que el menú */
+    margin-top: 260px;
   }
 
-  .planes-opciones {
-    flex-direction: column;
-    align-items: center;
-  }
+  .planes-opciones { flex-direction: column; align-items: center; }
+  .galeria-acerca { justify-content: center; }
 
-  .galeria-acerca {
-    justify-content: center;
-  }
-
-  /* Botón hamburguesa visible en móvil */
-  .hamburger {
-    display: block;
-  }
+  /* Botón hamburguesa visible */
+  .hamburger { display: block; }
 }
 
-/* Celulares pequeños (pantallas menores a 480px) */
+/* Celulares pequeños */
 @media (max-width: 480px) {
-  .hero h1 {
-    font-size: 1.8rem;
-  }
-
-  .hero p {
-    font-size: 1rem;
-  }
-
-  .galeria-acerca img {
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .card-plan {
-    width: 100%;
-  }
+  .hero h1 { font-size: 1.8rem; }
+  .hero p { font-size: 1rem; }
+  .galeria-acerca img { width: 100%; max-width: 300px; }
+  .card-plan { width: 100%; }
 }
 
-/* =========================
-   Botón Hamburguesa
-   ========================= */
+/* Botón Hamburguesa */
 .hamburger {
   display: none;
   position: fixed;
