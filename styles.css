@@ -311,3 +311,10 @@ main {
   cursor: pointer;
   z-index: 1001;
 }
+
+/* En celulares sí se ve */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+}
