@@ -2,10 +2,13 @@
    styles.css
    ========================= */
 
+/* Importar fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600&display=swap');
+
 /* General */
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   display: flex;
   background: #0A0A0A;
   color: #F5F5F5;
@@ -29,9 +32,10 @@ body {
 .sidebar h2 {
   cursor: pointer;
   margin-bottom: 30px;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   text-align: center;
   color: #C9A227;
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 .sidebar nav a {
@@ -42,6 +46,7 @@ body {
   text-decoration: none;
   border-radius: 6px;
   transition: all 0.3s;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .sidebar nav a:hover {
@@ -87,6 +92,7 @@ main {
   font-size: 2.8rem;
   margin-bottom: 15px;
   color: #C9A227;
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 .hero p {
@@ -135,6 +141,7 @@ main {
 .card-plan h3 {
   margin: 10px 0;
   color: #C9A227;
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 .card-plan .btn {
@@ -238,6 +245,7 @@ main {
   main {
     margin-left: 0;
     padding: 20px;
+    margin-top: 0;
   }
 
   /* cuando el menú está abierto, bajamos el main */
