@@ -31,6 +31,10 @@ function volverPlanes() {
 
 //menu hamburguesa
 function toggleMenu() {
-  document.querySelector(".sidebar").classList.toggle("active");
+  const sidebar = document.querySelector('.sidebar');
+  const main = document.querySelector('main');
+
+  sidebar.classList.toggle('active');
+  main.classList.toggle('menu-open');
 }
 
