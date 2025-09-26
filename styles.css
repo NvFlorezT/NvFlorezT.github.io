@@ -306,16 +306,17 @@ main {
 .hamburger {
   display: none;
   position: fixed;
-  top: 15px;
-  left: 15px;
+  top: 10px;   /* 👉 más arriba */
+  left: 10px;  /* 👉 pegado al borde */
   background: #C9A227;
   color: #000;
   border: none;
-  font-size: 2rem;
-  padding: 8px 14px;
-  border-radius: 8px;
+  font-size: 1.5rem;   /* 👉 más pequeño */
+  padding: 6px 10px;   /* 👉 menos espacio interno */
+  border-radius: 6px;
   cursor: pointer;
-  z-index: 1100; /* 👉 encima del menú */
+  z-index: 1100; /* 👉 siempre encima */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3); /* 👉 sombra ligera */
 }
 
 @media (max-width: 768px) {
