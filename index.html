@@ -29,7 +29,6 @@
           Con <b>Brahyan Cortes Castañeda</b>, entrenador personal, alcanzarás tus objetivos con disciplina,
           confianza y un método probado.
         </p>
-        <a href="#" class="btn-hero" onclick="showSection('planes')">Ver Planes</a>
       </div>
     </section>
 
@@ -57,37 +56,53 @@
 
       <div class="planes-opciones">
         <div class="card-plan">
-          <span class="icon">🏋️</span>
-          <h3>Entrenamiento Personalizado</h3>
-          <p>Rutina adaptada a ti y a tus objetivos.</p>
-          <a href="#" class="btn" onclick="toggleDetalle('personalizado')">Ver más</a>
+          <span class="icon">🥉</span>
+          <h3>Plan Básico</h3>
+          <p>Rutina general y consejos básicos para iniciar tu transformación.</p>
+          <a href="#" class="btn" onclick="toggleDetalle('basico')">Ver más</a>
         </div>
         <div class="card-plan">
-          <span class="icon">📲</span>
-          <h3>Asesorías Online</h3>
-          <p>Acompañamiento virtual con seguimiento real.</p>
-          <a href="#" class="btn" onclick="toggleDetalle('asesoria')">Ver más</a>
+          <span class="icon">🥈</span>
+          <h3>Plan Intermedio</h3>
+          <p>Entrenamiento adaptado a tus objetivos y seguimiento mensual.</p>
+          <a href="#" class="btn" onclick="toggleDetalle('intermedio')">Ver más</a>
+        </div>
+        <div class="card-plan">
+          <span class="icon">🥇</span>
+          <h3>Plan Premium</h3>
+          <p>Plan completo con seguimiento constante y soporte personalizado 24/7.</p>
+          <a href="#" class="btn" onclick="toggleDetalle('premium')">Ver más</a>
         </div>
       </div>
 
       <!-- Detalles -->
-      <div id="detalle-personalizado" class="detalle-plan">
-        <h3>Plan Personalizado</h3>
+      <div id="detalle-basico" class="detalle-plan">
+        <h3>Plan Básico</h3>
         <ul>
-          <li>Evaluación inicial de tu condición física</li>
-          <li>Rutina adaptada a tus objetivos</li>
-          <li>Seguimiento y ajustes semanales</li>
-          <li>Soporte 24/7</li>
+          <li>Rutina general</li>
+          <li>Consejos básicos de nutrición</li>
+          <li>Acceso a comunidad de apoyo</li>
         </ul>
         <button class="btn-volver" onclick="volverPlanes()">⬅ Volver a Planes</button>
       </div>
 
-      <div id="detalle-asesoria" class="detalle-plan">
-        <h3>Plan Asesorías</h3>
+      <div id="detalle-intermedio" class="detalle-plan">
+        <h3>Plan Intermedio</h3>
         <ul>
-          <li>Sesiones virtuales personalizadas</li>
-          <li>Revisión de tu rutina actual</li>
-          <li>Mejoras y estrategias adaptadas</li>
+          <li>Evaluación inicial de tu condición física</li>
+          <li>Rutina adaptada a tus objetivos</li>
+          <li>Seguimiento y ajustes mensuales</li>
+        </ul>
+        <button class="btn-volver" onclick="volverPlanes()">⬅ Volver a Planes</button>
+      </div>
+
+      <div id="detalle-premium" class="detalle-plan">
+        <h3>Plan Premium</h3>
+        <ul>
+          <li>Evaluación completa de tu condición física</li>
+          <li>Rutina avanzada y personalizada</li>
+          <li>Seguimiento semanal</li>
+          <li>Soporte 24/7</li>
         </ul>
         <button class="btn-volver" onclick="volverPlanes()">⬅ Volver a Planes</button>
       </div>
