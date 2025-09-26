@@ -23,6 +23,7 @@ function volverPlanes() {
 function toggleMenu() {
   const sidebar = document.querySelector('.sidebar');
   const main = document.querySelector('main');
+
   sidebar.classList.toggle('active');
   main.classList.toggle('menu-open');
 }
