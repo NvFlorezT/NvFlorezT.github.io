@@ -35,6 +35,12 @@ function toggleMenu() {
   const main = document.querySelector('main');
 
   sidebar.classList.toggle('active');
-  main.classList.toggle('menu-open');
+
+  if (sidebar.classList.contains('active')) {
+    main.style.marginTop = "260px"; // mismo alto que el menú
+  } else {
+    main.style.marginTop = "0"; // vuelve arriba al cerrar
+  }
 }
+
 
