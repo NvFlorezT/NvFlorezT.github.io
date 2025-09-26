@@ -260,15 +260,18 @@ main {
 @media (max-width: 768px) {
   body { flex-direction: column; }
 
-  /* Sidebar como menú superior oculto */
+  /* Sidebar como menú superior */
   .sidebar {
     width: 100%;
-    height: auto; /* ✅ ahora sí sobrescribe */
-    position: fixed;
+    max-height: 80vh;   /* 👉 no tapa toda la pantalla */
+    overflow-y: auto;   /* 👉 scroll si es muy largo */
+    position: absolute;
     top: 0;
     left: 0;
     transform: translateY(-100%);
     transition: transform 0.3s ease-in-out;
+    background: linear-gradient(180deg, #000000, #1C1C1C);
+    border-radius: 0 0 12px 12px;
     z-index: 1000;
   }
 
@@ -284,14 +287,11 @@ main {
   }
 
   main.menu-open {
-    margin-top: 260px;
+    margin-top: 260px; /* 👉 deja espacio al abrir menú */
   }
 
   .planes-opciones { flex-direction: column; align-items: center; }
   .galeria-acerca { justify-content: center; }
-
-  /* Botón hamburguesa visible */
-  .hamburger { display: block; }
 }
 
 /* Celulares pequeños */
@@ -311,16 +311,13 @@ main {
   background: #C9A227;
   color: #000;
   border: none;
-  font-size: 1.8rem;
-  padding: 8px 12px;
-  border-radius: 6px;
+  font-size: 2rem;
+  padding: 8px 14px;
+  border-radius: 8px;
   cursor: pointer;
-  z-index: 1001;
+  z-index: 1100; /* 👉 encima del menú */
 }
 
-/* En celulares sí se ve */
 @media (max-width: 768px) {
-  .hamburger {
-    display: block;
-  }
+  .hamburger { display: block; }
 }
