@@ -23,7 +23,16 @@ function volverPlanes() {
 function toggleMenu() {
   const sidebar = document.querySelector('.sidebar');
   const main = document.querySelector('main');
-
   sidebar.classList.toggle('active');
   main.classList.toggle('menu-open');
 }
+
+// 👉 Cerrar menú automáticamente al dar clic en un enlace
+document.querySelectorAll('.sidebar nav a').forEach(link => {
+  link.addEventListener('click', () => {
+    const sidebar = document.querySelector('.sidebar');
+    const main = document.querySelector('main');
+    sidebar.classList.remove('active');
+    main.classList.remove('menu-open');
+  });
+});
