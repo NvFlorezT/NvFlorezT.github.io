@@ -15,7 +15,7 @@ body {
 .sidebar {
   width: 260px;
   background: linear-gradient(180deg, #000000, #1C1C1C);
-  color: #FFD700;
+  color: #C9A227; /* dorado suave */
   padding: 20px;
   height: 100vh;
   position: fixed;
@@ -27,7 +27,7 @@ body {
   margin-bottom: 30px;
   font-size: 1.4rem;
   text-align: center;
-  color: #FFD700;
+  color: #C9A227;
 }
 
 .sidebar nav a {
@@ -41,7 +41,7 @@ body {
 }
 
 .sidebar nav a:hover {
-  background: #FFD700;
+  background: #C9A227;
   color: #000;
 }
 
@@ -62,39 +62,32 @@ main {
   padding: 30px;
   background: #111;
   border-radius: 12px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.8);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.6);
   margin-bottom: 30px;
 }
 
 /* Hero */
 .hero {
   text-align: center;
-  background: linear-gradient(135deg, #000, #1C1C1C);
-  color: #FFD700;
-  padding: 80px 20px;
+  background: 
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url("https://images.unsplash.com/photo-1558611848-73f7eb4001a1") center/cover no-repeat;
+  color: #fff;
+  padding: 120px 20px;
   border-radius: 12px;
   box-shadow: 0 6px 14px rgba(0,0,0,0.8);
 }
 
 .hero h1 {
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   margin-bottom: 15px;
+  color: #C9A227;
 }
 
-.btn-hero {
-  display: inline-block;
-  background: #FFD700;
-  color: #000;
-  padding: 12px 20px;
-  border-radius: 8px;
-  text-decoration: none;
-  margin-top: 20px;
-  transition: transform 0.3s, background 0.3s;
-}
-
-.btn-hero:hover {
-  background: #fff;
-  transform: scale(1.05);
+.hero p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 /* Galería */
@@ -129,18 +122,19 @@ main {
   padding: 25px;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.8);
-  flex: 1 1 220px;
-  color: #FFD700;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.6);
+  flex: 1 1 250px;
+  color: #fff;
 }
 
 .card-plan h3 {
   margin: 10px 0;
+  color: #C9A227;
 }
 
 .card-plan .btn {
   display: inline-block;
-  background: #FFD700;
+  background: #C9A227;
   color: #000;
   padding: 10px 15px;
   margin-top: 10px;
@@ -160,12 +154,12 @@ main {
   margin-top: 20px;
   padding: 20px;
   background: #222;
-  border-left: 5px solid #FFD700;
+  border-left: 5px solid #C9A227;
   border-radius: 8px;
 }
 
 .btn-volver {
-  background: #FFD700;
+  background: #C9A227;
   border: none;
   padding: 10px 15px;
   margin-top: 15px;
@@ -190,9 +184,9 @@ main {
   background: #1C1C1C;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.8);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.6);
   font-style: italic;
-  color: #FFD700;
+  color: #C9A227;
 }
 
 /* Animación */
