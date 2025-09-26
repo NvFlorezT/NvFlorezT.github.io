@@ -16,13 +16,19 @@ body {
   background: linear-gradient(180deg, #000000, #1C1C1C);
   color: #C9A227;
   padding: 20px;
-  height: 100vh;
   position: fixed;
   box-shadow: 4px 0 12px rgba(0,0,0,0.5);
   left: 0;
   top: 0;
   transition: all 0.3s ease-in-out;
   z-index: 1000;
+}
+
+/* Escritorio: sidebar ocupa toda la altura */
+@media (min-width: 769px) {
+  .sidebar {
+    height: 100vh;
+  }
 }
 
 .sidebar h2 {
@@ -257,7 +263,7 @@ main {
   /* Sidebar como menú superior oculto */
   .sidebar {
     width: 100%;
-    height: auto;
+    height: auto; /* ✅ ahora sí sobrescribe */
     position: fixed;
     top: 0;
     left: 0;
