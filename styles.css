@@ -54,6 +54,7 @@ main {
   margin-left: 280px;
   padding: 40px;
   flex: 1;
+  transition: margin-top 0.3s ease; /* transición para móviles */
 }
 
 .section {
@@ -237,6 +238,11 @@ main {
   main {
     margin-left: 0;
     padding: 20px;
+  }
+
+  /* cuando el menú está abierto, bajamos el main */
+  main.menu-open {
+    margin-top: 260px; /* mismo alto que el menú */
   }
 
   .planes-opciones {
