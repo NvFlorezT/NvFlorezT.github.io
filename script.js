@@ -8,24 +8,23 @@ function showSection(id) {
   document.getElementById(id).classList.add("active");
 
   // Ocultar los detalles de planes si se cambia de sección
-  document.getElementById("detalle-personalizado").style.display = "none";
-  document.getElementById("detalle-asesoria").style.display = "none";
+  ["detalle-basico", "detalle-intermedio", "detalle-premium"].forEach(d => {
+    document.getElementById(d).style.display = "none";
+  });
 }
 
 // Mostrar detalle de planes
 function toggleDetalle(plan) {
-  document.getElementById("detalle-personalizado").style.display = "none";
-  document.getElementById("detalle-asesoria").style.display = "none";
+  ["detalle-basico", "detalle-intermedio", "detalle-premium"].forEach(d => {
+    document.getElementById(d).style.display = "none";
+  });
 
-  if (plan === "personalizado") {
-    document.getElementById("detalle-personalizado").style.display = "block";
-  } else if (plan === "asesoria") {
-    document.getElementById("detalle-asesoria").style.display = "block";
-  }
+  document.getElementById("detalle-" + plan).style.display = "block";
 }
 
 // Volver a los planes
 function volverPlanes() {
-  document.getElementById("detalle-personalizado").style.display = "none";
-  document.getElementById("detalle-asesoria").style.display = "none";
+  ["detalle-basico", "detalle-intermedio", "detalle-premium"].forEach(d => {
+    document.getElementById(d).style.display = "none";
+  });
 }
