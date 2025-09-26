@@ -276,3 +276,39 @@ main {
     width: 100%;
   }
 }
+
+/* Botón Hamburguesa */
+.hamburger {
+  display: none; /* Oculto en escritorio */
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #C9A227;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .hamburger {
+    display: block; /* Visible solo en móviles */
+  }
+
+  main {
+    margin-left: 0; /* Quitar margen en móviles */
+    padding: 20px;
+  }
+}
+
