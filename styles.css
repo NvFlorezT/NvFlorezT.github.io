@@ -273,3 +273,19 @@ main {
   cursor: pointer;
   z-index: 1001;
 }
+
+
+.precio {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+.precio del {
+  color: #888;
+  margin-right: 8px;
+}
+
+.precio strong {
+  font-size: 1.3rem;
+  color: #e63946; /* rojo llamativo */
+}
