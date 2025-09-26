@@ -28,3 +28,9 @@ function volverPlanes() {
     document.getElementById(d).style.display = "none";
   });
 }
+
+//menu hamburguesa
+function toggleMenu() {
+  document.querySelector(".sidebar").classList.toggle("active");
+}
+
