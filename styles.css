@@ -194,3 +194,85 @@ main {
   from {opacity: 0; transform: translateY(20px);}
   to {opacity: 1; transform: translateY(0);}
 }
+
+/* =========================
+   Responsive Design
+   ========================= */
+
+/* Tablets (pantallas menores a 1024px) */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 200px;
+  }
+  main {
+    margin-left: 220px;
+    padding: 20px;
+  }
+}
+
+/* Celulares (pantallas menores a 768px) */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  /* Sidebar arriba */
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    box-shadow: none;
+    text-align: center;
+  }
+
+  .sidebar nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .sidebar nav a {
+    flex: 1 1 45%;
+    margin: 5px;
+  }
+
+  main {
+    margin-left: 0;
+    padding: 15px;
+  }
+
+  .planes-opciones {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .galeria-acerca {
+    justify-content: center;
+  }
+}
+
+/* Celulares pequeños (pantallas menores a 480px) */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .sidebar nav a {
+    flex: 1 1 100%;
+    margin: 3px 0;
+    padding: 10px;
+  }
+
+  .galeria-acerca img {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .card-plan {
+    width: 100%;
+  }
+}
