@@ -12,7 +12,7 @@ body {
 
 /* Sidebar */
 .sidebar {
-  width: 220px; /* un poco más angosto */
+  width: 260px;
   background: linear-gradient(180deg, #000000, #1C1C1C);
   color: #C9A227;
   padding: 20px;
@@ -22,7 +22,13 @@ body {
   top: 0;
   transition: all 0.3s ease-in-out;
   z-index: 1000;
-  height: 100vh;
+}
+
+/* Escritorio: sidebar ocupa toda la altura */
+@media (min-width: 769px) {
+  .sidebar {
+    height: 100vh;
+  }
 }
 
 .sidebar h2 {
@@ -51,7 +57,7 @@ body {
 
 /* Main */
 main {
-  margin-left: 240px;
+  margin-left: 280px;
   padding: 40px;
   flex: 1;
   transition: margin-top 0.3s ease;
@@ -246,38 +252,70 @@ main {
 
 /* Tablets */
 @media (max-width: 1024px) {
-  .sidebar { width: 180px; }
-  main { margin-left: 200px; padding: 20px; }
+  .sidebar { width: 200px; }
+  main { margin-left: 220px; padding: 20px; }
 }
 
 /* Celulares */
 @media (max-width: 768px) {
   body { flex-direction: column; }
 
-  /* Sidebar tipo panel angosto */
+  /* Sidebar como menú superior */
   .sidebar {
-    width: 65%;       /* 👈 más angosto */
-    max-width: 220px; /* 👈 nunca más grande de esto */
-    height: 100%;
-    position: fixed;
+    width: 100%;
+    max-height: 80vh;   /* 👉 no tapa toda la pantalla */
+    overflow-y: auto;   /* 👉 scroll si es muy largo */
+    position: absolute;
     top: 0;
     left: 0;
-    transform: translateX(-100%);
+    transform: translateY(-100%);
     transition: transform 0.3s ease-in-out;
-    border-radius: 0 8px 8px 0;
+    background: linear-gradient(180deg, #000000, #1C1C1C);
+    border-radius: 0 0 12px 12px;
+    z-index: 1000;
   }
 
   .sidebar.active {
-    transform: translateX(0);
+    transform: translateY(0);
   }
 
   main {
     margin-left: 0;
     padding: 20px;
+    margin-top: 0;
+    transition: margin-top 0.3s ease;
+  }
+
+  main.menu-open {
+    margin-top: 200px; /* espacio al abrir menú */
   }
 
   .planes-opciones { flex-direction: column; align-items: center; }
   .galeria-acerca { justify-content: center; }
+
+  /* Botón hamburguesa SOLO en móviles */
+  .hamburger {
+    display: flex;
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    background: #C9A227;
+    color: #000;
+    border: none;
+    font-size: 0.7rem;
+    padding: 4px;
+    border-radius: 3px;
+    cursor: pointer;
+    z-index: 1100;
+    width: 28px;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hamburger i {
+    font-size: 1rem;
+  }
 }
 
 /* Celulares pequeños */
@@ -286,27 +324,4 @@ main {
   .hero p { font-size: 1rem; }
   .galeria-acerca img { width: 100%; max-width: 300px; }
   .card-plan { width: 100%; }
-}
-
-/* Botón hamburguesa pequeño */
-.hamburger {
-  display: flex;
-  position: fixed;
-  top: 12px;
-  left: 12px;
-  background: #C9A227;
-  border: none;
-  padding: 6px;    /* 👈 más compacto */
-  border-radius: 4px;
-  cursor: pointer;
-  z-index: 1100;
-  width: 28px;     /* 👈 ancho reducido */
-  height: 28px;    /* 👈 alto reducido */
-  align-items: center;
-  justify-content: center;
-}
-
-.hamburger i {
-  font-size: 16px; /* 👈 icono más chiquito */
-  color: #000;
 }
