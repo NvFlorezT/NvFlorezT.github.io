@@ -29,6 +29,11 @@ body {
   .sidebar {
     height: 100vh;
   }
+
+  /* En escritorio el botón hamburguesa NO aparece */
+  .hamburger {
+    display: none !important;
+  }
 }
 
 .sidebar h2 {
@@ -263,8 +268,8 @@ main {
   /* Sidebar como menú superior */
   .sidebar {
     width: 100%;
-    max-height: 80vh;   /* 👉 no tapa toda la pantalla */
-    overflow-y: auto;   /* 👉 scroll si es muy largo */
+    max-height: 80vh;
+    overflow-y: auto;
     position: absolute;
     top: 0;
     left: 0;
@@ -287,7 +292,7 @@ main {
   }
 
   main.menu-open {
-    margin-top: 200px; /* espacio al abrir menú */
+    margin-top: 200px;
   }
 
   .planes-opciones { flex-direction: column; align-items: center; }
@@ -303,18 +308,18 @@ main {
     color: #000;
     border: none;
     font-size: 0.7rem;
-    padding: 4px;
+    padding: 3px;
     border-radius: 3px;
     cursor: pointer;
     z-index: 1100;
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
     align-items: center;
     justify-content: center;
   }
 
   .hamburger i {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 }
 
