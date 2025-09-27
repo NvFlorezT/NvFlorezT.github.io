@@ -302,23 +302,28 @@ main {
   .card-plan { width: 100%; }
 }
 
-/* Botón Hamburguesa */
+/* Botón hamburguesa */
 .hamburger {
   display: none;
   position: fixed;
-  top: 10px;   /* 👉 más arriba */
-  left: 10px;  /* 👉 pegado al borde */
+  top: 12px;     /* un poco separado del borde superior */
+  left: 12px;    /* un poco separado del borde izquierdo */
   background: #C9A227;
   color: #000;
   border: none;
-  font-size: 1.5rem;   /* 👉 más pequeño */
-  padding: 6px 10px;   /* 👉 menos espacio interno */
-  border-radius: 6px;
+  font-size: 1.2rem;   /* 👉 mucho más pequeño */
+  padding: 4px 6px;    /* 👉 reduce espacio interior */
+  border-radius: 4px;  /* esquinas menos redondas */
   cursor: pointer;
-  z-index: 1100; /* 👉 siempre encima */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3); /* 👉 sombra ligera */
+  z-index: 1100;
+  width: 38px;   /* 👉 ancho fijo pequeño */
+  height: 38px;  /* 👉 alto fijo pequeño */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@media (max-width: 768px) {
-  .hamburger { display: block; }
+/* Ajuste para las rayitas del ícono */
+.hamburger i {
+  font-size: 1rem;  /* 👉 más pequeñas las líneas */
 }
