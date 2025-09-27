@@ -302,28 +302,28 @@ main {
   .card-plan { width: 100%; }
 }
 
-/* Botón hamburguesa */
+/* Botón hamburguesa súper compacto */
 .hamburger {
   display: none;
   position: fixed;
-  top: 12px;     /* un poco separado del borde superior */
-  left: 12px;    /* un poco separado del borde izquierdo */
+  top: 8px;      /* más pegado al borde superior */
+  left: 8px;     /* más pegado al borde izquierdo */
   background: #C9A227;
   color: #000;
   border: none;
-  font-size: 1.2rem;   /* 👉 mucho más pequeño */
-  padding: 4px 6px;    /* 👉 reduce espacio interior */
-  border-radius: 4px;  /* esquinas menos redondas */
+  font-size: 0.8rem;   /* más pequeño */
+  padding: 2px;        /* casi sin relleno */
+  border-radius: 3px;  /* esquinas redondeadas */
   cursor: pointer;
   z-index: 1100;
-  width: 38px;   /* 👉 ancho fijo pequeño */
-  height: 38px;  /* 👉 alto fijo pequeño */
+  width: 28px;   /* 👈 ancho reducido */
+  height: 28px;  /* 👈 alto reducido */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Ajuste para las rayitas del ícono */
+/* Ajuste del ícono de rayitas */
 .hamburger i {
-  font-size: 1rem;  /* 👉 más pequeñas las líneas */
+  font-size: 0.7rem;   /* 👈 líneas aún más chiquitas */
 }
