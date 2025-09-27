@@ -6,14 +6,14 @@ body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
   display: flex;
-  background: #0A0A0A;
+  background: #121826; /* gris azulado en vez de negro puro */
   color: #F5F5F5;
 }
 
 /* Sidebar */
 .sidebar {
   width: 260px;
-  background: linear-gradient(180deg, #000000, #1C1C1C);
+  background: linear-gradient(180deg, #0d0d0d, #1f1f1f);
   color: #C9A227;
   padding: 20px;
   position: fixed;
@@ -24,16 +24,10 @@ body {
   z-index: 1000;
 }
 
-/* Escritorio: sidebar ocupa toda la altura */
+/* Escritorio */
 @media (min-width: 769px) {
-  .sidebar {
-    height: 100vh;
-  }
-
-  /* En escritorio el botón hamburguesa NO aparece */
-  .hamburger {
-    display: none !important;
-  }
+  .sidebar { height: 100vh; }
+  .hamburger { display: none !important; }
 }
 
 .sidebar h2 {
@@ -41,7 +35,7 @@ body {
   margin-bottom: 30px;
   font-size: 1.6rem;
   text-align: center;
-  color: #C9A227;
+  color: #1E90FF; /* azul energía */
   font-family: 'Bebas Neue', sans-serif;
 }
 
@@ -56,7 +50,7 @@ body {
 }
 
 .sidebar nav a:hover {
-  background: #C9A227;
+  background: #2ecc71; /* verde salud */
   color: #000;
 }
 
@@ -76,7 +70,7 @@ main {
 .section.active {
   display: block;
   padding: 30px;
-  background: #111;
+  background: #1a1f2e; /* azul gris oscuro */
   border-radius: 12px;
   box-shadow: 0 6px 14px rgba(0,0,0,0.6);
   margin-bottom: 30px;
@@ -86,7 +80,7 @@ main {
 .hero {
   text-align: center;
   background: 
-    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    linear-gradient(rgba(18,24,38,0.7), rgba(18,24,38,0.7)),
     url("https://images.unsplash.com/photo-1558611848-73f7eb4001a1") center/cover no-repeat;
   color: #fff;
   padding: 120px 20px;
@@ -122,19 +116,16 @@ main {
   box-shadow: 0 4px 12px rgba(0,0,0,0.6);
 }
 
-.galeria-acerca img:hover {
-  transform: scale(1.1);
-}
+.galeria-acerca img:hover { transform: scale(1.1); }
 
 /* =========================
    Planes de Entrenamiento
    ========================= */
-
 .section.planes {
   text-align: center;
   padding: 100px 20px;
   background: 
-    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+    linear-gradient(rgba(18,24,38,0.7), rgba(18,24,38,0.7)),
     url("https://images.unsplash.com/photo-1518611012118-696072aa579a") center/cover no-repeat;
   border-radius: 12px;
   margin-bottom: 40px;
@@ -144,7 +135,7 @@ main {
 .section.planes h2 {
   font-size: 2.5rem;
   margin-bottom: 20px;
-  color: #C9A227;
+  color: #1E90FF;
   font-family: 'Bebas Neue', sans-serif;
 }
 
@@ -157,7 +148,7 @@ main {
 }
 
 .card-plan {
-  background: #1C1C1C;
+  background: #20232e;
   padding: 25px;
   border-radius: 12px;
   text-align: center;
@@ -165,33 +156,28 @@ main {
   flex: 1 1 250px;
   color: #fff;
   max-width: 300px;
+  border: 2px solid #C9A227;
 }
 
 .card-plan h3 {
   margin: 10px 0;
-  color: #C9A227;
+  color: #2ecc71;
   font-family: 'Bebas Neue', sans-serif;
 }
 
-.precio {
-  font-size: 1.2rem;
-  margin-top: 10px;
-}
+.precio { font-size: 1.2rem; margin-top: 10px; }
 
-.precio del {
-  color: #888;
-  margin-right: 8px;
-}
+.precio del { color: #888; margin-right: 8px; }
 
 .precio strong {
   font-size: 1.3rem;
-  color: #e63946; /* rojo llamativo */
+  color: #e63946;
 }
 
 .card-plan .btn {
   display: inline-block;
-  background: #C9A227;
-  color: #000;
+  background: #1E90FF;
+  color: #fff;
   padding: 10px 15px;
   margin-top: 10px;
   border-radius: 8px;
@@ -200,32 +186,8 @@ main {
 }
 
 .card-plan .btn:hover {
-  background: #fff;
+  background: #2ecc71;
   transform: scale(1.05);
-}
-
-/* Detalle plan */
-.detalle-plan {
-  display: none;
-  margin-top: 20px;
-  padding: 20px;
-  background: #222;
-  border-left: 5px solid #C9A227;
-  border-radius: 8px;
-}
-
-.btn-volver {
-  background: #C9A227;
-  border: none;
-  padding: 10px 15px;
-  margin-top: 15px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.btn-volver:hover {
-  background: #fff;
 }
 
 /* Testimonios */
@@ -237,12 +199,12 @@ main {
 }
 
 .card-testimonio {
-  background: #1C1C1C;
+  background: #f4f4f4;
+  color: #121826;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.6);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
   font-style: italic;
-  color: #C9A227;
 }
 
 /* Animación */
@@ -251,21 +213,14 @@ main {
   to {opacity: 1; transform: translateY(0);}
 }
 
-/* =========================
-   Responsive Design
-   ========================= */
-
-/* Tablets */
+/* Responsive */
 @media (max-width: 1024px) {
   .sidebar { width: 200px; }
   main { margin-left: 220px; padding: 20px; }
 }
 
-/* Celulares */
 @media (max-width: 768px) {
   body { flex-direction: column; }
-
-  /* Sidebar como menú superior */
   .sidebar {
     width: 100%;
     max-height: 80vh;
@@ -275,30 +230,14 @@ main {
     left: 0;
     transform: translateY(-100%);
     transition: transform 0.3s ease-in-out;
-    background: linear-gradient(180deg, #000000, #1C1C1C);
+    background: linear-gradient(180deg, #0d0d0d, #1f1f1f);
     border-radius: 0 0 12px 12px;
     z-index: 1000;
   }
-
-  .sidebar.active {
-    transform: translateY(0);
-  }
-
-  main {
-    margin-left: 0;
-    padding: 20px;
-    margin-top: 0;
-    transition: margin-top 0.3s ease;
-  }
-
-  main.menu-open {
-    margin-top: 200px;
-  }
-
+  .sidebar.active { transform: translateY(0); }
+  main { margin-left: 0; padding: 20px; }
   .planes-opciones { flex-direction: column; align-items: center; }
   .galeria-acerca { justify-content: center; }
-
-  /* Botón hamburguesa SOLO en móviles */
   .hamburger {
     display: flex;
     position: fixed;
@@ -307,23 +246,18 @@ main {
     background: #C9A227;
     color: #000;
     border: none;
-    font-size: 0.7rem;
-    padding: 3px;
-    border-radius: 3px;
+    font-size: 1rem;
+    padding: 5px;
+    border-radius: 4px;
     cursor: pointer;
     z-index: 1100;
-    width: 26px;
-    height: 26px;
+    width: 32px;
+    height: 32px;
     align-items: center;
     justify-content: center;
   }
-
-  .hamburger i {
-    font-size: 0.9rem;
-  }
 }
 
-/* Celulares pequeños */
 @media (max-width: 480px) {
   .hero h1 { font-size: 1.8rem; }
   .hero p { font-size: 1rem; }
