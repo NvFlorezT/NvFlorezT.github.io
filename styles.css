@@ -311,13 +311,13 @@ main {
   background: #C9A227;
   color: #000;
   border: none;
-  font-size: 0.8rem;   /* más pequeño */
-  padding: 2px;        /* casi sin relleno */
+  font-size: 0.2rem;   /* más pequeño */
+  padding: 1px;        /* casi sin relleno */
   border-radius: 3px;  /* esquinas redondeadas */
   cursor: pointer;
   z-index: 1100;
-  width: 28px;   /* 👈 ancho reducido */
-  height: 28px;  /* 👈 alto reducido */
+  width: 15px;   /* 👈 ancho reducido */
+  height: 15px;  /* 👈 alto reducido */
   display: flex;
   align-items: center;
   justify-content: center;
